@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Accueil from './pages/Accueil';
 import Portfolio from './pages/Portfolio';
 import Bonus from './pages/Bonus';
-
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -17,7 +17,9 @@ function App() {
           <Route path="/bonus" element={<Bonus />} />
         </Routes>
       </main>
+      <Footer />
     </BrowserRouter>
+    
   );
 }
 

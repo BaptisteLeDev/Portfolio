@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <main className="p-4">
+      <main className="">
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/portfolio" element={<Portfolio />} />

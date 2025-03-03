@@ -6,6 +6,8 @@ import Portfolio from './pages/Portfolio';
 import Bonus from './pages/Bonus';
 import Footer from './components/Footer';
 
+
+
 function App() {
   return (
     <BrowserRouter>

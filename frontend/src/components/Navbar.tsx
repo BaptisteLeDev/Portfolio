@@ -31,11 +31,21 @@ const Navbar = () => {
     >
       {/* Logo */}
       
-      <div className="text-lg font-semibold text-white m-5"><img
-        src={Logo}
-        alt="Logo"
-        className="w-auto"
-      /></div>
+      <div>
+  <Link
+    to="/"
+    className="relative flex items-center justify-center w-16 h-16 rounded-full bg-white 
+               transition-all duration-300 hover:scale-110 hover:shadow-lg
+               "
+  >
+    <img
+      src={Logo}
+      alt="Logo"
+      className="w-10 h-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+    />
+  </Link>
+</div>
+
 
       <div className="space-x-6 flex left-25 me-10">
         <NavLink to="/">CV</NavLink>

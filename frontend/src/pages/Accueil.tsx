@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import Background from "../assets/background_accueil.png";
 import Cody from "../assets/Cody_Accueil.svg";
 import Introduction from "../assets/section_coup-oeil.png";
+import F1 from "../assets/forma_1.svg";
+import F2 from "../assets/forma_2.svg";
+import F3 from "../assets/forma_3.svg";
 
 const Accueil = () => {
   return (
@@ -37,11 +40,11 @@ const Accueil = () => {
         style={{ backgroundImage: `url(${Introduction})` }}
       >
         <motion.div>
-        <p className="text-9xl">[</p>
+          <p className="text-9xl">[</p>
         </motion.div>
 
         <motion.div className="relative min-h-screen flex flex-col items-left justify-center text-left box-border size-[40%]">
-          <h2 className="text-3xl font-bold mb-4">Introduction</h2>
+          <h2 className="text-3xl mb-4">Introduction</h2>
           <h3 className="text-5xl font-bold mb-4 ">Coup d'oeil</h3>
           <p className="max-w-2xl">
             Je suis Baptiste Dechamp, développeur passionné par la création de
@@ -56,20 +59,26 @@ const Accueil = () => {
         <motion.div>
           <p className="text-9xl">]</p>
         </motion.div>
-
       </motion.section>
 
       {/* 🎯 SECTION "PROJETS" */}
       <motion.section
-        className="min-h-screen flex flex-col items-center justify-center p-10 bg-gray-800 text-white text-center"
+        className="relative min-h-screen flex flex-col justify-center p-20 bg-gray-800 text-left
+        bg-gradient-to-br from-indigo-700 from-20% to-pink-600 -top-50 rounded-[100px]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold mb-4">Mes Projets</h2>
-        <p className="max-w-2xl">
-          Voici quelques projets que j’ai réalisés en React et Tailwind CSS.
-        </p>
+        <motion.div className="items-left">
+          <h2 className="text-3xl mb-4">Mon parcours</h2>
+          <h3 className="text-5xl font-bold mb-4 ">Mes formations</h3>
+        </motion.div>
+
+        <motion.div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 mt-10">
+          <img src={F1} alt="1" className="w-75 h-auto mb-6 " />
+          <img src={F2} alt="2" className="w-75 h-auto mb-6 " />
+          <img src={F3} alt="3" className="w-75 h-auto mb-6 " />
+        </motion.div>
       </motion.section>
     </>
   );

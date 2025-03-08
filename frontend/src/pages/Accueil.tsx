@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import Background from "../assets/background_accueil.png";
 import Cody from "../assets/Cody_Accueil.svg";
@@ -103,7 +102,7 @@ const Accueil = () => {
           <h6 className="text-3xl font-bold mb-4 ">Adaptabilité</h6>
           <h6 className="text-3xl font-bold mb-4 ">Esprit d’analyse</h6>
           <h6 className="text-3xl font-bold mb-4 ">Écoute et bienveillance</h6>
-          <h6 className="text-3xl font-bold mb-4 ">Compréhension contextuell</h6>
+          <h6 className="text-3xl font-bold mb-4 ">Compréhension contextuelle</h6>
         </motion.div>
       </motion.section>
     </>

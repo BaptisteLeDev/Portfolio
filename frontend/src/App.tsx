@@ -1,12 +1,9 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Accueil from './pages/Accueil';
 import Portfolio from './pages/Portfolio';
 import Bonus from './pages/Bonus';
 import Footer from './components/Footer';
-
-
 
 function App() {
   return (
@@ -21,7 +18,6 @@ function App() {
       </main>
       <Footer />
     </BrowserRouter>
-    
   );
 }
 

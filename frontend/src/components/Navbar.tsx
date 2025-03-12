@@ -30,7 +30,7 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       {/* Logo */}
-      <div>
+      <div className="space-x-6 flex left-25 me-10">
         <Link
           to="/"
           className="relative flex items-center justify-center w-16 h-16 rounded-full bg-white 
@@ -42,6 +42,7 @@ const Navbar = () => {
             className="w-10 h-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
           />
         </Link>
+        
       </div>
 
       <div className="space-x-6 flex left-25 me-10">
@@ -56,6 +57,7 @@ const Navbar = () => {
         >
           CV
         </a>*/}
+        <NavLink to="/">Accueil</NavLink>
         <NavLink to="/portfolio">Portfolio</NavLink>
         <NavLink to="/bonus">Contact</NavLink>
       </div>

@@ -3,7 +3,6 @@
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
 
-
 :root {
   --background: oklch(21.61% 0.0061 56.04);
   --foreground: oklch(98.69% 0.0214 95.28);
@@ -123,35 +122,88 @@
   }
 }
 
-h1{
+h1 {
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 900;
   font-style: normal;
   font-size: 60px;
 }
 
-h2{
+h2 {
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 40px;
 }
 
-h3{
+h3 {
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 700;
   font-style: normal;
 }
 
-p{
+p {
   font-family: "neue-haas-grotesk-display", sans-serif;
   font-weight: 500;
   font-style: normal;
 }
 
+h6 {
+  font-family: "neue-haas-grotesk-display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-h6{
-  font-family: neue-haas-grotesk-display, sans-serif;
-font-weight: 400;
-font-style: normal;
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 50px;
+  }
+  h2 {
+    font-size: 35px;
+  }
+  h3 {
+    font-size: 30px;
+  }
+  p {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  p {
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 35px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 12px;
+  }
 }

@@ -2,14 +2,14 @@
   {
     "title": "Portfolio Vite React Motion",
     "description": "Mon portfolio personnel développé avec Vite, React et Framer Motion pour des animations fluides et une expérience utilisateur dynamique.",
-    "image": "https://cdn.prod.website-files.com/5e0a5d9d743608d0f3ea6753/6638bcb6a71f89ec30bb8a05_Feed.png",
+    "image": "/images/portfolio.png",
     "link": "#",
     "category": "Développement"
   },
   {
     "title": "Devflix",
     "description": "Plateforme de streaming inspirée de Netflix, développée avec Vite, React, Node.js, Toastify et Firebase, utilisant l'API TMDB pour les données de films et séries.",
-    "image": "https://s3.amazonaws.com/digitalgov/hcd-guide-landing-resized.jpg",
+    "image": "/images/devflix.jpg",
     "link": "#",
     "category": "Développement"
   },

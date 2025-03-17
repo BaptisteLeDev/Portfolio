@@ -5,8 +5,10 @@ import Cody from "../assets/Cody_Portfolio.svg";
 import UpArrow from "@/components/ui/UpArrow";
 import Footer from "@/components/Footer";
 import Carousel from "@/components/Carousel";
+import ProjectDetail from "@/components/project";
 import projects from "../data/projects.json";
 
+// Plus besoin de ProjectImages, nous utilisons directement les chemins d'images du dossier public
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(projects[0].id);
 
@@ -45,8 +47,15 @@ const Portfolio = () => {
         animate={{ transform: "translateX(0px)" }}
         transition={{ type: "spring" }}
       >
-        <h2 className="text-4xl font-bold mb-4">Bienvenue sur mon Portfolio</h2>
-        <p className="text-lg mb-6">Découvrez mes projets et réalisations.</p>
+        <div className="mb-8">
+        <h2 className="text-5xl text-amber-50 font-[350] max-sm:text-4xl">
+                Mes Projets
+              </h2>
+              <h3 className="mt-2.5 text-5xl font-medium text-amber-50 max-sm:text-4xl">
+                Dévellopeur Web
+              </h3>
+        </div>
+        
         <Carousel />
       </motion.section>
 
@@ -86,88 +95,9 @@ const Portfolio = () => {
             </ul>
           </div>
 
-          {/* Partie droite - Détails du projet */}
+          {/* Partie droite - Composant de détail du projet */}
           <div className="w-full md:w-2/3 mt-8 md:mt-0">
-            <motion.div 
-              key={currentProject.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-stone-800 rounded-[30px] p-8 h-full"
-            >
-              <div className="flex flex-col h-full">
-                <div className="mb-6">
-                  <img 
-                    src={currentProject.image} 
-                    alt={currentProject.title} 
-                    className="w-full h-64 object-cover rounded-[20px]"
-                  />
-                </div>
-                
-                <h3 className="text-3xl font-bold text-pink-600 mb-4">
-                  {currentProject.title}
-                </h3>
-                
-                <p className="text-amber-50 text-xl mb-6">
-                  {currentProject.detailedDescription}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <h4 className="text-pink-400 text-lg font-medium mb-2">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {currentProject.technologies.map((tech, index) => (
-                        <span 
-                          key={index}
-                          className="bg-stone-700 text-amber-50 px-3 py-1 rounded-full text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-pink-400 text-lg font-medium mb-2">Attribution</h4>
-                    <p className="text-amber-50/80">{currentProject.attribution}</p>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-pink-400 text-lg font-medium mb-2">Date</h4>
-                    <p className="text-amber-50/80">{currentProject.date}</p>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-pink-400 text-lg font-medium mb-2">Mon rôle</h4>
-                    <p className="text-amber-50/80">{currentProject.role}</p>
-                  </div>
-                </div>
-
-                <div className="mt-auto flex gap-4">
-                  {currentProject.demoLink && (
-                    <a 
-                      href={currentProject.demoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition-colors"
-                    >
-                      Voir la démo
-                    </a>
-                  )}
-                  
-                  {currentProject.githubLink && (
-                    <a 
-                      href={currentProject.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-amber-50 text-amber-50 px-6 py-3 rounded-full hover:bg-amber-50/10 transition-colors"
-                    >
-                      Code source
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectDetail project={currentProject} />
           </div>
         </div>
       </motion.section>

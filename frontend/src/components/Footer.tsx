@@ -33,7 +33,7 @@ const ContactForm: React.FC = () => {
       <div className="flex gap-6">
         <button
           type="submit"
-          className="text-xl font-bold bg-amber-50 border-none h-[42px] rounded-[100px] text-stone-900 w-[140px] hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600"
+          className="text-xl font-bold bg-amber-50 border-none h-[42px] rounded-[100px] text-stone-900 w-[140px] hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-600"
         >
           Envoyer
         </button>

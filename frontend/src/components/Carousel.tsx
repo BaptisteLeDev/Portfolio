@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import projects from '../data/projects_dev.json';
-
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
@@ -13,7 +13,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, link, category }) => {
   return (
-    <article className="border-solid bg-stone-900 border-[10px] border-pink-600 border-opacity-10 rounded-[50px] min-h-[200px] transition-all duration-300 hover:transform hover:scale-105 overflow-hidden group">
+    <article className="border-solid bg-stone-900 border-[10px] border-pink-600 border-opacity-10 rounded-[50px] min-h-[200px] transition-all duration-300 hover:transform hover:scale-105 overflow-hidden group w-full md:w-auto">
       <a href={link} className="block p-6 h-full" aria-label={`View ${title} project`}>
         {image && (
           <div className="mb-4 overflow-hidden rounded-lg">
@@ -34,6 +34,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, li
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Vérifier si l'appareil est un mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? projects.length - 1 : prevIndex - 1));
@@ -46,7 +61,7 @@ const Carousel: React.FC = () => {
   return (
     <div className="relative w-full flex items-center justify-center">
       <button onClick={handlePrev} className="text-black font-bold absolute left-25 p-3 bg-amber-50 rounded-full hover:scale-110">
-        {'<'}
+        <ChevronLeft />
       </button>
       <motion.div
         className="w-full flex items-center justify-center gap-10"
@@ -55,10 +70,11 @@ const Carousel: React.FC = () => {
         transition={{ duration: 1.5 }}
       >
         <ProjectCard {...projects[currentIndex]} />
-        <ProjectCard {...projects[currentIndex]} />
+        {!isMobile && <ProjectCard {...projects[(currentIndex + 1) % projects.length]} />}
+        {!isMobile && <ProjectCard {...projects[(currentIndex + 2) % projects.length]} />}
       </motion.div>
       <button onClick={handleNext} className="text-black font-bold absolute right-25 p-3 bg-amber-50 rounded-full hover:scale-110">
-      {'>'}
+        <ChevronRight />
       </button>
     </div>
   );

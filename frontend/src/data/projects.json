@@ -1,23 +1,62 @@
 [
   {
-    "title": "Projet 1",
-    "description": "Description du projet 1",
+    "id": "vannes-agglo",
+    "title": "Vannes Agglo",
+    "description": "Refonte complète du site web de Vannes Agglo avec une approche centrée sur l'utilisateur et une interface moderne.",
+    "detailedDescription": "Ce projet visait à moderniser la présence en ligne de Vannes Agglo en créant une plateforme intuitive et accessible. J'ai conçu une architecture d'information optimisée et développé une interface réactive qui s'adapte à tous les appareils.",
     "image": "https://cdn.prod.website-files.com/5e0a5d9d743608d0f3ea6753/6638bcb6a71f89ec30bb8a05_Feed.png",
     "link": "#",
-    "category": "Développement"
+    "demoLink": "https://vannes-agglo-demo.vercel.app",
+    "githubLink": "https://github.com/BaptisteLeDev/vannes-agglo",
+    "category": "UX/UI & Design",
+    "technologies": ["React", "Tailwind CSS", "Figma", "NextJS"],
+    "attribution": "Projet réalisé en collaboration avec l'équipe de communication de Vannes Agglo",
+    "date": "Mars 2024",
+    "role": "Designer UX/UI et développeur front-end"
   },
   {
-    "title": "Projet 2",
-    "description": "Description du projet 2",
+    "id": "festival-vibrations",
+    "title": "Festival Vibrations",
+    "description": "Création de l'identité visuelle et du site web pour le festival de musique Vibrations.",
+    "detailedDescription": "J'ai conçu l'ensemble de l'identité visuelle du festival Vibrations, des supports imprimés au site web. Le design s'inspire des ondes sonores et utilise une palette de couleurs vives pour évoquer l'énergie du festival.",
     "image": "https://s3.amazonaws.com/digitalgov/hcd-guide-landing-resized.jpg",
     "link": "#",
-    "category": "Design"
+    "demoLink": "https://festival-vibrations.netlify.app",
+    "githubLink": "https://github.com/BaptisteLeDev/festival-vibrations",
+    "category": "UX/UI & Design",
+    "technologies": ["Illustrator", "Photoshop", "JavaScript", "GSAP"],
+    "attribution": "En collaboration avec l'association Musiques Actuelles",
+    "date": "Septembre 2023",
+    "role": "Designer graphique et intégrateur web"
   },
   {
-    "title": "Projet 3",
-    "description": "Description du projet 3",
+    "id": "erwen-ewen",
+    "title": "Erwen&Ewen",
+    "description": "Développement d'une application web pour la marque de vêtements bretonne Erwen&Ewen.",
+    "detailedDescription": "Cette application e-commerce intègre un catalogue de produits, un système de panier, et des fonctionnalités de personnalisation pour la marque de vêtements Erwen&Ewen. J'ai créé une expérience utilisateur fluide et intuitive qui reflète l'identité de la marque.",
     "image": "https://publicmarkets.nyc/sites/default/files/styles/16x9_md/public/2019-08/leasing-opp-gallery-image-essex-st-market-photo-kreg-holt-nycedc-097.jpg?h=84071268&itok=0oUIQ9dK",
     "link": "#",
-    "category": "Dossier"
+    "demoLink": "https://erwen-ewen-shop.vercel.app",
+    "githubLink": "https://github.com/BaptisteLeDev/erwen-ewen",
+    "category": "UX/UI & Design",
+    "technologies": ["React", "Stripe", "Firebase", "Styled Components"],
+    "attribution": "Projet réalisé pour la marque Erwen&Ewen",
+    "date": "Janvier 2024",
+    "role": "Développeur full-stack et designer UX"
+  },
+  {
+    "id": "g-en",
+    "title": "G-En",
+    "description": "Application de suivi énergétique pour entreprises avec visualisation de données en temps réel.",
+    "detailedDescription": "G-En est une application de tableau de bord permettant aux entreprises de suivre leur consommation d'énergie en temps réel. J'ai conçu des visualisations de données interactives qui aident à identifier les tendances et à optimiser la consommation.",
+    "image": "https://s3.amazonaws.com/digitalgov/hcd-guide-landing-resized.jpg",
+    "link": "#",
+    "demoLink": "https://g-en-dashboard.vercel.app",
+    "githubLink": "https://github.com/BaptisteLeDev/g-en",
+    "category": "UX/UI & Design",
+    "technologies": ["Vue.js", "D3.js", "Node.js", "Express", "MongoDB"],
+    "attribution": "En partenariat avec GreenTech Solutions",
+    "date": "Février 2024",
+    "role": "Développeur front-end et data visualisation"
   }
 ]

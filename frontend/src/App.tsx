@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Accueil from './pages/Accueil';
 import Portfolio from './pages/Portfolio';
 import Bonus from './pages/Bonus';
-
+import NotFound from './pages/404';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
           <Route path="/" element={<Accueil />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/bonus" element={<Bonus />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </BrowserRouter>

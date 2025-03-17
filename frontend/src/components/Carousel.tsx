@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import projects from '../data/projects.json';
+import projects from '../data/projects_dev.json';
 
 
 interface ProjectCardProps {

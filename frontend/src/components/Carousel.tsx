@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import projects from '../data/projects_dev.json';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 

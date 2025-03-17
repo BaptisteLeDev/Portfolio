@@ -77,9 +77,8 @@ const Portfolio = () => {
                 Ux / Ui & Design
               </h3>
             </div>
-            
             <ul className="space-y-6">
-              {projects.filter(p => p.category === "UX/UI & Design").map(project => (
+              {projects.filter(p => p.category.includes("UX/UI") || p.category.includes("Ux / Ui")).map(project => (
                 <li 
                   key={project.id}
                   className={`cursor-pointer transition-all duration-300 ${
@@ -94,7 +93,6 @@ const Portfolio = () => {
               ))}
             </ul>
           </div>
-
           {/* Partie droite - Composant de détail du projet */}
           <div className="w-full md:w-2/3 mt-8 md:mt-0">
             <ProjectDetail project={currentProject} />

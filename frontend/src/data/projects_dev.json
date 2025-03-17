@@ -1,23 +1,23 @@
 [
   {
-    "title": "Projet 1",
-    "description": "Description du projet 1",
+    "title": "Portfolio Vite React Motion",
+    "description": "Mon portfolio personnel développé avec Vite, React et Framer Motion pour des animations fluides et une expérience utilisateur dynamique.",
     "image": "https://cdn.prod.website-files.com/5e0a5d9d743608d0f3ea6753/6638bcb6a71f89ec30bb8a05_Feed.png",
     "link": "#",
     "category": "Développement"
   },
   {
-    "title": "Projet 2",
-    "description": "Description du projet 2",
+    "title": "Devflix",
+    "description": "Plateforme de streaming inspirée de Netflix, développée avec Vite, React, Node.js, Toastify et Firebase, utilisant l'API TMDB pour les données de films et séries.",
     "image": "https://s3.amazonaws.com/digitalgov/hcd-guide-landing-resized.jpg",
     "link": "#",
-    "category": "Design"
+    "category": "Développement"
   },
   {
-    "title": "Projet 3",
-    "description": "Description du projet 3",
-    "image": "https://publicmarkets.nyc/sites/default/files/styles/16x9_md/public/2019-08/leasing-opp-gallery-image-essex-st-market-photo-kreg-holt-nycedc-097.jpg?h=84071268&itok=0oUIQ9dK",
+    "title": "Amigaru",
+    "description": "Site d'agence pour VTubers francophones développé en PHP avec TailwindCSS et une base de données MySQL via Laragon, offrant une interface moderne pour connecter talents et clients.",
+    "image": "/images/amigaru.png",
     "link": "#",
-    "category": "Dossier"
+    "category": "Développement"
   }
 ]

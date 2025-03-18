@@ -59,7 +59,7 @@ const Navbar = () => {
         </a>*/}
         <NavLink to="/">Accueil</NavLink>
         <NavLink to="/portfolio">Portfolio</NavLink>
-        <NavLink to="/bonus">Contact</NavLink>
+        {/*<NavLink to="/bonus">Contact</NavLink>*/}
       </div>
     </motion.nav>
   );

@@ -24,6 +24,12 @@ const ProjectPage = () => {
     );
   }
 
+  // Conversion des valeurs null en undefined pour être compatible avec le type Project
+  const formattedProject = {
+    ...project,
+    githubLink: project.githubLink === null ? undefined : project.githubLink
+  };
+
   return (
     <div className="min-h-screen bg-stone-900 py-32 px-6 md:px-20">
       <div className="mb-6">
@@ -41,7 +47,7 @@ const ProjectPage = () => {
         animate={{ opacity: 1 }}
         className="max-w-5xl mx-auto"
       >
-        <ProjectDetail project={project} />
+        <ProjectDetail project={formattedProject} />
       </motion.div>
     </div>
   );

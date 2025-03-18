@@ -1,13 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-{/*const ContactForm: React.FC = () => {
+{
+  /*const ContactForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Logique d'envoi du formulaire ici
     alert("Message envoyé avec succès!");
   };
-
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-black">
       <input
@@ -42,27 +41,24 @@ import { motion } from "framer-motion";
     </form>
   );
 };
-*/}
-
+*/
+}
 // Définition des icônes sociales avec des URL spécifiques
 const socialIcons = {
   Linkedin: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
   GitHub: "https://cdn-icons-png.flaticon.com/512/25/25231.png",
   Mail: "https://cdn-icons-png.flaticon.com/512/561/561127.png",
 };
-
 // Définition des liens vers les réseaux sociaux (à personnaliser)
 const socialLinks = {
   Linkedin: "www.linkedin.com/in/baptiste-dechamp",
   GitHub: "https://github.com/BaptisteLeDev",
-  Mail: "mailto:contact@baptisteledev.fr",
+  Mail: "mailto:baptiste.dechamp@outlook.fr",
 };
-
 interface SocialIconProps {
   image: string;
   name: string;
 }
-
 const SocialIcon: React.FC<SocialIconProps> = ({ image, name }) => {
   return (
     <motion.a
@@ -87,10 +83,8 @@ const SocialIcon: React.FC<SocialIconProps> = ({ image, name }) => {
     </motion.a>
   );
 };
-
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
   return (
     <motion.footer
       initial={{ y: 50, opacity: 0 }}
@@ -108,21 +102,11 @@ const Footer: React.FC = () => {
               Contact
             </h3>
             <div className="flex flex-wrap gap-12 max-sm:justify-center">
-              <SocialIcon
-                image={socialIcons.Linkedin}
-                name="Linkedin"
-              />
-              <SocialIcon
-                image={socialIcons.GitHub}
-                name="GitHub"
-              />
-              <SocialIcon
-                image={socialIcons.Mail}
-                name="Mail"
-              />
+              <SocialIcon image={socialIcons.Linkedin} name="Linkedin" />
+              <SocialIcon image={socialIcons.GitHub} name="GitHub" />
+              <SocialIcon image={socialIcons.Mail} name="Mail" />
             </div>
           </div>
-          
           {/* Formulaire de contact - Décommentez pour l'activer */}
           {/* 
           <div className="flex-1">
@@ -137,12 +121,14 @@ const Footer: React.FC = () => {
           */}
         </div>
       </section>
-
       <div className="px-4 py-12 text-center">
         <div className="text-amber-50 max-w-7xl mx-auto">
           <h2 className="mb-5 text-lg font-bold">by Baptiste D</h2>
           <nav className="mx-0 my-4 text-lg md:text-2xl flex flex-wrap justify-center gap-x-3 gap-y-2">
-            <a href="/sitemap" className="hover:text-pink-600 transition-colors">
+            <a
+              href="/sitemap"
+              className="hover:text-pink-600 transition-colors"
+            >
               Plan du site
             </a>
             <span className="text-amber-300">|</span>
@@ -150,7 +136,10 @@ const Footer: React.FC = () => {
               Mentions légales
             </a>
             <span className="text-amber-300">|</span>
-            <a href="/privacy" className="hover:text-pink-600 transition-colors">
+            <a
+              href="/privacy"
+              className="hover:text-pink-600 transition-colors"
+            >
               Politique de confidentialité
             </a>
           </nav>
@@ -162,5 +151,4 @@ const Footer: React.FC = () => {
     </motion.footer>
   );
 };
-
 export default Footer;

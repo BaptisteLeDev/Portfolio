@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Portfolio Vite React Motion",
+    "description": "Mon portfolio personnel développé avec Vite, React et Framer Motion pour des animations fluides et une expérience utilisateur dynamique.",
+    "image": "/images/portfolio.png",
+    "link": "#",
+    "category": "Développement",
+    "tags": ["Frontend", "React"]
+  },
+  {
+    "title": "Devflix",
+    "description": "Plateforme de streaming inspirée de Netflix, développée avec Vite, React, Node.js, Toastify et Firebase, utilisant l'API TMDB pour les données de films et séries.",
+    "image": "/images/devflix.jpg",
+    "link": "#",
+    "category": "Développement",
+    "tags": ["Frontend", "Backend", "API"]
+  },
+  {
+    "title": "Amigaru",
+    "description": "Site d'agence pour VTubers francophones développé en PHP avec TailwindCSS et une base de données MySQL via Laragon, offrant une interface moderne pour connecter talents et clients.",
+    "image": "/images/amigaru.png",
+    "link": "#",
+    "category": "Développement",
+    "tags": ["PHP", "MySQL", "TailwindCSS"]
+  },
+  {
+    "title": "Vannes Agglo",
+    "description": "Marketing de territoire pour aider les étudiants de Vannes dans leur parcours scolaire.",
+    "image": "/images/vannes-agglo.png",
+    "link": "#",
+    "category": "UX/UI & Design",
+    "tags": ["Marketing", "Figma", "Stratégie"]
+  },
+  {
+    "title": "Festival Vibrations",
+    "description": "Création de l'identité visuelle et du site web pour le festival de musique Vibrations.",
+    "image": "/images/festival-vibrations.png",
+    "link": "#",
+    "category": "UX/UI & Design",
+    "tags": ["Identité visuelle", "Web Design", "Creativité"]
+  },
+  {
+    "title": "Erwan&Ewen",
+    "description": "Développement d'un site web wordpress, pour les cavistes bretonne Erwan&Ewen.",
+    "image": "/images/erwan-ewen.png",
+    "link": "#",
+    "category": "Intégration",
+    "tags": ["Wordpress", "UX/UI", "E-commerce"]
+  },
+  {
+    "title": "G-En",
+    "description": "Solution B2B favorisant l'inclusion intergénérationnelle au sein des entreprises.",
+    "image": "/images/g-en.png",
+    "link": "#",
+    "category": "UX/UI & Design",
+    "tags": ["B2B", "Prototypage", "Recherche"]
+  }
+]

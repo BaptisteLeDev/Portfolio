@@ -9,7 +9,7 @@
     "demoLink": "https://vannes-agglo-demo.vercel.app",
     "githubLink": "https://github.com/BaptisteLeDev/vannes-agglo",
     "category": "UX/UI & Design",
-    "technologies": ["Figma", "Photoshop", "Marketing digital"],
+    "skills": ["Figma", "Photoshop", "Marketing digital"],
     "attribution": "Projet réalisé en binôme avec Pierre Gaillard",
     "date": "Mars 2024",
     "role": "Chef de projet, Designer UX/UI et responsable marketing"
@@ -24,7 +24,7 @@
     "demoLink": "https://festival-vibrations.netlify.app",
     "githubLink": "https://github.com/BaptisteLeDev/festival-vibrations",
     "category": "UX/UI & Design",
-    "technologies": ["Illustrator", "Photoshop", "JavaScript", "GSAP"],
+    "skills": ["Illustrator", "Photoshop", "JavaScript", "GSAP"],
     "attribution": "En collaboration avec l'association Musiques Actuelles",
     "date": "Septembre 2023",
     "role": "Designer graphique et intégrateur web"
@@ -39,7 +39,7 @@
     "demoLink": "https://erwen-ewen-shop.vercel.app",
     "githubLink": "https://github.com/BaptisteLeDev/erwen-ewen",
     "category": "Intégrateur, UX/UI & Design",
-    "technologies": ["Wordpress", "Figma", "WinSCP", "Kadence Template"],
+    "skills": ["Wordpress", "Figma", "WinSCP", "Kadence Template"],
     "attribution": "Projet réalisé pour la marque Erwen&Ewen",
     "date": "Novembre 2024",
     "role": "Intégrateur Wordpress et Designer UX"
@@ -54,7 +54,7 @@
     "demoLink": "https://g-en-dashboard.vercel.app",
     "githubLink": "https://github.com/BaptisteLeDev/g-en",
     "category": "UX/UI & Design",
-    "technologies": ["Figma", "Adobe XD", "Recherche UX", "Prototype interactif"],
+    "skills": ["Figma", "Adobe XD", "Recherche UX", "Prototype interactif"],
     "attribution": "Projet réalisé en équipe avec Pierre Gaillard",
     "date": "Janvier 2025",
     "role": "UX Designer & Recherche marketing"

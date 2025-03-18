@@ -11,7 +11,7 @@ export interface Project {
   demoLink?: string;
   githubLink?: string;
   category: string;
-  technologies: string[];
+  skills: string[];
   attribution: string;
   date: string;
   role: string;
@@ -52,14 +52,14 @@ const ProjectDetail = ({ project }: ProjectDetailProps) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
-            <h4 className="text-pink-400 text-lg font-medium mb-2">Technologies</h4>
+            <h4 className="text-pink-400 text-lg font-medium mb-2">Compétences</h4>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, index) => (
+              {project.skills.map((skills, index) => (
                 <span 
                   key={index}
                   className="bg-stone-700 text-amber-50 px-3 py-1 rounded-full text-sm"
                 >
-                  {tech}
+                  {skills}
                 </span>
               ))}
             </div>

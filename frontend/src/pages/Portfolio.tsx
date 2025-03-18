@@ -47,15 +47,6 @@ const Portfolio = () => {
         animate={{ transform: "translateX(0px)" }}
         transition={{ type: "spring" }}
       >
-        <div className="mb-8">
-        <h2 className="text-5xl text-amber-50 font-[350] max-sm:text-4xl">
-                Mes Projets
-              </h2>
-              <h3 className="mt-2.5 text-5xl font-medium text-amber-50 max-sm:text-4xl">
-                Dévellopeur Web
-              </h3>
-        </div>
-        
         <Carousel />
       </motion.section>
 
@@ -100,7 +91,8 @@ const Portfolio = () => {
         </div>
       </motion.section>
 
-      {/* Portfolio Section */}
+      {/* Portfolio Dossier */}
+      {/*
       <motion.section
         className="px-10 md:px-20 py-24 bg-stone-900"
         initial={{ opacity: 0 }}
@@ -128,6 +120,7 @@ const Portfolio = () => {
           <h4 className="text-5xl text-amber-50 font-[350]">G-En</h4>
         </div>
       </motion.section>
+      */}
 
       <UpArrow />
       <Footer />

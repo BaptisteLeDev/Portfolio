@@ -23,13 +23,13 @@ const ContactForm: React.FC = () => {
         className="px-5 py-0 w-full bg-amber-50 border-none h-[42px] rounded-[100px] focus:outline-none focus:ring-2 focus:ring-pink-600"
         aria-label="Subject"
       />
-      <input
-        type="text"
+      <textarea
         placeholder="Mon message ..."
         required
-        className="px-5 py-0 w-full bg-amber-50 border-none h-[42px] rounded-[100px] focus:outline-none focus:ring-2 focus:ring-pink-600"
+        rows={4}
+        className="px-5 py-3 w-full bg-amber-50 border-none rounded-[20px] focus:outline-none focus:ring-2 focus:ring-pink-600"
         aria-label="Message"
-      />
+      ></textarea>
       <div className="flex gap-6">
         <button
           type="submit"
@@ -42,20 +42,38 @@ const ContactForm: React.FC = () => {
   );
 };
 
+// Définition des icônes sociales avec des URL spécifiques
+const socialIcons = {
+  Linkedin: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
+  GitHub: "https://cdn-icons-png.flaticon.com/512/25/25231.png",
+  Mail: "https://cdn-icons-png.flaticon.com/512/561/561127.png",
+  "Bento.me": "https://assets.bento.me/static/favicon.png"
+};
+
+// Définition des liens vers les réseaux sociaux
+const socialLinks = {
+  Linkedin: "https://www.linkedin.com/in/votre-profil/",
+  GitHub: "https://github.com/votre-profil",
+  Mail: "mailto:votre-email@exemple.com",
+  "Bento.me": "https://bento.me/votre-profil"
+};
+
 const SocialIcon: React.FC<{ image: string; name: string }> = ({
   image,
   name,
 }) => {
   return (
     <a
-      href={`#${name.toLowerCase()}`}
+      href={socialLinks[name as keyof typeof socialLinks]}
       className="text-center group"
-      aria-label={`Visit ${name}`}
+      aria-label={`Visiter ${name}`}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <img
-        src={image}
+        src={socialIcons[name as keyof typeof socialIcons] || image}
         alt={name}
-        className="mb-4 rounded-full h-[100px] w-[100px] transition-transform group-hover:transform group-hover:scale-110"
+        className="mb-4 rounded-full h-[100px] w-[100px] transition-transform group-hover:transform group-hover:scale-110 bg-amber-50 p-4 object-contain"
       />
       <div className="text-xl text-amber-50 group-hover:text-pink-600">
         {name}
@@ -67,9 +85,9 @@ const SocialIcon: React.FC<{ image: string; name: string }> = ({
 const Footer: React.FC = () => {
   return (
     <motion.footer
-      initial={{ y: 50, opacity: 0 }} // Démarre en bas avec opacité 0
-      animate={{ y: 0, opacity: 1 }} // Remonte et devient visible
-      transition={{ duration: 0.5, ease: "easeOut" }} // Animation fluide
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="text-white text-left"
     >
       <section className="px-10 lg:px-52 py-24 border-solid bg-stone-900 border-y-[22px] border-y-pink-600 rounded-[100px] max-md:px-5 max-md:py-12">
@@ -83,29 +101,31 @@ const Footer: React.FC = () => {
             </h3>
             <div className="flex flex-wrap gap-12 max-sm:justify-center">
               <SocialIcon
-                image="https://cdn.builder.io/api/v1/image/assets/TEMP/6c3f0aeebc1b94669d693c7723f85a1f8b7ae0d4"
+                image={socialIcons.Linkedin}
                 name="Linkedin"
               />
               <SocialIcon
-                image="https://cdn.builder.io/api/v1/image/assets/TEMP/6c3f0aeebc1b94669d693c7723f85a1f8b7ae0d4"
+                image={socialIcons.GitHub}
                 name="GitHub"
               />
               <SocialIcon
-                image="https://cdn.builder.io/api/v1/image/assets/TEMP/6c3f0aeebc1b94669d693c7723f85a1f8b7ae0d4"
+                image={socialIcons.Mail}
                 name="Mail"
               />
               <SocialIcon
-                image="https://cdn.builder.io/api/v1/image/assets/TEMP/6c3f0aeebc1b94669d693c7723f85a1f8b7ae0d4"
+                image={socialIcons["Bento.me"]}
                 name="Bento.me"
               />
             </div>
           </div>
+          {/* Décommentez cette section pour activer le formulaire de contact
           <div className="flex-1">
             <h2 className="mb-5 text-5xl text-amber-50 max-sm:text-4xl">
               Formulaire
             </h2>
             <ContactForm />
           </div>
+          */}
         </div>
       </section>
 

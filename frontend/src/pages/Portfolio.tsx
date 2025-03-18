@@ -12,7 +12,12 @@ import projects from "../data/projects.json";
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(projects[0].id);
 
+  // Conversion des valeurs null en undefined pour être compatible avec le type Project
   const currentProject = projects.find(project => project.id === selectedProject) || projects[0];
+  const formattedProject = {
+    ...currentProject,
+    githubLink: currentProject.githubLink === null ? undefined : currentProject.githubLink
+  };
 
   return (
     <>
@@ -43,10 +48,12 @@ const Portfolio = () => {
       {/* 🎯 SECTION "PORTFOLIO" */}
       <motion.section
         className="min-h-screen flex flex-col items-center justify-center bg-stone-900 p-10 md:p-20"
-        initial={{ transform: "translateX(-100px)" }}
-        animate={{ transform: "translateX(0px)" }}
+        initial={{ x: -100 }}
+        animate={{ x: 0 }}
         transition={{ type: "spring" }}
       >
+
+        
         <Carousel />
       </motion.section>
 
@@ -86,7 +93,7 @@ const Portfolio = () => {
           </div>
           {/* Partie droite - Composant de détail du projet */}
           <div className="w-full md:w-2/3 mt-8 md:mt-0">
-            <ProjectDetail project={currentProject} />
+            <ProjectDetail project={formattedProject} />
           </div>
         </div>
       </motion.section>

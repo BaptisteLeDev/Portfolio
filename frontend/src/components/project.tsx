@@ -89,7 +89,7 @@ const ProjectDetail = ({ project }: ProjectDetailProps) => {
               rel="noopener noreferrer"
               className="bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition-colors"
             >
-              Voir la démo
+              Voir +
             </a>
           )}
           
@@ -106,6 +106,8 @@ const ProjectDetail = ({ project }: ProjectDetailProps) => {
         </div>
       </div>
     </motion.div>
+
+    
   );
 };
 

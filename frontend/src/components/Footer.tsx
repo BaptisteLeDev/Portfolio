@@ -123,13 +123,13 @@ const Footer: React.FC = () => {
       </section>
       <div className="px-4 py-12 text-center">
         <div className="text-amber-50 max-w-7xl mx-auto">
-          <h2 className="mb-5 text-lg font-bold">by Baptiste D</h2>
+          <h2 className="mb-5 text-xl font-bold">by Baptiste D</h2>
           <nav className="mx-0 my-4 text-lg md:text-2xl flex flex-wrap justify-center gap-x-3 gap-y-2">
             <a
-              href="/sitemap"
+              href="/site-story"
               className="hover:text-pink-600 transition-colors"
             >
-              Plan du site
+              Site-story
             </a>
             <span className="text-amber-300">|</span>
             <a href="/legal" className="hover:text-pink-600 transition-colors">

@@ -13,6 +13,12 @@ import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { projects } from "@/data/projects";
 
+const statusLabel: Record<string, string> = {
+  live: "En production",
+  wip: "En développement",
+  archived: "Archivé",
+};
+
 export default function ProjectPage() {
   const { id } = useParams();
   const { t } = useTranslation("project");
@@ -27,15 +33,35 @@ export default function ProjectPage() {
 
   return (
     <>
-      {/* Hero projet */}
-      <section className="relative min-h-[70vh] overflow-hidden flex items-end pt-32 pb-16 px-8">
+      {/* Hero projet — centré vertical, hauteur adaptée */}
+      <section className="relative overflow-hidden flex items-center pt-16 pb-20 md:pt-24 md:pb-28 px-6 md:px-8">
         <AnimatedGradient palette={palette} />
-        <div className="absolute inset-0 bg-bg/40" aria-hidden="true" />
+        <div className="absolute inset-0 bg-bg/45" aria-hidden="true" />
         <NoiseOverlay />
         <Container size="lg" className="relative z-10">
-          <Label prefix="">// {project.type}</Label>
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <Label prefix="">// {project.type}</Label>
+            <span
+              className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] px-3 py-1 rounded-full border ${
+                project.status === "live"
+                  ? "bg-success/15 border-success/40 text-success"
+                  : project.status === "wip"
+                    ? "bg-warn/15 border-warn/40 text-warn"
+                    : "bg-fg/10 border-fg/20 text-fg/70"
+              }`}
+            >
+              {project.status === "live" && (
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full bg-success"
+                  style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+                />
+              )}
+              {statusLabel[project.status]}
+            </span>
+          </div>
           <h1
-            className="mt-4 font-display font-black"
+            className="font-display font-black"
             style={{
               fontSize: "var(--text-display-xl)",
               lineHeight: 0.92,
@@ -44,7 +70,9 @@ export default function ProjectPage() {
           >
             {project.title}
           </h1>
-          <p className="mt-5 text-xl md:text-2xl opacity-95 max-w-2xl">{project.tagline}</p>
+          <p className="mt-5 text-xl md:text-2xl opacity-95 max-w-2xl leading-snug">
+            {project.tagline}
+          </p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
             <span>
               <span className="opacity-60">{t("role")} · </span>
@@ -57,10 +85,10 @@ export default function ProjectPage() {
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <Tag key={s} className="bg-bg/50 text-fg border-fg/20">{s}</Tag>
+              <Tag key={s} className="bg-bg/55 text-fg border-fg/20">{s}</Tag>
             ))}
           </div>
-          {project.links && (
+          {project.links && (project.links.live || project.links.repo) && (
             <div className="mt-8 flex gap-3 flex-wrap">
               {project.links.live && (
                 <Button variant="gradient" size="md" asChild>
@@ -81,46 +109,48 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-      {/* Description */}
-      <Section tone="cream" rounded="2xl" overlap>
+      {/* Description — section cream, compact */}
+      <Section tone="cream" rounded="2xl" overlap className="py-16 md:py-20">
         <Container size="md" className="text-bg">
           <ScrollReveal effect="rise">
-            <p className="text-xl leading-relaxed">{project.description}</p>
+            <Label className="text-bg">À PROPOS DU PROJET</Label>
+            <p className="mt-5 text-xl md:text-2xl leading-relaxed">{project.description}</p>
           </ScrollReveal>
         </Container>
       </Section>
 
       {/* Problem / Solution / Outcome */}
       {(project.problem || project.solution || project.outcome) && (
-        <Section tone="dark" rounded="none">
+        <Section tone="dark" rounded="none" className="py-20">
           <Container size="lg">
+            <Label className="mb-10 block">DÉFI & LIVRAISON</Label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {project.problem && (
                 <ScrollReveal effect="rise">
-                  <Card tone="glass" radius="lg">
+                  <Card tone="glass" radius="lg" className="h-full">
                     <CardBody>
                       <Label>{t("problem")}</Label>
-                      <p className="mt-4">{project.problem}</p>
+                      <p className="mt-4 leading-relaxed">{project.problem}</p>
                     </CardBody>
                   </Card>
                 </ScrollReveal>
               )}
               {project.solution && (
                 <ScrollReveal effect="rise" delay={80}>
-                  <Card tone="glass" radius="lg">
+                  <Card tone="glass" radius="lg" className="h-full">
                     <CardBody>
                       <Label>{t("solution")}</Label>
-                      <p className="mt-4">{project.solution}</p>
+                      <p className="mt-4 leading-relaxed">{project.solution}</p>
                     </CardBody>
                   </Card>
                 </ScrollReveal>
               )}
               {project.outcome && (
                 <ScrollReveal effect="rise" delay={160}>
-                  <Card tone="glass" radius="lg">
+                  <Card tone="glass" radius="lg" className="h-full">
                     <CardBody>
                       <Label>{t("outcome")}</Label>
-                      <p className="mt-4">{project.outcome}</p>
+                      <p className="mt-4 leading-relaxed">{project.outcome}</p>
                     </CardBody>
                   </Card>
                 </ScrollReveal>
@@ -132,10 +162,16 @@ export default function ProjectPage() {
 
       {/* Versions (Amigaru) */}
       {project.versions && project.versions.length > 0 && (
-        <Section tone="gradient" rounded="2xl" overlap>
+        <Section tone="gradient" rounded="2xl" overlap className="py-20">
           <AnimatedGradient palette="hero" className="opacity-30" />
           <Container size="lg" className="relative z-10">
             <Label>{t("versions")}</Label>
+            <h2
+              className="mt-3 font-display font-black"
+              style={{ fontSize: "var(--text-h2)", lineHeight: 1, letterSpacing: "-0.02em" }}
+            >
+              Évolution technique
+            </h2>
             <div className="mt-10 space-y-6">
               {project.versions.map((v, i) => (
                 <ScrollReveal key={v.label} effect="rise" delay={i * 80}>
@@ -149,7 +185,7 @@ export default function ProjectPage() {
                           ))}
                         </div>
                       </div>
-                      <p className="mt-4 opacity-85">{v.note}</p>
+                      <p className="mt-4 opacity-85 leading-relaxed">{v.note}</p>
                     </CardBody>
                   </Card>
                 </ScrollReveal>
@@ -161,7 +197,7 @@ export default function ProjectPage() {
 
       {/* Gallery */}
       {project.screenshots && project.screenshots.length > 0 && (
-        <Section tone="cream" rounded="none">
+        <Section tone="cream" rounded="none" className="py-20">
           <Container size="xl" className="text-bg">
             <Label className="text-bg">{t("gallery")}</Label>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -174,11 +210,11 @@ export default function ProjectPage() {
       )}
 
       {/* Prev / Next nav */}
-      <Section tone="dark" rounded="none" className="py-16">
+      <Section tone="dark" rounded="none" className="py-12 md:py-16">
         <Container size="lg">
           <Divider variant="brackets" className="mb-10" />
           <div className="flex flex-wrap justify-between gap-6">
-            <Link to={`/portfolio/${prev.id}`} className="group">
+            <Link to={`/portfolio/${prev.id}`} className="group max-w-[45%]">
               <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50">
                 ← {t("prev")}
               </p>
@@ -186,7 +222,7 @@ export default function ProjectPage() {
                 {prev.title}
               </p>
             </Link>
-            <Link to={`/portfolio/${next.id}`} className="group text-right">
+            <Link to={`/portfolio/${next.id}`} className="group text-right max-w-[45%]">
               <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50">
                 {t("next")} →
               </p>

@@ -1,15 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Bracket } from "@/components/ui/bracket";
 import { Label } from "@/components/ui/label";
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { AnimatedGradient } from "@/components/effects/animated-gradient";
-import { Cody } from "@/components/cody";
 import { Footer } from "@/components/footer";
 import { formations } from "@/data/formations";
 import { hardSkills, softSkills } from "@/data/skills";
@@ -160,33 +157,6 @@ export default function Accueil() {
           </div>
         </div>
       </section>
-
-      {/* 6. CTA final — rounded 2xl gradient */}
-      <Section tone="gradient" rounded="2xl" overlap className="bg-bg">
-        <AnimatedGradient palette="hero" className="opacity-40" />
-        <Container size="md" className="relative z-10 text-center">
-          <h2
-            className="font-display font-black"
-            style={{ fontSize: "var(--text-display-xl)", lineHeight: 1, letterSpacing: "-0.035em" }}
-          >
-            Envie de parler d'un projet ?
-          </h2>
-          <p className="mt-6 text-xl opacity-85">
-            Je réponds vite, que ce soit une alternance, un freelance ou juste un café.
-          </p>
-          <div className="mt-10 flex gap-4 justify-center flex-wrap">
-            <Button variant="gradient" size="lg" asChild>
-              <a href="mailto:baptiste.dechamp@tomexplore.com">Envoyer un email →</a>
-            </Button>
-            <Button variant="glass-cream" size="lg" asChild>
-              <Link to="/portfolio">{t("common:cta.see_projects")}</Link>
-            </Button>
-          </div>
-          <div className="mt-16 flex justify-center">
-            <Cody mood="happy" variant="portfolio" size={180} />
-          </div>
-        </Container>
-      </Section>
 
       <Footer />
     </>

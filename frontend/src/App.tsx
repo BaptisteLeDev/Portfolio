@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { MouseProvider } from "@/components/cody";
+import { MouseProvider, CodyReactionProvider } from "@/components/cody";
 import { NavBar } from "@/components/nav/navbar";
 import { UpArrow } from "@/components/ui/UpArrow";
 import { pageVariants } from "@/lib/motion-variants";
@@ -36,19 +36,21 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <MouseProvider>
-      <BrowserRouter>
-        <a
-          href="#content"
-          className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100] bg-fg text-bg px-4 py-2 rounded-full"
-        >
-          Aller au contenu
-        </a>
-        <NavBar />
-        <main id="content" className="pt-16">
-          <AnimatedRoutes />
-        </main>
-        <UpArrow />
-      </BrowserRouter>
+      <CodyReactionProvider>
+        <BrowserRouter>
+          <a
+            href="#content"
+            className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100] bg-fg text-bg px-4 py-2 rounded-full"
+          >
+            Aller au contenu
+          </a>
+          <NavBar />
+          <main id="content" className="pt-24">
+            <AnimatedRoutes />
+          </main>
+          <UpArrow />
+        </BrowserRouter>
+      </CodyReactionProvider>
     </MouseProvider>
   );
 }

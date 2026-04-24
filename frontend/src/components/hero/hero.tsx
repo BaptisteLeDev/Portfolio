@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
@@ -6,16 +5,14 @@ import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import { FluidBlobs } from "@/components/effects/fluid-blobs";
 import { NoiseOverlay } from "@/components/effects/noise-overlay";
 import { Typewriter } from "@/components/effects/typewriter";
-import { Cody, type CodyMood } from "@/components/cody";
+import { Cody, useCodyBroadcast } from "@/components/cody";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
   const { t } = useTranslation("home");
   const { t: tc } = useTranslation("common");
-  const [hoverMood, setHoverMood] = useState<CodyMood | null>(null);
-
-  const starOnEnter = () => setHoverMood("star");
-  const clearHover = () => setHoverMood(null);
+  const projectsBind = useCodyBroadcast({ mood: "star", brackets: "square" });
+  const curriculumBind = useCodyBroadcast({ mood: "happy", brackets: "curly" });
 
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center rounded-b-[100px] max-md:rounded-b-[64px] px-8 py-28">
@@ -53,33 +50,17 @@ export function Hero() {
             </p>
 
             <div className="mt-10 flex gap-4 flex-wrap">
-              <Button
-                variant="gradient"
-                size="lg"
-                asChild
-                onMouseEnter={starOnEnter}
-                onMouseLeave={clearHover}
-                onFocus={starOnEnter}
-                onBlur={clearHover}
-              >
+              <Button variant="gradient" size="lg" asChild {...projectsBind}>
                 <Link to="/portfolio">{tc("cta.see_projects")} →</Link>
               </Button>
-              <Button
-                variant="glass-cream"
-                size="lg"
-                asChild
-                onMouseEnter={starOnEnter}
-                onMouseLeave={clearHover}
-                onFocus={starOnEnter}
-                onBlur={clearHover}
-              >
+              <Button variant="glass-cream" size="lg" asChild {...curriculumBind}>
                 <Link to="/bonus">{tc("cta.curriculum")}</Link>
               </Button>
             </div>
           </div>
 
           <div className="hidden md:flex justify-center items-center text-fg">
-            <Cody mood={hoverMood ?? "curious"} variant="portfolio" size={340} />
+            <Cody mood="curious" variant="portfolio" brackets="square" size={340} listen />
           </div>
         </div>
       </Container>

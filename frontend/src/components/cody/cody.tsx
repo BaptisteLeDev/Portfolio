@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { useMouseCtx } from "./mouse-context";
+import { useCodyReaction } from "./reaction-context";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export type CodyMood =
@@ -10,33 +11,64 @@ export type CodyMood =
   | "confused"
   | "thinking"
   | "star"
-  | "wow";
+  | "wow"
+  | "mail"
+  | "phone"
+  | "code"
+  | "wink"
+  | "love"
+  | "sleep"
+  | "brand";
+
 export type CodyVariant = "portfolio" | "bracket";
+export type CodyBrackets = "square" | "round" | "curly" | "angle";
 
 export interface CodyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "style" | "onClick"> {
   mood?: CodyMood;
   variant?: CodyVariant;
+  brackets?: CodyBrackets;
   size?: number;
   /** If true, clicking Cody triggers a temporary 'wow' burst. Default: true. */
   clickable?: boolean;
+  /** Zoom up slightly (1.1x) to draw attention */
+  zoom?: boolean;
+  /** If true (default), overrides own mood/brackets with global Cody reaction when one is broadcast. */
+  listen?: boolean;
 }
 
 // ASCII face per mood — pure text, no SVG shapes.
 const faceByMood: Record<CodyMood, { left: string; right: string; mouth: string }> = {
-  idle:     { left: "o", right: "o", mouth: "_" },
-  curious:  { left: "o", right: "O", mouth: "_" },
-  happy:    { left: "^", right: "^", mouth: "‿" },
-  confused: { left: "?", right: "?", mouth: "~" },
-  thinking: { left: "-", right: "-", mouth: "." },
-  star:     { left: "✦", right: "✦", mouth: "‿" },
-  wow:      { left: "✦", right: "✦", mouth: "o" },
+  idle:     { left: "o",  right: "o",  mouth: "_" },
+  curious:  { left: "o",  right: "O",  mouth: "_" },
+  happy:    { left: "^",  right: "^",  mouth: "‿" },
+  confused: { left: "?",  right: "?",  mouth: "~" },
+  thinking: { left: "-",  right: "-",  mouth: "." },
+  star:     { left: "✦",  right: "✦",  mouth: "‿" },
+  wow:      { left: "✦",  right: "✦",  mouth: "o" },
+  mail:     { left: "@",  right: "@",  mouth: "‿" },
+  phone:    { left: "☏",  right: "☏",  mouth: "o" },
+  code:     { left: "<",  right: "/",  mouth: ">" },
+  wink:     { left: "-",  right: "o",  mouth: "‿" },
+  love:     { left: "♥",  right: "♥",  mouth: "‿" },
+  sleep:    { left: "z",  right: "z",  mouth: "~" },
+  brand:    { left: "B",  right: "D",  mouth: "_" },
+};
+
+const bracketPairs: Record<CodyBrackets, { open: string; close: string }> = {
+  square: { open: "[", close: "]" },
+  round:  { open: "(", close: ")" },
+  curly:  { open: "{", close: "}" },
+  angle:  { open: "<", close: ">" },
 };
 
 export function Cody({
   mood: propMood = "curious",
   variant = "bracket",
+  brackets: propBrackets = "square",
   size = 200,
   clickable = true,
+  zoom = false,
+  listen = true,
   className,
   ...props
 }: CodyProps) {
@@ -45,11 +77,16 @@ export function Cody({
   const leftEyeRef = useRef<HTMLSpanElement | null>(null);
   const rightEyeRef = useRef<HTMLSpanElement | null>(null);
   const mouse = useMouseCtx();
+  const { reaction } = useCodyReaction();
   const reduce = useReducedMotion();
   const [blink, setBlink] = useState(false);
   const [burst, setBurst] = useState<CodyMood | null>(null);
   const [pulseKey, setPulseKey] = useState(0);
-  const mood = burst ?? propMood;
+  // Priority: click burst > global broadcast (if listening) > own prop
+  const syncedMood = listen && reaction.mood ? reaction.mood : propMood;
+  const syncedBrackets = listen && reaction.brackets ? reaction.brackets : propBrackets;
+  const mood = burst ?? syncedMood;
+  const brackets = burst ? propBrackets : syncedBrackets;
 
   const triggerWow = () => {
     setBurst("wow");
@@ -111,6 +148,7 @@ export function Cody({
   }, [mouse.clientX, mouse.clientY, reduce, size]);
 
   const face = faceByMood[mood];
+  const bracketChars = bracketPairs[brackets];
   const accent = variant === "portfolio" ? "text-cream" : "text-fg";
 
   const eyeWrap: React.CSSProperties = {
@@ -144,8 +182,9 @@ export function Cody({
       onClick={isClickable ? triggerWow : undefined}
       onKeyDown={handleKey}
       className={cn(
-        "inline-block relative",
+        "inline-block relative transition-transform duration-300 ease-[var(--ease-signature)]",
         isClickable && "cursor-pointer",
+        zoom && "scale-110",
         className,
       )}
       style={{ perspective: `${size * 2.5}px` }}
@@ -168,7 +207,7 @@ export function Cody({
           willChange: "transform",
         }}
       >
-        <span aria-hidden="true">[</span>
+        <span aria-hidden="true">{bracketChars.open}</span>
         <span ref={leftEyeRef} style={eyeWrap}>
           <span style={blinkWrap}>{face.left}</span>
         </span>
@@ -178,7 +217,7 @@ export function Cody({
         <span ref={rightEyeRef} style={eyeWrap}>
           <span style={blinkWrap}>{face.right}</span>
         </span>
-        <span aria-hidden="true">]</span>
+        <span aria-hidden="true">{bracketChars.close}</span>
       </div>
       {burst === "wow" && !reduce && <CodyBurst />}
     </div>

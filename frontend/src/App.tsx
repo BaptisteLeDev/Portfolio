@@ -45,7 +45,7 @@ export default function App() {
             Aller au contenu
           </a>
           <NavBar />
-          <main id="content" className="pt-24">
+          <main id="content">
             <AnimatedRoutes />
           </main>
           <UpArrow />

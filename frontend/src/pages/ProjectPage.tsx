@@ -34,7 +34,7 @@ export default function ProjectPage() {
   return (
     <>
       {/* Hero projet — centré vertical, hauteur adaptée */}
-      <section className="relative overflow-hidden flex items-center pt-16 pb-20 md:pt-24 md:pb-28 px-6 md:px-8">
+      <section className="relative overflow-hidden flex items-center pt-24 pb-24 md:pt-28 md:pb-32 px-6 md:px-8">
         <AnimatedGradient palette={palette} />
         <div className="absolute inset-0 bg-bg/45" aria-hidden="true" />
         <NoiseOverlay />

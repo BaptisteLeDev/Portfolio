@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Bracket } from "@/components/ui/bracket";
 import { Label } from "@/components/ui/label";
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import { Footer } from "@/components/footer";
@@ -20,8 +22,13 @@ export default function Accueil() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* 2. About — flat, overlap, cream */}
-      <Section tone="cream" rounded="none" overlap>
+      {/* 2. About — cream, rounded-top matching hero bottom, overlap */}
+      <Section
+        tone="cream"
+        rounded="none"
+        overlap
+        className="rounded-t-[100px] max-md:rounded-t-[64px] max-sm:rounded-t-[32px] relative z-10"
+      >
         <Container size="md" className="relative">
           <Bracket side="left" size="giant" float className="left-[-4rem] top-[-3rem] opacity-30 text-bg" />
           <Bracket side="right" size="giant" float className="right-[-4rem] bottom-[-3rem] opacity-30 text-bg" />
@@ -157,6 +164,30 @@ export default function Accueil() {
           </div>
         </div>
       </section>
+
+      {/* 6. CTA final — gradient, sans Cody */}
+      <Section tone="gradient" rounded="2xl" overlap className="bg-bg">
+        <AnimatedGradient palette="hero" className="opacity-40" />
+        <Container size="md" className="relative z-10 text-center">
+          <h2
+            className="font-display font-black"
+            style={{ fontSize: "var(--text-display-xl)", lineHeight: 1, letterSpacing: "-0.035em" }}
+          >
+            Envie de parler d'un projet&nbsp;?
+          </h2>
+          <p className="mt-6 text-xl opacity-85 max-w-prose mx-auto">
+            Je réponds vite, que ce soit une alternance, un freelance ou juste un café.
+          </p>
+          <div className="mt-10 flex gap-4 justify-center flex-wrap">
+            <Button variant="gradient" size="lg" asChild>
+              <a href="mailto:baptiste.dechamp@tomexplore.com">Envoyer un email →</a>
+            </Button>
+            <Button variant="glass-cream" size="lg" asChild>
+              <Link to="/portfolio">{t("common:cta.see_projects")}</Link>
+            </Button>
+          </div>
+        </Container>
+      </Section>
 
       <Footer />
     </>

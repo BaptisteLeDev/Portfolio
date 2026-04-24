@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
@@ -5,12 +6,17 @@ import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import { FluidBlobs } from "@/components/effects/fluid-blobs";
 import { NoiseOverlay } from "@/components/effects/noise-overlay";
 import { Typewriter } from "@/components/effects/typewriter";
-import { Cody } from "@/components/cody";
+import { Cody, type CodyMood } from "@/components/cody";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
   const { t } = useTranslation("home");
   const { t: tc } = useTranslation("common");
+  const [hoverMood, setHoverMood] = useState<CodyMood | null>(null);
+
+  const starOnEnter = () => setHoverMood("star");
+  const clearHover = () => setHoverMood(null);
+
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center rounded-b-[100px] max-md:rounded-b-[64px] px-8 py-28">
       <AnimatedGradient palette="hero" />
@@ -47,17 +53,33 @@ export function Hero() {
             </p>
 
             <div className="mt-10 flex gap-4 flex-wrap">
-              <Button variant="gradient" size="lg" asChild>
+              <Button
+                variant="gradient"
+                size="lg"
+                asChild
+                onMouseEnter={starOnEnter}
+                onMouseLeave={clearHover}
+                onFocus={starOnEnter}
+                onBlur={clearHover}
+              >
                 <Link to="/portfolio">{tc("cta.see_projects")} →</Link>
               </Button>
-              <Button variant="glass-cream" size="lg" asChild>
+              <Button
+                variant="glass-cream"
+                size="lg"
+                asChild
+                onMouseEnter={starOnEnter}
+                onMouseLeave={clearHover}
+                onFocus={starOnEnter}
+                onBlur={clearHover}
+              >
                 <Link to="/bonus">{tc("cta.curriculum")}</Link>
               </Button>
             </div>
           </div>
 
           <div className="hidden md:flex justify-center items-center text-fg">
-            <Cody mood="curious" variant="portfolio" size={340} />
+            <Cody mood={hoverMood ?? "curious"} variant="portfolio" size={340} />
           </div>
         </div>
       </Container>

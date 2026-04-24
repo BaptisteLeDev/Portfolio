@@ -3,13 +3,22 @@ import { cn } from "@/lib/cn";
 import { useMouseCtx } from "./mouse-context";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-export type CodyMood = "idle" | "curious" | "happy" | "confused" | "thinking";
+export type CodyMood =
+  | "idle"
+  | "curious"
+  | "happy"
+  | "confused"
+  | "thinking"
+  | "star"
+  | "wow";
 export type CodyVariant = "portfolio" | "bracket";
 
-export interface CodyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "style"> {
+export interface CodyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "style" | "onClick"> {
   mood?: CodyMood;
   variant?: CodyVariant;
   size?: number;
+  /** If true, clicking Cody triggers a temporary 'wow' burst. Default: true. */
+  clickable?: boolean;
 }
 
 // ASCII face per mood — pure text, no SVG shapes.
@@ -19,12 +28,15 @@ const faceByMood: Record<CodyMood, { left: string; right: string; mouth: string 
   happy:    { left: "^", right: "^", mouth: "‿" },
   confused: { left: "?", right: "?", mouth: "~" },
   thinking: { left: "-", right: "-", mouth: "." },
+  star:     { left: "✦", right: "✦", mouth: "‿" },
+  wow:      { left: "✦", right: "✦", mouth: "o" },
 };
 
 export function Cody({
-  mood = "curious",
+  mood: propMood = "curious",
   variant = "bracket",
   size = 200,
+  clickable = true,
   className,
   ...props
 }: CodyProps) {
@@ -35,6 +47,15 @@ export function Cody({
   const mouse = useMouseCtx();
   const reduce = useReducedMotion();
   const [blink, setBlink] = useState(false);
+  const [burst, setBurst] = useState<CodyMood | null>(null);
+  const [pulseKey, setPulseKey] = useState(0);
+  const mood = burst ?? propMood;
+
+  const triggerWow = () => {
+    setBurst("wow");
+    setPulseKey((k) => k + 1);
+    window.setTimeout(() => setBurst(null), 1200);
+  };
 
   useEffect(() => {
     if (reduce) return;
@@ -104,21 +125,40 @@ export function Cody({
     transition: "transform 90ms ease",
   };
 
+  const isClickable = clickable && !reduce;
+  const handleKey = isClickable
+    ? (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          triggerWow();
+        }
+      }
+    : undefined;
+
   return (
     <div
       ref={containerRef}
-      role="img"
+      role={isClickable ? "button" : "img"}
       aria-label={`Cody ${mood}`}
-      className={cn("inline-block", className)}
+      tabIndex={isClickable ? 0 : undefined}
+      onClick={isClickable ? triggerWow : undefined}
+      onKeyDown={handleKey}
+      className={cn(
+        "inline-block relative",
+        isClickable && "cursor-pointer",
+        className,
+      )}
       style={{ perspective: `${size * 2.5}px` }}
       {...props}
     >
       <div
         ref={faceRef}
+        key={pulseKey}
         className={cn(
           "font-mono font-black select-none leading-none whitespace-nowrap",
           "inline-flex items-center justify-center gap-[0.3em]",
           accent,
+          burst && "cody-pulse",
         )}
         style={{
           fontSize: size * 0.28,
@@ -140,6 +180,38 @@ export function Cody({
         </span>
         <span aria-hidden="true">]</span>
       </div>
+      {burst === "wow" && !reduce && <CodyBurst />}
     </div>
+  );
+}
+
+function CodyBurst() {
+  // ASCII sparkle particles that briefly radiate outward
+  const particles = [
+    { tx: "-60%", ty: "-80%", rot: "-20deg", delay: "0ms" },
+    { tx: "60%", ty: "-70%", rot: "15deg", delay: "60ms" },
+    { tx: "-80%", ty: "20%", rot: "-10deg", delay: "120ms" },
+    { tx: "80%", ty: "40%", rot: "25deg", delay: "90ms" },
+    { tx: "0%", ty: "-100%", rot: "0deg", delay: "0ms" },
+  ];
+  return (
+    <>
+      {particles.map((p, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center font-mono font-black text-pink"
+          style={{
+            fontSize: "0.9em",
+            animation: `cody-burst 700ms ${p.delay} cubic-bezier(0.32,0.72,0,1) both`,
+            ["--tx" as string]: p.tx,
+            ["--ty" as string]: p.ty,
+            ["--rot" as string]: p.rot,
+          }}
+        >
+          ✦
+        </span>
+      ))}
+    </>
   );
 }

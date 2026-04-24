@@ -30,9 +30,10 @@ export default function ProjectPage() {
       {/* Hero projet */}
       <section className="relative min-h-[70vh] overflow-hidden flex items-end pt-32 pb-16 px-8">
         <AnimatedGradient palette={palette} />
+        <div className="absolute inset-0 bg-bg/40" aria-hidden="true" />
         <NoiseOverlay />
         <Container size="lg" className="relative z-10">
-          <Label>// {project.type}</Label>
+          <Label prefix="">// {project.type}</Label>
           <h1
             className="mt-4 font-display font-black"
             style={{
@@ -43,20 +44,20 @@ export default function ProjectPage() {
           >
             {project.title}
           </h1>
-          <p className="mt-5 text-xl md:text-2xl opacity-90 max-w-2xl">{project.tagline}</p>
-          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm opacity-80">
+          <p className="mt-5 text-xl md:text-2xl opacity-95 max-w-2xl">{project.tagline}</p>
+          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
             <span>
               <span className="opacity-60">{t("role")} · </span>
-              {project.role}
+              <span className="opacity-95">{project.role}</span>
             </span>
             <span>
               <span className="opacity-60">{t("period")} · </span>
-              {project.period}
+              <span className="opacity-95">{project.period}</span>
             </span>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <Tag key={s}>{s}</Tag>
+              <Tag key={s} className="bg-bg/50 text-fg border-fg/20">{s}</Tag>
             ))}
           </div>
           {project.links && (

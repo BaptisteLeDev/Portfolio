@@ -8,7 +8,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const isLive = project.status === "live";
   return (
     <Link to={`/portfolio/${project.id}`} className="block">
-      <Card tone="glass" radius="lg" interactive>
+      <Card tone="outline" radius="lg" interactive className="text-bg bg-bg/5 border-bg/10">
         <div className="relative aspect-[4/3] overflow-hidden">
           {project.thumbnail.kind === "gradient" ? (
             <AnimatedGradient palette={project.thumbnail.palette} />
@@ -25,16 +25,16 @@ export function ProjectCard({ project }: { project: Project }) {
           )}
           <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
             {project.stack.slice(0, 3).map((s) => (
-              <Tag key={s}>{s}</Tag>
+              <Tag key={s} className="bg-bg/40 text-fg border-fg/10">{s}</Tag>
             ))}
           </div>
         </div>
         <CardBody>
-          <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60 mb-2">
+          <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-55 mb-2">
             // {project.type}
           </p>
           <CardTitle>{project.title}</CardTitle>
-          <p className="mt-2 opacity-80 text-sm">{project.tagline}</p>
+          <p className="mt-2 opacity-75 text-sm">{project.tagline}</p>
         </CardBody>
       </Card>
     </Link>

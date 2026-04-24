@@ -24,13 +24,13 @@ export function Hero() {
             </p>
 
             <h1
-              className="font-display font-black leading-[0.88] tracking-[-0.045em] text-balance"
-              style={{ fontSize: "var(--text-display-xxl)" }}
+              className="font-display font-black leading-[0.95] tracking-[-0.04em] text-balance"
+              style={{ fontSize: "clamp(2.5rem, 7.5vw, 5.5rem)" }}
             >
               <span className="opacity-55">_</span>
               <Typewriter text={t("hero.greeting_text")} speed={55} startDelay={300} caret={false} />
               <br />
-              je&nbsp;suis{" "}
+              je suis{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -38,7 +38,7 @@ export function Hero() {
                     "linear-gradient(110deg, var(--color-cream) 0%, color-mix(in oklch, var(--color-pink) 60%, var(--color-cream)) 100%)",
                 }}
               >
-                <Typewriter text="Baptiste." speed={80} startDelay={1100} />
+                <Typewriter text="Baptiste." speed={80} startDelay={1100} caret={false} />
               </span>
             </h1>
 
@@ -56,8 +56,8 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hidden md:flex justify-center text-fg">
-            <Cody mood="curious" variant="portfolio" size={380} />
+          <div className="hidden md:flex justify-center items-center text-fg">
+            <Cody mood="curious" variant="portfolio" size={340} />
           </div>
         </div>
       </Container>

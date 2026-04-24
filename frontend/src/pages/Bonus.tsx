@@ -25,7 +25,7 @@ export default function Bonus() {
       <Section tone="dark" rounded="none" className="pt-32 pb-20">
         <AnimatedGradient palette="hero" className="opacity-40" />
         <Container size="lg" className="relative z-10">
-          <Label>/ Bonus</Label>
+          <Label>BONUS</Label>
           <h1
             className="mt-4 font-display font-black"
             style={{
@@ -46,10 +46,15 @@ export default function Bonus() {
         <Container size="lg" className="text-bg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {EXPERIMENTS.map((e) => (
-              <Card key={e.title} tone="outline" radius="lg">
+              <Card
+                key={e.title}
+                tone="outline"
+                radius="lg"
+                className="text-bg bg-bg/5 border-bg/10"
+              >
                 <CardBody>
                   <CardTitle>{e.title}</CardTitle>
-                  <p className="mt-3 opacity-80">{e.note}</p>
+                  <p className="mt-3 opacity-75">{e.note}</p>
                 </CardBody>
               </Card>
             ))}

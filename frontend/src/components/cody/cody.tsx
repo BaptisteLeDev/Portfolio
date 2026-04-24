@@ -91,24 +91,25 @@ export function Cody({
       role="img"
       aria-label={`Cody ${mood}`}
       className={cn(
-        "font-mono font-black tracking-[0.15em] select-none leading-none inline-block",
+        "font-mono font-black select-none leading-none whitespace-nowrap",
+        "inline-flex items-center justify-center gap-[0.3em]",
         accent,
         className,
       )}
-      style={{ fontSize: size * 0.35 }}
+      style={{ fontSize: size * 0.28 }}
       {...props}
     >
-      <span aria-hidden="true">[&nbsp;</span>
+      <span aria-hidden="true">[</span>
       <span ref={leftEyeRef} style={eyeWrap}>
         <span style={blinkWrap}>{face.left}</span>
       </span>
-      <span aria-hidden="true" className="mx-[0.15em] opacity-80">
+      <span aria-hidden="true" className="opacity-70">
         {face.mouth}
       </span>
       <span ref={rightEyeRef} style={eyeWrap}>
         <span style={blinkWrap}>{face.right}</span>
       </span>
-      <span aria-hidden="true">&nbsp;]</span>
+      <span aria-hidden="true">]</span>
     </div>
   );
 }

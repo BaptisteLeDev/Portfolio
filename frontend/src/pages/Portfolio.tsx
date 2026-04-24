@@ -18,7 +18,7 @@ export default function Portfolio() {
     <>
       <Section tone="dark" rounded="none" className="pt-32 pb-20">
         <Container size="xl">
-          <Label>/ Portfolio</Label>
+          <Label>PORTFOLIO</Label>
           <h1
             className="mt-4 font-display font-black"
             style={{

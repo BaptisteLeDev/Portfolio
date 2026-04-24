@@ -1,0 +1,11 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "no-console": "warn"
+  },
+  "ignorePatterns": ["dist", "node_modules", "*.config.*"]
+}

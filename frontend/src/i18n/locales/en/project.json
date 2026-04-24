@@ -1,0 +1,14 @@
+{
+  "role": "Role",
+  "period": "Period",
+  "stack": "Stack",
+  "problem": "Problem",
+  "solution": "Solution",
+  "outcome": "Outcome",
+  "versions": "Versions",
+  "gallery": "Gallery",
+  "prev": "Previous",
+  "next": "Next",
+  "view_live": "View site",
+  "view_repo": "Source code"
+}

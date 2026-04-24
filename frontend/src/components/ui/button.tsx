@@ -1,58 +1,47 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-
-import { cn } from "@/lib/utils"
+import { Slot } from "@radix-ui/react-slot";
+import { forwardRef } from "react";
+import { cva, type VariantProps } from "@/lib/cva";
+import { cn } from "@/lib/cn";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 font-body font-medium transition-[transform,background,box-shadow] duration-200 ease-[var(--ease-signature)] hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
-        outline:
-          "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        "solid-dark": "bg-bg text-fg hover:shadow-lg",
+        "solid-cream": "bg-cream text-bg hover:shadow-lg",
+        gradient:
+          "bg-[linear-gradient(135deg,var(--color-indigo),var(--color-pink))] text-fg shadow-[0_8px_24px_-8px_color-mix(in_oklch,var(--color-pink)_60%,transparent)] hover:shadow-[0_12px_32px_-8px_color-mix(in_oklch,var(--color-pink)_70%,transparent)]",
+        "glass-dark": "bg-bg/10 text-bg backdrop-blur-md hover:bg-bg/20",
+        "glass-cream": "bg-fg/10 text-fg backdrop-blur-md hover:bg-fg/20",
+        ghost: "bg-transparent text-fg hover:bg-fg/10",
+        link: "bg-transparent text-fg underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
+        sm: "h-9 rounded-full px-4 text-sm",
+        md: "h-11 rounded-full px-6 text-base",
+        lg: "h-14 rounded-full px-8 text-lg",
+        icon: "size-11 rounded-full",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
+    defaultVariants: { variant: "solid-dark", size: "md" },
+  },
+);
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
-  const Comp = asChild ? Slot : "button"
-
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
 }
 
-export { Button, buttonVariants }
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return (
+      <Comp className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
+    );
+  },
+);
+Button.displayName = "Button";
+
+export { buttonVariants };

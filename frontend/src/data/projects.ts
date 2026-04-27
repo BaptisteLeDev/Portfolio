@@ -41,7 +41,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "React", "TypeScript", "Storybook", "Tailwind", "PHP"],
     type: "fullstack",
     status: "live",
-    thumbnail: { kind: "gradient", palette: "hero" },
+    thumbnail: { kind: "image", src: "/images/amigaru/cover.png" },
     versions: [
       { label: "v1 — MVP", stack: ["PHP", "MySQL", "Tailwind", "jQuery"], note: "Preuve de concept, solo dev, focus sur les flux métier." },
       { label: "v2 — SPA", stack: ["React", "Vite", "Tailwind"], note: "Passage au front réactif, API séparée, premiers composants partagés." },
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     stack: ["React", "Vite", "Node", "Firebase", "TMDB API", "Tailwind"],
     type: "fullstack",
     status: "archived",
-    thumbnail: { kind: "gradient", palette: "hero" },
+    thumbnail: { kind: "image", src: "/images/devflix/cover.jpg" },
     problem: "Exercice d'école : réinventer une interface streaming pour du contenu technique.",
     solution: "UI VOD adaptée au cours court, rangées thématiques, player sticky.",
     outcome: "Livré en 10 jours, 18/20, repris en portfolio.",
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     stack: ["WordPress", "Kadence", "Figma", "WinSCP"],
     type: "web",
     status: "live",
-    thumbnail: { kind: "gradient", palette: "chaud" },
+    thumbnail: { kind: "image", src: "/images/erwan-ewen/cover.png" },
   },
   {
     id: "g-en",
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     stack: ["Figma", "Adobe XD", "Recherche UX"],
     type: "design",
     status: "archived",
-    thumbnail: { kind: "gradient", palette: "froid" },
+    thumbnail: { kind: "image", src: "/images/g-en/cover.png" },
     outcome: "Prototype cliquable, dossier marketing complet, concept validé en jury.",
   },
   {
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     stack: ["Illustrator", "Photoshop", "Figma"],
     type: "design",
     status: "archived",
-    thumbnail: { kind: "gradient", palette: "hero" },
+    thumbnail: { kind: "image", src: "/images/festival-vibrations/cover.png" },
   },
   {
     id: "vannes-agglo",
@@ -150,6 +150,6 @@ export const projects: Project[] = [
     stack: ["Figma", "Photoshop", "Marketing digital"],
     type: "design",
     status: "archived",
-    thumbnail: { kind: "gradient", palette: "chaud" },
+    thumbnail: { kind: "image", src: "/images/vannes-agglo/cover.png" },
   },
 ];

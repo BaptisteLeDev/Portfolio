@@ -1682,7 +1682,7 @@ function App() {
     <MouseProvider>
       <BrowserRouter>
         <NavBar />
-        <main className="pt-16">
+        <main className="pt-24">
           <AnimatedRoutes />
         </main>
       </BrowserRouter>
@@ -2159,7 +2159,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <main className="pt-16">
+      <main className="pt-24">
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/portfolio" element={<Portfolio />} />
@@ -2885,7 +2885,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <main className="pt-16">
+      <main className="pt-24">
         <AnimatedRoutes />
       </main>
     </BrowserRouter>
@@ -2963,7 +2963,7 @@ Dans `App.tsx`, avant `<NavBar>` :
 </a>
 ```
 
-Et `<main id="content" className="pt-16">`.
+Et `<main id="content" className="pt-24">`.
 
 - [ ] **Step 3 : Commit**
 

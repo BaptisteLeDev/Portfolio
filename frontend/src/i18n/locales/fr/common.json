@@ -2,7 +2,6 @@
   "nav": {
     "home": "Accueil",
     "portfolio": "Portfolio",
-    "bonus": "Bonus",
     "contact": "Contact"
   },
   "footer": {
@@ -13,7 +12,6 @@
   "cta": {
     "see_projects": "Voir mes projets",
     "back_home": "Retour à l'accueil",
-    "read_more": "En savoir plus",
-    "curriculum": "Curriculum"
+    "read_more": "En savoir plus"
   }
 }

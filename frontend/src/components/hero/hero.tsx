@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { AnimatedGradient } from "@/components/effects/animated-gradient";
-import { FluidBlobs } from "@/components/effects/fluid-blobs";
 import { NoiseOverlay } from "@/components/effects/noise-overlay";
 import { Typewriter } from "@/components/effects/typewriter";
 import { Cody, useCodyBroadcast } from "@/components/cody";
@@ -12,12 +11,10 @@ export function Hero() {
   const { t } = useTranslation("home");
   const { t: tc } = useTranslation("common");
   const projectsBind = useCodyBroadcast({ mood: "star", brackets: "square" });
-  const curriculumBind = useCodyBroadcast({ mood: "happy", brackets: "curly" });
 
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center rounded-b-[100px] max-md:rounded-b-[64px] px-8 py-28">
       <AnimatedGradient palette="hero" />
-      <FluidBlobs />
       <NoiseOverlay />
       <Container size="xl" className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] items-center gap-12">
@@ -52,9 +49,6 @@ export function Hero() {
             <div className="mt-10 flex gap-4 flex-wrap">
               <Button variant="gradient" size="lg" asChild {...projectsBind}>
                 <Link to="/portfolio">{tc("cta.see_projects")} →</Link>
-              </Button>
-              <Button variant="glass-cream" size="lg" asChild {...curriculumBind}>
-                <Link to="/bonus">{tc("cta.curriculum")}</Link>
               </Button>
             </div>
           </div>

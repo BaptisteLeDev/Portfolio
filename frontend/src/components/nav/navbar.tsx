@@ -11,12 +11,11 @@ import {
 import { MobileMenu } from "./mobile-menu";
 import { cn } from "@/lib/cn";
 
-type NavKey = "home" | "portfolio" | "bonus" | "contact";
+type NavKey = "home" | "portfolio" | "contact";
 
 const reactions: Record<NavKey, { mood: CodyMood; brackets: CodyBrackets }> = {
   home:      { mood: "curious", brackets: "square" },
   portfolio: { mood: "star",    brackets: "square" },
-  bonus:     { mood: "wow",     brackets: "curly"  },
   contact:   { mood: "mail",    brackets: "round"  },
 };
 
@@ -65,7 +64,6 @@ export function NavBar() {
   const links = [
     { to: "/", label: t("nav.home"), key: "home" as const },
     { to: "/portfolio", label: t("nav.portfolio"), key: "portfolio" as const },
-    { to: "/bonus", label: t("nav.bonus"), key: "bonus" as const },
   ];
 
   return (

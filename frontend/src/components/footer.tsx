@@ -59,7 +59,6 @@ export function Footer() {
             <ul className="mt-4 space-y-2">
               <li><FooterRouterLink to="/" reaction={R("curious", "square")}>{t("nav.home")}</FooterRouterLink></li>
               <li><FooterRouterLink to="/portfolio" reaction={R("star", "square")}>{t("nav.portfolio")}</FooterRouterLink></li>
-              <li><FooterRouterLink to="/bonus" reaction={R("wow", "curly")}>{t("nav.bonus")}</FooterRouterLink></li>
             </ul>
           </div>
 

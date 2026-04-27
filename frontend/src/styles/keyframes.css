@@ -1,7 +1,3 @@
-@keyframes spin-slow {
-  to { --angle: 360deg; }
-}
-
 @keyframes drift {
   0%   { transform: translateY(-4px); }
   100% { transform: translateY(4px); }
@@ -26,11 +22,25 @@
   50% { opacity: 0; }
 }
 
-@keyframes fluid-morph {
-  0%, 100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
-  25%      { transform: translate3d(3%,-2%,0) scale(1.08) rotate(8deg); }
-  50%      { transform: translate3d(-2%,3%,0) scale(0.95) rotate(-6deg); }
-  75%      { transform: translate3d(-3%,-1%,0) scale(1.05) rotate(4deg); }
+@keyframes blob-drift-0 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
+  33%      { transform: translate(-42%, -58%) scale(1.15) rotate(40deg); }
+  66%      { transform: translate(-58%, -45%) scale(0.9)  rotate(-20deg); }
+}
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
+  40%      { transform: translate(-60%, -42%) scale(1.2)  rotate(-30deg); }
+  75%      { transform: translate(-46%, -60%) scale(0.85) rotate(25deg); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
+  30%      { transform: translate(-55%, -55%) scale(1.1)  rotate(60deg); }
+  70%      { transform: translate(-44%, -48%) scale(0.95) rotate(-40deg); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
+  25%      { transform: translate(-48%, -56%) scale(0.92) rotate(-50deg); }
+  60%      { transform: translate(-56%, -44%) scale(1.18) rotate(35deg); }
 }
 
 @keyframes marquee {

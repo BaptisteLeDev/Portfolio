@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "footer": {
+    "signature": "/* fin */",
+    "made_with": "Fait avec",
+    "year": "© 2026 Baptiste Dechamp"
+  },
+  "cta": {
+    "see_projects": "Voir mes projets",
+    "back_home": "Retour à l'accueil",
+    "read_more": "En savoir plus"
+  }
+}

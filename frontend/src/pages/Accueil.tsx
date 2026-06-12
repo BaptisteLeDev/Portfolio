@@ -1,116 +1,195 @@
-import { motion } from "framer-motion";
-import Background from "../assets/background_accueil.png";
-import Cody from "../assets/Cody_Accueil.svg";
-import Introduction from "../assets/section_coup-oeil.png";
-import F1 from "../assets/forma_1.svg";
-import F2 from "../assets/forma_2.svg";
-import F3 from "../assets/forma_3.svg";
-import Footer from "../components/Footer";
-import UpArrow from "@/components/ui/UpArrow";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Hero } from "@/components/hero";
+import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { Bracket } from "@/components/ui/bracket";
+import { Label } from "@/components/ui/label";
+import { Card, CardBody, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
+import { AnimatedGradient } from "@/components/effects/animated-gradient";
+import { Footer } from "@/components/footer";
+import { formations } from "@/data/formations";
+import { hardSkills, softSkills } from "@/data/skills";
+import { stackItems } from "@/data/stack";
 
-const Accueil = () => {
+export default function Accueil() {
+  const { t } = useTranslation();
+
   return (
     <>
-      {/* 🎯 SECTION HERO */}
-      <motion.section
-        className="relative bg-cover bg-center p-10 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 rounded-b-[100px]"
-        style={{ backgroundImage: `url(${Background})` }}
+      {/* 1. Hero */}
+      <Hero />
+
+      {/* 2. About — cream, rounded-top matching hero bottom, overlap */}
+      <Section
+        tone="cream"
+        rounded="none"
+        overlap
+        className="rounded-t-[100px] max-md:rounded-t-[64px] max-sm:rounded-t-[32px] relative z-10"
       >
-        <motion.div className="relative flex flex-col items-left justify-center min-h-screen text-left">
-          <h1 className="font-bold mb-4 ">
-            _Hello world,
-            <br /> je suis Baptiste
-          </h1>
-          <p className="text-3xl mb-6">
-            Jeune développeur en
-            <br /> formation à MyDigitalSchool
+        <Container size="md" className="relative">
+          <Bracket side="left" size="giant" float className="left-[-4rem] top-[-3rem] opacity-30 text-bg" />
+          <Bracket side="right" size="giant" float className="right-[-4rem] bottom-[-3rem] opacity-30 text-bg" />
+          <ScrollReveal effect="rise">
+            <Label className="text-bg">{t("home:about.eyebrow")}</Label>
+            <h2
+              className="mt-3 font-display font-black text-bg"
+              style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
+            >
+              {t("home:about.title")}
+            </h2>
+            <p className="mt-6 text-xl leading-relaxed text-bg/85 max-w-prose">
+              {t("home:about.body")}
+            </p>
+          </ScrollReveal>
+        </Container>
+      </Section>
+
+      {/* 3. Parcours — rounded 2xl, overlap, dark + gradient chaud */}
+      <Section tone="dark" rounded="2xl" overlap>
+        <AnimatedGradient palette="chaud" className="opacity-30" />
+        <Container size="lg" className="relative z-10">
+          <Label>{t("home:parcours.eyebrow")}</Label>
+          <h2
+            className="mt-3 font-display font-black"
+            style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
+          >
+            {t("home:parcours.title")}
+          </h2>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {formations.map((f, i) => (
+              <ScrollReveal key={f.title} effect="rise" delay={i * 80}>
+                <Card tone="glass" radius="lg">
+                  <CardBody>
+                    <Label className="opacity-50">{f.year}</Label>
+                    <CardTitle className="mt-3">{f.title}</CardTitle>
+                    <p className="mt-2 text-sm opacity-70">{f.school}</p>
+                    {f.note && <p className="mt-4 text-sm opacity-80">{f.note}</p>}
+                  </CardBody>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4. Skills — flat, overlap, cream */}
+      <Section tone="cream" rounded="none" overlap>
+        <Container size="lg" className="text-bg">
+          <Label className="text-bg">{t("home:skills.eyebrow")}</Label>
+          <h2
+            className="mt-3 font-display font-black"
+            style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
+          >
+            {t("home:skills.title")}
+          </h2>
+
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12">
+            {/* Hard — grouped lists, no bars */}
+            <div>
+              <h3 className="font-display font-bold text-2xl mb-6">{t("home:skills.hard")}</h3>
+              <div className="space-y-6">
+                {(Object.entries(hardSkills) as [keyof typeof hardSkills, string[]][]).map(([group, items]) => (
+                  <div key={group}>
+                    <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50 mb-3">// {group}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map((s) => (
+                        <span
+                          key={s}
+                          className="inline-flex items-center rounded-full border border-bg/15 bg-bg/5 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.1em] text-bg/80"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Soft — numbered cards 01..04 */}
+            <div>
+              <h3 className="font-display font-bold text-2xl mb-6">{t("home:skills.soft")}</h3>
+              <div className="space-y-4">
+                {softSkills.map((s, i) => (
+                  <div key={s.label} className="rounded-[16px] border border-bg/12 bg-bg/5 p-5">
+                    <div className="flex items-baseline justify-between">
+                      <span className="font-display font-bold text-lg">{s.label}</span>
+                      <span className="font-mono text-xs opacity-50">0{i + 1}</span>
+                    </div>
+                    <p className="mt-2 text-sm opacity-85">{s.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 5. StackMarquee — flat dark, display giant, marquee animation */}
+      <section className="relative bg-bg text-fg py-24 overflow-hidden">
+        <Container size="lg">
+          <Label>{t("home:stack.eyebrow")}</Label>
+          <h2
+            className="mt-3 font-display font-black"
+            style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
+          >
+            {t("home:stack.title")}
+          </h2>
+        </Container>
+        <div className="mt-12 mask-fade-x overflow-hidden">
+          <div className="flex gap-8 w-max" style={{ animation: "marquee 40s linear infinite" }}>
+            {[...stackItems, ...stackItems].map((item, i) => {
+              const colors = [
+                "var(--color-pink)",
+                "var(--color-cream)",
+                "color-mix(in oklch, var(--color-fg) 30%, transparent)",
+              ];
+              return (
+                <span
+                  key={i}
+                  className="font-display font-black whitespace-nowrap"
+                  style={{
+                    fontSize: "clamp(2rem, 5vw, 4rem)",
+                    letterSpacing: "-0.03em",
+                    color: colors[i % 3],
+                  }}
+                >
+                  {item.label} <span className="opacity-40">·</span>
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CTA final — gradient, sans Cody */}
+      <Section tone="gradient" rounded="2xl" overlap className="bg-bg">
+        <AnimatedGradient palette="hero" className="opacity-40" />
+        <Container size="md" className="relative z-10 text-center">
+          <h2
+            className="font-display font-black"
+            style={{ fontSize: "var(--text-display-xl)", lineHeight: 1, letterSpacing: "-0.035em" }}
+          >
+            Envie de parler d'un projet&nbsp;?
+          </h2>
+          <p className="mt-6 text-xl opacity-85 max-w-prose mx-auto">
+            Je réponds vite, que ce soit une alternance, un freelance ou juste un café.
           </p>
-        </motion.div>
+          <div className="mt-10 flex gap-4 justify-center flex-wrap">
+            <Button variant="gradient" size="lg" asChild>
+              <a href="mailto:baptiste.dechamp@tomexplore.com">Envoyer un email →</a>
+            </Button>
+            <Button variant="glass-cream" size="lg" asChild>
+              <Link to="/portfolio">{t("common:cta.see_projects")}</Link>
+            </Button>
+          </div>
+        </Container>
+      </Section>
 
-        <motion.div className="hidden md:block">
-          <img src={Cody} alt="Cody" className="w-100 h-auto mb-6 " />
-        </motion.div>
-      </motion.section>
-
-      {/* 🎯 SECTION "INTRODUCTION" */}
-      <motion.section
-        className="columns-2 min-h-[550px] relative flex items-center justify-center gap-20 z-[-5] bg-center -mt-50 mb-15 md:mb-0 md:-mt-40 p-5 pt-70 pb-50"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        style={{ backgroundImage: `url(${Introduction})` }}
-      >
-        <motion.div className="hidden md:block">
-          <p className="text-9xl">[</p>
-        </motion.div>
-
-        <motion.div className="flex flex-col items-start justify-center text-left box-border w-full md:w-1/2">
-          <h2 className="text-3xl mb-4">Introduction</h2>
-          <h3 className="text-5xl font-bold mb-4 ">Coup d'oeil</h3>
-          <p className="max-w-2xl text-lg">
-            Je suis Baptiste Dechamp, développeur passionné par la création de
-            contenus pour les réseaux sociaux, le développement web et la
-            gestion de projets. Curieux et collaboratif, j'aime des solutions
-            uniques et performantes en explorant des approches créatives et
-            techniques. Voici mon <strong>parcours</strong>, mes{" "}
-            <strong>skills</strong> et mes <strong>projets</strong>.
-          </p>
-        </motion.div>
-
-        <motion.div className="hidden md:block">
-          <p className="text-9xl">]</p>
-        </motion.div>
-      </motion.section>
-
-      {/* 🎯 SECTION "FORMATION" */}
-      <motion.section
-        className="relative min-h-screen flex flex-col justify-center p-15 bg-gray-800 text-left
-        bg-gradient-to-br from-indigo-700 from-20% to-pink-600 rounded-[100px] -mt-40 md:-mt-20"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.div className="items-left">
-          <h2 className="text-3xl mb-4">Mon parcours</h2>
-          <h3 className="text-5xl font-bold mb-4 ">Mes formations</h3>
-        </motion.div>
-
-        <motion.div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 mt-10">
-          <img src={F1} alt="1" className="w-75 h-auto mb-6 " />
-          <img src={F2} alt="2" className="w-75 h-auto mb-6 " />
-          <img src={F3} alt="3" className="w-75 h-auto mb-6 " />
-        </motion.div>
-      </motion.section>
-
-      {/* 🎯 SECTION "COMPÉTENCES" */}
-      <motion.section
-        className="relative flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 z-[-1] bg-center p-10 pt-25 pb-25"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.div className="relative flex flex-col items-left justify-center text-left box-border">
-          <h2 className="text-3xl mb-4">Mes Compétences</h2>
-          <h3 className="text-5xl font-bold mb-4 ">Hard Skills</h3>
-          <h6 className="text-3xl font-bold mb-4 ">Créatif & Design</h6>
-          <h6 className="text-3xl font-bold mb-4 ">Logique & développement</h6>
-          <h6 className="text-3xl font-bold mb-4 ">Bureautique</h6>
-        </motion.div>
-
-        <motion.div className="text-right">
-          <h3 className="text-5xl font-bold mb-4 ">Soft Skills</h3>
-          <h6 className="text-3xl font-bold mb-4 ">Adaptabilité</h6>
-          <h6 className="text-3xl font-bold mb-4 ">Esprit d’analyse</h6>
-          <h6 className="text-3xl font-bold mb-4 ">Écoute et bienveillance</h6>
-          <h6 className="text-3xl font-bold mb-4 ">
-            Compréhension contextuelle
-          </h6>
-        </motion.div>
-      </motion.section>
-      <UpArrow />
       <Footer />
     </>
   );
-};
-
-export default Accueil;
+}

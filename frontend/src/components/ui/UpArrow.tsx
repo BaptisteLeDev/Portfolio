@@ -1,23 +1,22 @@
-import React from 'react';
+import { Button } from "./button";
 
-const UpArrow: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
+export function UpArrow() {
   return (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-[50px] right-[50px] hover:outline-none hover:ring-3 hover:ring-amber-50 rounded-full w-[50px] h-[50px] flex items-center justify-center"
-      aria-label="Scroll to top"
+    <Button
+      variant="glass-cream"
+      size="icon"
+      aria-label="Retour en haut"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-6 right-6 z-50 opacity-0"
+      style={{
+        animation: "rise-in linear both",
+        animationTimeline: "scroll(root)",
+        animationRange: "20vh 40vh",
+      }}
     >
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `<svg id="73:79" layer-name="arrow-up" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" class="up-arrow"> <circle cx="25" cy="25" r="23" fill="#1E1F1D" stroke="#8B72BE" stroke-width="4"></circle> <path d="M25 49L25 14" stroke="#8B72BE" stroke-width="4" stroke-linecap="square" stroke-linejoin="round"></path> <path d="M18 24.3015L25 12.5739L32 24.3015" stroke="#8B72BE" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </svg>`,
-        }}
-      />
-    </button>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M12 19V5M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </Button>
   );
-};
-
-export default UpArrow;
+}

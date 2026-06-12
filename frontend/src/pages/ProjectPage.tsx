@@ -1,56 +1,240 @@
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ProjectDetail from '@/components/project';
-import projects from '../data/projects.json';
-import { ChevronLeft } from 'lucide-react';
+import { useParams, Navigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { Label } from "@/components/ui/label";
+import { Tag } from "@/components/ui/tag";
+import { Card, CardBody, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Divider } from "@/components/ui/divider";
+import { AnimatedGradient } from "@/components/effects/animated-gradient";
+import { NoiseOverlay } from "@/components/effects/noise-overlay";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
+import { Footer } from "@/components/footer";
+import { projects } from "@/data/projects";
 
-// Plus besoin de ProjectImages, nous utilisons directement les chemins d'images du dossier public
-const ProjectPage = () => {
-  const { id } = useParams<{ id: string }>();
-  const project = projects.find((p) => p.id === id);
-
-  if (!project) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-stone-900 p-6">
-        <h1 className="text-4xl font-bold text-pink-600 mb-6">Projet non trouvé</h1>
-        <Link 
-          to="/portfolio"
-          className="flex items-center gap-2 text-amber-50 hover:text-pink-400 transition-colors"
-        >
-          <ChevronLeft size={20} />
-          Retour au portfolio
-        </Link>
-      </div>
-    );
-  }
-
-  // Conversion des valeurs null en undefined pour être compatible avec le type Project
-  const formattedProject = {
-    ...project,
-    githubLink: project.githubLink === null ? undefined : project.githubLink
-  };
-
-  return (
-    <div className="min-h-screen bg-stone-900 py-32 px-6 md:px-20">
-      <div className="mb-6">
-        <Link 
-          to="/portfolio"
-          className="inline-flex items-center gap-2 text-amber-50 hover:text-pink-400 transition-colors mb-8"
-        >
-          <ChevronLeft size={20} />
-          Retour au portfolio
-        </Link>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="max-w-5xl mx-auto"
-      >
-        <ProjectDetail project={formattedProject} />
-      </motion.div>
-    </div>
-  );
+const statusLabel: Record<string, string> = {
+  live: "En production",
+  wip: "En développement",
+  archived: "Archivé",
 };
 
-export default ProjectPage;
+export default function ProjectPage() {
+  const { id } = useParams();
+  const { t } = useTranslation("project");
+  const idx = projects.findIndex((p) => p.id === id);
+
+  if (idx === -1) return <Navigate to="/404" replace />;
+
+  const project = projects[idx];
+  const prev = projects[(idx - 1 + projects.length) % projects.length];
+  const next = projects[(idx + 1) % projects.length];
+  const palette = project.thumbnail.kind === "gradient" ? project.thumbnail.palette : "chaud";
+
+  return (
+    <>
+      {/* Hero projet — centré vertical, hauteur adaptée */}
+      <section className="relative overflow-hidden flex items-center pt-24 pb-24 md:pt-28 md:pb-32 px-6 md:px-8">
+        <AnimatedGradient palette={palette} />
+        <div className="absolute inset-0 bg-bg/45" aria-hidden="true" />
+        <NoiseOverlay />
+        <Container size="lg" className="relative z-10">
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <Label prefix="">// {project.type}</Label>
+            <span
+              className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] px-3 py-1 rounded-full border ${
+                project.status === "live"
+                  ? "bg-success/15 border-success/40 text-success"
+                  : project.status === "wip"
+                    ? "bg-warn/15 border-warn/40 text-warn"
+                    : "bg-fg/10 border-fg/20 text-fg/70"
+              }`}
+            >
+              {project.status === "live" && (
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full bg-success"
+                  style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+                />
+              )}
+              {statusLabel[project.status]}
+            </span>
+          </div>
+          <h1
+            className="font-display font-black"
+            style={{
+              fontSize: "var(--text-display-xl)",
+              lineHeight: 0.92,
+              letterSpacing: "-0.035em",
+            }}
+          >
+            {project.title}
+          </h1>
+          <p className="mt-5 text-xl md:text-2xl opacity-95 max-w-2xl leading-snug">
+            {project.tagline}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
+            <span>
+              <span className="opacity-60">{t("role")} · </span>
+              <span className="opacity-95">{project.role}</span>
+            </span>
+            <span>
+              <span className="opacity-60">{t("period")} · </span>
+              <span className="opacity-95">{project.period}</span>
+            </span>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.stack.map((s) => (
+              <Tag key={s} className="bg-bg/55 text-fg border-fg/20">{s}</Tag>
+            ))}
+          </div>
+          {project.links && (project.links.live || project.links.repo) && (
+            <div className="mt-8 flex gap-3 flex-wrap">
+              {project.links.live && (
+                <Button variant="gradient" size="md" asChild>
+                  <a href={project.links.live} target="_blank" rel="noreferrer">
+                    {t("view_live")} →
+                  </a>
+                </Button>
+              )}
+              {project.links.repo && (
+                <Button variant="glass-cream" size="md" asChild>
+                  <a href={project.links.repo} target="_blank" rel="noreferrer">
+                    {t("view_repo")}
+                  </a>
+                </Button>
+              )}
+            </div>
+          )}
+        </Container>
+      </section>
+
+      {/* Description — section cream, compact */}
+      <Section tone="cream" rounded="2xl" overlap className="py-16 md:py-20">
+        <Container size="md" className="text-bg">
+          <ScrollReveal effect="rise">
+            <Label className="text-bg">À PROPOS DU PROJET</Label>
+            <p className="mt-5 text-xl md:text-2xl leading-relaxed">{project.description}</p>
+          </ScrollReveal>
+        </Container>
+      </Section>
+
+      {/* Problem / Solution / Outcome */}
+      {(project.problem || project.solution || project.outcome) && (
+        <Section tone="dark" rounded="none" className="py-20">
+          <Container size="lg">
+            <Label className="mb-10 block">DÉFI & LIVRAISON</Label>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {project.problem && (
+                <ScrollReveal effect="rise">
+                  <Card tone="glass" radius="lg" className="h-full">
+                    <CardBody>
+                      <Label>{t("problem")}</Label>
+                      <p className="mt-4 leading-relaxed">{project.problem}</p>
+                    </CardBody>
+                  </Card>
+                </ScrollReveal>
+              )}
+              {project.solution && (
+                <ScrollReveal effect="rise" delay={80}>
+                  <Card tone="glass" radius="lg" className="h-full">
+                    <CardBody>
+                      <Label>{t("solution")}</Label>
+                      <p className="mt-4 leading-relaxed">{project.solution}</p>
+                    </CardBody>
+                  </Card>
+                </ScrollReveal>
+              )}
+              {project.outcome && (
+                <ScrollReveal effect="rise" delay={160}>
+                  <Card tone="glass" radius="lg" className="h-full">
+                    <CardBody>
+                      <Label>{t("outcome")}</Label>
+                      <p className="mt-4 leading-relaxed">{project.outcome}</p>
+                    </CardBody>
+                  </Card>
+                </ScrollReveal>
+              )}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* Versions (Amigaru) */}
+      {project.versions && project.versions.length > 0 && (
+        <Section tone="gradient" rounded="2xl" overlap className="py-20">
+          <AnimatedGradient palette="hero" className="opacity-30" />
+          <Container size="lg" className="relative z-10">
+            <Label>{t("versions")}</Label>
+            <h2
+              className="mt-3 font-display font-black"
+              style={{ fontSize: "var(--text-h2)", lineHeight: 1, letterSpacing: "-0.02em" }}
+            >
+              Évolution technique
+            </h2>
+            <div className="mt-10 space-y-6">
+              {project.versions.map((v, i) => (
+                <ScrollReveal key={v.label} effect="rise" delay={i * 80}>
+                  <Card tone="glass" radius="lg">
+                    <CardBody>
+                      <div className="flex flex-wrap items-baseline justify-between gap-4">
+                        <CardTitle>{v.label}</CardTitle>
+                        <div className="flex flex-wrap gap-2">
+                          {v.stack.map((s) => (
+                            <Tag key={s}>{s}</Tag>
+                          ))}
+                        </div>
+                      </div>
+                      <p className="mt-4 opacity-85 leading-relaxed">{v.note}</p>
+                    </CardBody>
+                  </Card>
+                </ScrollReveal>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* Gallery */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <Section tone="cream" rounded="none" className="py-20">
+          <Container size="xl" className="text-bg">
+            <Label className="text-bg">{t("gallery")}</Label>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.screenshots.map((src) => (
+                <img key={src} src={src} alt="" loading="lazy" className="w-full rounded-[24px]" />
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* Prev / Next nav */}
+      <Section tone="dark" rounded="none" className="py-12 md:py-16">
+        <Container size="lg">
+          <Divider variant="brackets" className="mb-10" />
+          <div className="flex flex-wrap justify-between gap-6">
+            <Link to={`/portfolio/${prev.id}`} className="group max-w-[45%]">
+              <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50">
+                ← {t("prev")}
+              </p>
+              <p className="mt-2 font-display font-bold text-2xl group-hover:opacity-80 transition-opacity">
+                {prev.title}
+              </p>
+            </Link>
+            <Link to={`/portfolio/${next.id}`} className="group text-right max-w-[45%]">
+              <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50">
+                {t("next")} →
+              </p>
+              <p className="mt-2 font-display font-bold text-2xl group-hover:opacity-80 transition-opacity">
+                {next.title}
+              </p>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      <Footer />
+    </>
+  );
+}

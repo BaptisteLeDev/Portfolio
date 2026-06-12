@@ -1,0 +1,13 @@
+{
+  "title": "Portfolio",
+  "subtitle": "Projets, expérimentations, apprentissages",
+  "filters": {
+    "all": "Tous",
+    "web": "Web",
+    "mobile": "Mobile",
+    "desktop": "Desktop",
+    "fullstack": "Full-stack",
+    "design": "Design"
+  },
+  "empty": "Aucun projet ne correspond à ce filtre."
+}

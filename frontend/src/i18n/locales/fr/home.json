@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "greeting_text": "Hello world,",
+    "name": "je suis Baptiste",
+    "subtitle": "Développeur full-stack — CDA 3e année à MyDigitalSchool Vannes. Je conçois, je code, je recommence — jusqu'à ce que l'interface ait l'air évidente."
+  },
+  "about": {
+    "eyebrow": "À PROPOS",
+    "title": "Coup d'œil",
+    "body": "Dev full-stack JS/TS avec une sensibilité produit héritée d'un parcours pluridisciplinaire. Je construis des apps web, mobile et desktop — de l'architecture à la prod — et j'aime garder la main sur toute la chaîne."
+  },
+  "parcours": {
+    "eyebrow": "PARCOURS",
+    "title": "Mes formations"
+  },
+  "skills": {
+    "eyebrow": "COMPÉTENCES",
+    "title": "Hard & Soft Skills",
+    "hard": "Hard Skills",
+    "soft": "Soft Skills"
+  },
+  "stack": {
+    "eyebrow": "STACK",
+    "title": "Ce que j'utilise, aujourd'hui."
+  }
+}

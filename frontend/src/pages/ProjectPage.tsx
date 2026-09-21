@@ -13,6 +13,7 @@ import { NoiseOverlay } from "@/components/effects/noise-overlay";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { projects, type SitemapNode } from "@/data/projects";
+import { GalleryCarousel } from "@/components/portfolio/gallery-carousel";
 
 const statusLabel: Record<string, string> = {
   live: "En production",
@@ -274,21 +275,7 @@ export default function ProjectPage() {
               </div>
             )}
             {project.screenshots && project.screenshots.length > 0 && (
-              <div
-                tabIndex={0}
-                aria-label={t("gallery")}
-                className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
-              >
-                {project.screenshots.map((src) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt=""
-                    loading="lazy"
-                    className="min-w-[85%] md:min-w-[70%] w-auto snap-center rounded-[24px] object-cover"
-                  />
-                ))}
-              </div>
+              <GalleryCarousel images={project.screenshots} label={t("gallery")} />
             )}
           </Container>
         </Section>

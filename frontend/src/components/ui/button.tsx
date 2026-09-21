@@ -8,8 +8,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        "solid-dark": "bg-bg text-fg hover:shadow-lg",
-        "solid-cream": "bg-cream text-bg hover:shadow-lg",
+        "solid-dark": "bg-bg text-fg",
+        "solid-cream": "bg-cream text-bg",
         gradient:
           "bg-[linear-gradient(135deg,var(--color-indigo),var(--color-pink))] text-fg shadow-[0_8px_24px_-8px_color-mix(in_oklch,var(--color-pink)_60%,transparent)] hover:shadow-[0_12px_32px_-8px_color-mix(in_oklch,var(--color-pink)_70%,transparent)]",
         "glass-dark": "bg-bg/10 text-bg backdrop-blur-md hover:bg-bg/20",

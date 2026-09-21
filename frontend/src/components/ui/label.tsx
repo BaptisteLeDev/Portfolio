@@ -1,10 +1,8 @@
 import { cn } from "@/lib/cn";
 
-export interface LabelProps extends React.HTMLAttributes<HTMLSpanElement> {
-  prefix?: "//" | "_" | "[]" | "";
-}
+export interface LabelProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
-export function Label({ prefix = "//", className, children, ...props }: LabelProps) {
+export function Label({ className, children, ...props }: LabelProps) {
   return (
     <span
       className={cn(
@@ -13,7 +11,6 @@ export function Label({ prefix = "//", className, children, ...props }: LabelPro
       )}
       {...props}
     >
-      {prefix && <span className="mr-2">{prefix}</span>}
       {children}
     </span>
   );

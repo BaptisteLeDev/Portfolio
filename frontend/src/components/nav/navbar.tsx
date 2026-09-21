@@ -52,7 +52,7 @@ function ContactButton({ label }: { label: string }) {
   const bind = useCodyBroadcast(reactions.contact);
   return (
     <Button size="sm" variant="solid-cream" asChild {...bind}>
-      <a href="mailto:baptiste.dechamp@tomexplore.com">{label}</a>
+      <a href="mailto:baptiste.dechamp@outlook.fr">{label}</a>
     </Button>
   );
 }
@@ -72,7 +72,7 @@ export function NavBar() {
         <nav className="pointer-events-auto backdrop-blur-md bg-bg/70 border border-fg/10 rounded-full px-3 md:px-5 h-14 flex items-center gap-1 md:gap-4 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)]">
           <Link
             to="/"
-            aria-label="Baptiste Dechamp — Accueil"
+            aria-label="Baptiste Dechamp - Accueil"
             className="shrink-0 rounded-full pl-2 pr-3 py-1 flex items-center gap-2 hover:opacity-100 opacity-85 transition-opacity"
           >
             <Cody

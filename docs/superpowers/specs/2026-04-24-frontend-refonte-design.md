@@ -1,4 +1,4 @@
-# Design System — Portfolio Baptiste Dechamp
+# Design System - Portfolio Baptiste Dechamp
 
 > Refonte complète du frontend. Cadre la DA, la stack VoidZero, les composants maison, les animations CSS et la stratégie d'exécution BMAD (foundation first + sweep parallèle via sub-agents).
 
@@ -6,7 +6,7 @@
 
 - **Stack cible** : Vite 7 + **VoidZero** (oxlint + oxc-formatter + Vitest), React 19, react-router 7, Tailwind 4, pnpm, framer-motion (orchestration complexe uniquement), CSS moderne (scroll-driven animations, `@property`, conic-gradient, `animation-timeline: scroll()`). Déploiement **Vercel**. Back/data **Supabase** si besoin (form contact, analytics).
 - **Pages** : Accueil, Portfolio (liste projets), ProjectPage (détail), Bonus, 404.
-- **Liberté créative** : B/C — conserver l'ADN (palette beige/indigo/pink, Cody mascotte, brackets typographiques, gros radius) mais **compléter** la DA avec grain, textures, easter eggs, animations CSS scroll-driven, nouvelle font, et un système de composants maison cohérent.
+- **Liberté créative** : B/C - conserver l'ADN (palette beige/indigo/pink, Cody mascotte, brackets typographiques, gros radius) mais **compléter** la DA avec grain, textures, easter eggs, animations CSS scroll-driven, nouvelle font, et un système de composants maison cohérent.
 - **Contenu** : liberté totale pour **retravailler**, réorganiser, ajouter, déplacer. L'essentiel conservé (parcours, compétences, projets existants), mais les formulations, layouts et l'ordre peuvent évoluer.
 - **Langue** : FR par défaut, architecture i18n prévue dès le départ (namespace + hook `useT` + fichiers `fr.ts` / `en.ts` lazy).
 - **Assets à remplacer** :
@@ -20,12 +20,12 @@
 
 ## 1. Visual Theme & Atmosphere
 
-Le portfolio de Baptiste est une **scène typographique chaude** où une sans-serif grotesque moderne (**Geist Sans** variable, remplaçant l'ancien Typekit Neue Haas) dialogue avec des crochets `[ ]` géants qui signent l'identité. La palette oscille entre un **crème chaud oklch** et des **gradients indigo→rose électriques**, posés sur des surfaces aux **coins massivement arrondis** (`radius-xl = 100px`). Cody, la mascotte — tête en caractères ASCII transcrite en SVG — regarde, cligne, et réagit au curseur : c'est le point focal émotionnel de chaque page.
+Le portfolio de Baptiste est une **scène typographique chaude** où une sans-serif grotesque moderne (**Geist Sans** variable, remplaçant l'ancien Typekit Neue Haas) dialogue avec des crochets `[ ]` géants qui signent l'identité. La palette oscille entre un **crème chaud oklch** et des **gradients indigo→rose électriques**, posés sur des surfaces aux **coins massivement arrondis** (`radius-xl = 100px`). Cody, la mascotte - tête en caractères ASCII transcrite en SVG - regarde, cligne, et réagit au curseur : c'est le point focal émotionnel de chaque page.
 
 La refonte ajoute deux couches qui manquaient : **un grain/noise texture CSS** (fichier SVG inline encodé data-URI, 1-2% opacité) qui unifie toutes les surfaces, et des **backgrounds animés** (conic-gradient en rotation lente via `@property --angle` + `animation-timeline: scroll()`) qui remplacent les PNG lourds. Chaque section devient un tableau : grands aplats chauds, typo sculptée à grands poids (900 display), brackets comme guillemets visuels, et transitions au scroll qui donnent le rythme.
 
 **Key Characteristics :**
-- **Geist Sans Variable** (npm `geist`, self-hosted, gratuit, Vercel) avec stops 400 / 500 / 700 / 900 — poids dramatiques, pas de gradient fin comme Figma
+- **Geist Sans Variable** (npm `geist`, self-hosted, gratuit, Vercel) avec stops 400 / 500 / 700 / 900 - poids dramatiques, pas de gradient fin comme Figma
 - **Geist Mono Variable** pour labels techniques / timestamps / code inline / tags stack
 - Brackets `[ ]` géants (96-120px) comme signature typographique (déjà présents, amplifiés)
 - Radius scale extrême : `sm: 8px`, `md: 16px`, `lg: 32px`, `xl: 64px`, `2xl: 100px` (hero sections)
@@ -41,13 +41,13 @@ La refonte ajoute deux couches qui manquaient : **un grain/noise texture CSS** (
 ## 2. Color Palette & Roles
 
 ### Primary (background & foreground)
-- **Warm Cream** (`oklch(98.69% 0.0214 95.28)`) — foreground texte sur fond sombre, fond clair des sections blanches
-- **Deep Warm Black** (`oklch(21.61% 0.0061 56.04)`) — background principal, texte sur fond clair
-- **Soft Cream** (`oklch(96% 0.02 95)`) — surfaces cards sur fond sombre
+- **Warm Cream** (`oklch(98.69% 0.0214 95.28)`) - foreground texte sur fond sombre, fond clair des sections blanches
+- **Deep Warm Black** (`oklch(21.61% 0.0061 56.04)`) - background principal, texte sur fond clair
+- **Soft Cream** (`oklch(96% 0.02 95)`) - surfaces cards sur fond sombre
 
 ### Accent (gradient system)
-- **Indigo 700** (`oklch(45% 0.22 280)`) — début gradient hero / formation
-- **Pink 600** (`oklch(65% 0.25 0)`) — fin gradient
+- **Indigo 700** (`oklch(45% 0.22 280)`) - début gradient hero / formation
+- **Pink 600** (`oklch(65% 0.25 0)`) - fin gradient
 - **Gradient Hero** : `conic-gradient(from var(--angle), indigo-700 0%, pink-600 40%, warm-cream 60%, indigo-700 100%)` animé via `@property --angle` (rotation 40s infinite)
 - **Gradient Accent Chaud** : `linear-gradient(135deg, oklch(85% 0.15 65) 0%, oklch(70% 0.22 25) 100%)` pour CTAs secondaires
 
@@ -55,7 +55,7 @@ La refonte ajoute deux couches qui manquaient : **un grain/noise texture CSS** (
 - **Glass Dark** : `color-mix(in oklch, var(--color-background) 85%, transparent)`
 - **Glass Cream** : `color-mix(in oklch, var(--color-foreground) 12%, transparent)`
 - **Noise overlay** : SVG turbulence data-URI, `opacity: 0.04`, `mix-blend-mode: overlay`
-- **Ring focus** : `oklch(75% 0.18 290)` (indigo clair) — dashed 2px, écho au style éditeur
+- **Ring focus** : `oklch(75% 0.18 290)` (indigo clair) - dashed 2px, écho au style éditeur
 
 ### Semantic
 - **Success** : `oklch(70% 0.18 145)`
@@ -103,9 +103,9 @@ import "@fontsource-variable/geist-mono";
 | Bracket Giant | display | 9 (144px) | 400 | 1 | normal | `[` `]` signature visuelle |
 
 ### Principles
-- **Masse typographique** : le poids 900 est la base des displays — la hiérarchie se fait par taille et tracking, pas par variation fine de poids (contraire de Figma).
+- **Masse typographique** : le poids 900 est la base des displays - la hiérarchie se fait par taille et tracking, pas par variation fine de poids (contraire de Figma).
 - **Tracking négatif** sur tout display/H1-H3, **tracking positif** sur mono uppercase (labels).
-- **`_Hello world,`** : prefix underscore en hero — signature du code/dev, à conserver.
+- **`_Hello world,`** : prefix underscore en hero - signature du code/dev, à conserver.
 - **Brackets** : `[` et `]` traités comme composants typographiques à part entière, pas comme de la ponctuation.
 - **Feature settings** global : `font-feature-settings: "kern", "liga", "ss01"` sur `html`.
 
@@ -289,7 +289,7 @@ Tous les composants respectent `@media (prefers-reduced-motion: reduce)`. Les an
 /* Geist variable fonts loaded via @fontsource-variable/geist in main.tsx */
 
 @theme {
-  /* Couleurs — oklch */
+  /* Couleurs - oklch */
   --color-bg:          oklch(21.61% 0.0061 56.04);
   --color-fg:          oklch(98.69% 0.0214 95.28);
   --color-cream:       oklch(96% 0.02 95);
@@ -341,7 +341,7 @@ Tous les composants respectent `@media (prefers-reduced-motion: reduce)`. Les an
 ```
 
 ### 6.2 Conventions classes
-- Toujours passer par les tokens `@theme` — pas de valeurs arbitraires `[#abc]` sauf exception motivée.
+- Toujours passer par les tokens `@theme` - pas de valeurs arbitraires `[#abc]` sauf exception motivée.
 - Utiliser `@utility` pour toute classe custom réutilisable (≥3 usages).
 - Container queries (`@container`) privilégiées vs media queries quand pertinent.
 
@@ -350,7 +350,7 @@ Tous les composants respectent `@media (prefers-reduced-motion: reduce)`. Les an
 ## 7. Layout Principles
 
 ### Spacing scale (Tailwind 4 défaut + extras)
-- Base 0.25rem (4px) — scale 1/2/3/4/6/8/12/16/20/24/32/40/48
+- Base 0.25rem (4px) - scale 1/2/3/4/6/8/12/16/20/24/32/40/48
 - Sections : `py-section` = 8rem desktop, clamp-based en responsive.
 
 ### Container
@@ -375,7 +375,7 @@ Tous les composants respectent `@media (prefers-reduced-motion: reduce)`. Les an
 ## 8. Do's and Don'ts
 
 ### Do
-- Utiliser les tokens Tailwind 4 via `@theme` — jamais de valeurs hardcodées
+- Utiliser les tokens Tailwind 4 via `@theme` - jamais de valeurs hardcodées
 - Préférer CSS pur (scroll-driven, conic, `@property`) à framer-motion
 - Respecter `prefers-reduced-motion` sur **toute** animation décorative
 - Typer strict tous les composants (pas de `any`)
@@ -385,14 +385,14 @@ Tous les composants respectent `@media (prefers-reduced-motion: reduce)`. Les an
 - Noise overlay présent sur **toutes** les sections principales (unité visuelle)
 
 ### Don't
-- Ne pas réintroduire de PNG pour décoratif — tout en CSS ou SVG inline
+- Ne pas réintroduire de PNG pour décoratif - tout en CSS ou SVG inline
 - Ne pas utiliser framer-motion pour du hover simple ou du reveal simple
-- Ne pas utiliser shadcn-ui en bulk — uniquement pattern Slot si besoin
+- Ne pas utiliser shadcn-ui en bulk - uniquement pattern Slot si besoin
 - Ne pas hardcoder de couleurs HEX/RGB
 - Ne pas oublier focus visible (dashed ring) sur tous les interactifs
 - Pas d'images d'arrière-plan PNG/JPG >20KB
 - Pas de `!important` (Tailwind 4 les rend inutiles avec layers)
-- Ne pas animer `width`/`height`/`top`/`left` — uniquement `transform`/`opacity`
+- Ne pas animer `width`/`height`/`top`/`left` - uniquement `transform`/`opacity`
 
 ---
 
@@ -482,7 +482,7 @@ Déploiement : **Vercel** (framework detected: Vite, build `pnpm build`, output 
 
 ## 11. BMAD Execution Plan
 
-### Phase 1 — Foundation (séquentiel, 1 agent = moi)
+### Phase 1 - Foundation (séquentiel, 1 agent = moi)
 Blocage : rien ne part en parallèle tant que cette phase n'est pas verte.
 
 1. Upgrade stack (Vite 7, React 19 dernier, remove ESLint, install oxlint + oxc-formatter + Vitest)
@@ -495,7 +495,7 @@ Blocage : rien ne part en parallèle tant que cette phase n'est pas verte.
 8. Tests Vitest des primitives
 9. ✅ Gate : `pnpm build` vert, `pnpm test` vert, `pnpm lint` vert, screenshot Storybook/dev des primitives
 
-### Phase 2 — Pages Sweep (parallèle, sub-agents dispatch)
+### Phase 2 - Pages Sweep (parallèle, sub-agents dispatch)
 Dispatch 1 sub-agent par page via `superpowers:dispatching-parallel-agents`. Chaque sub-agent a :
 - Contexte : ce design.md
 - Primitives disponibles (phase 1)
@@ -508,7 +508,7 @@ Pages :
 - Agent C : **ProjectPage** (layout détail)
 - Agent D : **Bonus + 404**
 
-### Phase 3 — Polish (séquentiel)
+### Phase 3 - Polish (séquentiel)
 1. Transitions de route framer-motion
 2. Perf audit Lighthouse (objectif 95+ mobile)
 3. A11y audit (axe)
@@ -535,7 +535,7 @@ Pages :
 > "Section tone cream rounded 2xl overlap negative. `<Bracket side='left' size='giant' />` flottant absolute. Label eyebrow mono `// COMPÉTENCES`. H2 'Hard & Soft Skills'. Grid 2 cols md:4, chaque skill dans Card glass avec hover lift. ScrollReveal effect='rise' stagger."
 
 **Bouton CTA principal**
-> "`<Button variant='gradient' size='lg'>Voir mes projets →</Button>` — gradient indigo→pink, rounded-full, padding 1.25rem 2.5rem, hover translate-y-[-2px] + shadow warm, focus outline dashed 2px ring."
+> "`<Button variant='gradient' size='lg'>Voir mes projets →</Button>` - gradient indigo→pink, rounded-full, padding 1.25rem 2.5rem, hover translate-y-[-2px] + shadow warm, focus outline dashed 2px ring."
 
 ### Iteration guidelines
 1. Si doute sur une valeur : check `@theme` d'abord, token existant probable
@@ -570,11 +570,11 @@ Liberté **C** validée : on retravaille contenu, formulations, ordre et layouts
 ### 14.2 Pages & sections (cible)
 
 **Accueil**
-1. Hero — `_Hello world, je suis Baptiste` + sous-titre "Développeur full-stack — CDA 3e année" + Cody curious
-2. `// À PROPOS` — pitch court **dev-first** : "Dev full-stack JS/TS avec une sensibilité produit héritée d'un parcours pluridisciplinaire."
-3. `// PARCOURS` — timeline 3 étapes : CDA (en cours) → BTS SIO → L1 Arts Plastiques
-4. `// COMPÉTENCES` — grid : Hard Skills rebalancé (Dev > Conception > Design) / Soft Skills
-5. `// STACK` — bande (marquee animée) de tags stack actuelle
+1. Hero - `_Hello world, je suis Baptiste` + sous-titre "Développeur full-stack - CDA 3e année" + Cody curious
+2. `// À PROPOS` - pitch court **dev-first** : "Dev full-stack JS/TS avec une sensibilité produit héritée d'un parcours pluridisciplinaire."
+3. `// PARCOURS` - timeline 3 étapes : CDA (en cours) → BTS SIO → L1 Arts Plastiques
+4. `// COMPÉTENCES` - grid : Hard Skills rebalancé (Dev > Conception > Design) / Soft Skills
+5. `// STACK` - bande (marquee animée) de tags stack actuelle
 6. CTA vers Portfolio
 
 **Portfolio**
@@ -597,7 +597,7 @@ Liberté **C** validée : on retravaille contenu, formulations, ordre et layouts
 
 ### 14.3 Profil réel (correction importante)
 
-**Identité** : Baptiste Dechamp, **développeur full-stack** en 3e année du titre **CDA — Concepteur Développeur d'Applications** (RNCP niveau 6, MyDigitalSchool Vannes). Le positionnement est **dev-first** : React/TS/Next.js/Laravel au cœur, avec une sensibilité conception d'application (UX, modélisation, architecture) héritée d'un parcours pluridisciplinaire. Les compétences design existent mais sont **secondaires** — pas un portfolio de designer.
+**Identité** : Baptiste Dechamp, **développeur full-stack** en 3e année du titre **CDA - Concepteur Développeur d'Applications** (RNCP niveau 6, MyDigitalSchool Vannes). Le positionnement est **dev-first** : React/TS/Next.js/Laravel au cœur, avec une sensibilité conception d'application (UX, modélisation, architecture) héritée d'un parcours pluridisciplinaire. Les compétences design existent mais sont **secondaires** - pas un portfolio de designer.
 
 ### 14.4 Projets à intégrer (data/projects.ts)
 
@@ -605,9 +605,9 @@ Mix des projets **réels actuels** (depuis `data/projects_mini.json`) + **nouvea
 
 | ID | Nom | Type | Stack | Notes |
 |----|-----|------|-------|-------|
-| amigaru | Amigaru | Web — 3 versions | v1 PHP/MySQL/Tailwind · v2 React+Vite · v3 Next.js + Storybook + dashboard | Projet phare dev — case study montée en stack |
+| amigaru | Amigaru | Web - 3 versions | v1 PHP/MySQL/Tailwind · v2 React+Vite · v3 Next.js + Storybook + dashboard | Projet phare dev - case study montée en stack |
 | devflix | DevFlix | Web fullstack | React + Vite + Node + Firebase + TMDB API | Clone Netflix pédagogique |
-| erwan-ewen | Erwan & Ewen | Intégration | WordPress + Kadence + Figma | E-commerce cavistes — mission client |
+| erwan-ewen | Erwan & Ewen | Intégration | WordPress + Kadence + Figma | E-commerce cavistes - mission client |
 | stream-dashboard | Stream Dashboard | Desktop app | Electron + React + Vite + Tailwind + TS | **Nouveau** : dashboard streameurs (overlays, alertes, stats) |
 | seira-like | App Éducative | Cross-platform | Web **Angular** + Mobile **Expo/RN** + Backend **Laravel** | **Nouveau** : plateforme pédagogique multi-plateforme full-stack |
 | festival-vibrations | Festival Vibrations | UX/UI secondaire | Illustrator + Photoshop + Figma | Projet design (garder mais tagger "design") |
@@ -615,7 +615,7 @@ Mix des projets **réels actuels** (depuis `data/projects_mini.json`) + **nouvea
 | g-en | G-En | UX/UI & Recherche | Figma + Recherche UX | Projet conception app (met en avant compétences concepteur) |
 
 **Stratégie d'affichage** :
-- Filtre par défaut : **tous** (pas "dev" only — on montre la polyvalence)
+- Filtre par défaut : **tous** (pas "dev" only - on montre la polyvalence)
 - **Ordre d'affichage** : dev en premier (Amigaru, DevFlix, Stream Dashboard, Seira-like, Erwan&Ewen) puis design (Festival Vibrations, Vannes Agglo, G-En)
 - Tags `type` : `web` | `mobile` | `desktop` | `fullstack` | `design`
 - Tags `category` visibles sur card : "Full-stack", "Intégration", "UX/UI & Design", etc.
@@ -626,15 +626,15 @@ Timeline réelle :
 
 ```ts
 [
-  { year: "2023 →", place: "MyDigitalSchool Vannes", title: "Titre CDA — Concepteur Développeur d'Applications", note: "3e année, formation en cours. RNCP niveau 6. Full-stack JS/TS, conception app, DevOps." },
-  { year: "2022 — 2023", place: "BTS SIO", title: "Services Informatiques aux Organisations — Option SLAM", note: "Solutions logicielles et applications métier." },
-  { year: "2021 — 2022", place: "Université Rennes 2", title: "L1 Arts Plastiques", note: "Sémiotique visuelle, bases du design — fondation de la sensibilité produit." }
+  { year: "2023 →", place: "MyDigitalSchool Vannes", title: "Titre CDA - Concepteur Développeur d'Applications", note: "3e année, formation en cours. RNCP niveau 6. Full-stack JS/TS, conception app, DevOps." },
+  { year: "2022 - 2023", place: "BTS SIO", title: "Services Informatiques aux Organisations - Option SLAM", note: "Solutions logicielles et applications métier." },
+  { year: "2021 - 2022", place: "Université Rennes 2", title: "L1 Arts Plastiques", note: "Sémiotique visuelle, bases du design - fondation de la sensibilité produit." }
 ]
 ```
 
 ### 14.6 Skills (rebalancé dev-first)
 
-**Hard Skills — ordre = priorité affichée :**
+**Hard Skills - ordre = priorité affichée :**
 
 ```ts
 hard: [
@@ -677,7 +677,7 @@ interface Project {
   tagline: string;           // 1 phrase
   description: string;       // paragraphe
   role: string;
-  period: string;            // "2024 — 2025"
+  period: string;            // "2024 - 2025"
   stack: string[];           // tags courts
   type: 'web' | 'mobile' | 'desktop' | 'fullstack';
   status: 'live' | 'archived' | 'wip';
@@ -725,7 +725,7 @@ src/
 ```
 
 ### 15.3 Conventions
-- Jamais de string FR en dur dans un composant — toujours `t('home.hero.title')`
+- Jamais de string FR en dur dans un composant - toujours `t('home.hero.title')`
 - Namespace par page principale + `common` pour nav/footer/CTAs
 - Pluriels et interpolations via i18next (`t('projects.count', { count })`)
 - Date formatting via `Intl.DateTimeFormat(locale)`
@@ -740,7 +740,7 @@ src/
 
 Après deux itérations sur le prototype, les choix retenus sont :
 
-### Skills — PAS de graphiques/barres
+### Skills - PAS de graphiques/barres
 **Décision** : remplacer les barres `level: 0-100` par une simple **liste groupée** par catégorie (Dev / Conception / Design / Outils). Pas intuitif de se noter sur 100, et visuellement banal.
 
 Rendu cible :
@@ -754,13 +754,13 @@ Hard skills
 Soft skills (cards numérotées 01, 02, 03, 04 avec label + note)
 ```
 
-### Gestion de projet — light
+### Gestion de projet - light
 La compétence existe (expérience Vannes Agglo en "chef de projet") mais n'est pas mise en avant. Pas de section dédiée. Mentionnée en passant si pertinent dans un case study projet.
 
-### Cody v2 — style proche du SVG original, beefier, expressif
+### Cody v2 - style proche du SVG original, beefier, expressif
 Le Cody final du prototype v2 est le bon modèle :
 - **Deux variantes** :
-  - `variant="portfolio"` (filled) : face cream remplie avec outline noir épais (stroke-width 7), + brackets épais (stroke 9) — **style proche du SVG original de Baptiste**
+  - `variant="portfolio"` (filled) : face cream remplie avec outline noir épais (stroke-width 7), + brackets épais (stroke 9) - **style proche du SVG original de Baptiste**
   - `variant="bracket"` (outline) : juste brackets + yeux/bouche en outline sur le fond (pour nav, footer)
 - **Sourcils expressifs** par mood : `idle` / `curious` / `happy` / `confused` / `thinking`
   - `idle`    : `^ ^` neutres
@@ -770,25 +770,25 @@ Le Cody final du prototype v2 est le bon modèle :
   - `thinking`: lignes plates
 - **Bouche expressive** par mood (path Bezier variable)
 - **Cheek blush** rose quand `mood="happy"` (ellipses transparentes)
-- **Brackets statiques** (PAS de drift — user feedback "les accolades bougent trop")
+- **Brackets statiques** (PAS de drift - user feedback "les accolades bougent trop")
 - **Yeux** : tracking via `MouseContext` global, clignement aléatoire 2.5-6s
 
-### Hero — Typewriter + Terminal prompt
+### Hero - Typewriter + Terminal prompt
 - Eyebrow mono : `~/baptiste-dev $ run hello.tsx`
 - H1 avec **effet machine à écrire** (composant `<Typewriter>`) sur "Hello world," (55ms/char) puis "Baptiste." (80ms/char, delay 1100ms)
 - "Baptiste." en **texte dégradé** (background clip → text, linear-gradient cream→pink)
 - Caret clignotant en fin de mot actif (`caret-blink 1s steps(2) infinite`)
 - Pas de pill "Dispo en alternance" (supprimée)
 
-### Background Hero — fluid blobs organiques
+### Background Hero - fluid blobs organiques
 **Remplace** le simple conic-gradient. Inspiré du background PNG original de Baptiste :
 - 4 radial-gradients (indigo, pink, indigo-deep, pink) positionnés en quadrants
 - `filter: blur(60px) saturate(1.3)` pour effet fluide/flou
-- 2 couches (`::before` + `::after`) avec animation `fluid-morph` (translate + scale + rotate) — durées décalées (22s + 32s reverse) et `mix-blend-mode: screen` sur l'une
+- 2 couches (`::before` + `::after`) avec animation `fluid-morph` (translate + scale + rotate) - durées décalées (22s + 32s reverse) et `mix-blend-mode: screen` sur l'une
 - Résultat : flux organique violet/rose, lisibilité préservée sous le texte
 
 ### Alternance radius sections
-Pas toutes les sections arrondies — **alternance** :
+Pas toutes les sections arrondies - **alternance** :
 - Impaires (Hero, Timeline, CTA final) : `rounded-[100px]`
 - Paires (About, Skills, Marquee) : **plates**
 - Header nav : `rounded-[12px]` (pas pill)
@@ -797,7 +797,7 @@ Pas toutes les sections arrondies — **alternance** :
 Tags stack en **display 900** géants, défilement horizontal continu (`animation: marquee 40s linear infinite`), alternance 3 couleurs (pink / cream / muted), séparateurs `·`, mask-image fade sur les bords.
 
 ### Status pulse dot
-Sur projets `status: "live"` uniquement — petit point qui pulse (opacity + scale).
+Sur projets `status: "live"` uniquement - petit point qui pulse (opacity + scale).
 
 ---
 

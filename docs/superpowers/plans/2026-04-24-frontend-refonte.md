@@ -1,16 +1,16 @@
-# Frontend Refonte — Implementation Plan
+# Frontend Refonte - Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Refonte complète du portfolio Baptiste Dechamp : stack VoidZero, Tailwind 4 tokens, composants maison, animations CSS pures (scroll-driven, conic), Cody SVG animé, 3 nouveaux projets documentés, architecture i18n.
 
-**Architecture:** BMAD — Phase 1 Foundation séquentielle (stack swap + design system + primitives), Phase 2 Pages Sweep (4 sub-agents parallèles, un par page/groupe de pages), Phase 3 Polish (transitions route, perf, a11y).
+**Architecture:** BMAD - Phase 1 Foundation séquentielle (stack swap + design system + primitives), Phase 2 Pages Sweep (4 sub-agents parallèles, un par page/groupe de pages), Phase 3 Polish (transitions route, perf, a11y).
 
 **Tech Stack:** Vite 7, React 19, react-router 7, Tailwind 4, VoidZero (oxlint + oxc-formatter + Vitest), Geist Variable Fonts (@fontsource-variable), framer-motion (orchestration route + Cody uniquement), i18next, Electron/Expo/Laravel mentionnés dans projets, pnpm, Vercel.
 
 **Spec source:** `docs/superpowers/specs/2026-04-24-frontend-refonte-design.md`
 
-**Working directory:** `frontend/` — toutes les commandes et chemins sont relatifs à ce dossier sauf mention contraire.
+**Working directory:** `frontend/` - toutes les commandes et chemins sont relatifs à ce dossier sauf mention contraire.
 
 ---
 
@@ -97,7 +97,7 @@ frontend/
 
 ---
 
-# PHASE 1 — FOUNDATION (séquentiel)
+# PHASE 1 - FOUNDATION (séquentiel)
 
 ## Task 1 : Branch + baseline snapshot
 
@@ -124,7 +124,7 @@ git commit --allow-empty -m "chore: baseline before refonte foundation"
 
 ---
 
-## Task 2 : Stack swap — remove ESLint, add VoidZero (oxlint, oxc-formatter, Vitest)
+## Task 2 : Stack swap - remove ESLint, add VoidZero (oxlint, oxc-formatter, Vitest)
 
 **Files:**
 - Modify: `frontend/package.json`
@@ -262,7 +262,7 @@ pnpm build
 pnpm test
 ```
 
-Expected: lint passes (may show current code issues — that's fine), build passes, test runs with "no test files".
+Expected: lint passes (may show current code issues - that's fine), build passes, test runs with "no test files".
 
 - [ ] **Step 10 : Commit**
 
@@ -272,7 +272,7 @@ git add -A && git commit -m "chore: swap eslint for voidzero (oxlint, oxc-format
 
 ---
 
-## Task 3 : Design tokens — refaire `src/styles/index.css` (Tailwind 4 @theme)
+## Task 3 : Design tokens - refaire `src/styles/index.css` (Tailwind 4 @theme)
 
 **Files:**
 - Create: `frontend/src/styles/index.css`
@@ -447,7 +447,7 @@ git add -A && git commit -m "feat(design): Tailwind 4 @theme tokens, Geist fonts
 
 ---
 
-## Task 4 : Utility libs — `cn`, `cva` re-export, motion variants
+## Task 4 : Utility libs - `cn`, `cva` re-export, motion variants
 
 **Files:**
 - Create: `frontend/src/lib/cn.ts`
@@ -475,7 +475,7 @@ describe("cn", () => {
 });
 ```
 
-- [ ] **Step 2 : Run test — expect fail**
+- [ ] **Step 2 : Run test - expect fail**
 
 Run: `pnpm test src/__tests__/lib/cn.test.ts`
 Expected: FAIL (module not found).
@@ -493,7 +493,7 @@ export function cn(...inputs: ClassValue[]): string {
 }
 ```
 
-- [ ] **Step 4 : Run test — expect pass**
+- [ ] **Step 4 : Run test - expect pass**
 
 Run: `pnpm test src/__tests__/lib/cn.test.ts`
 Expected: PASS.
@@ -614,12 +614,12 @@ File: `src/i18n/locales/fr/home.json`
   "hero": {
     "greeting_text": "Hello world,",
     "name": "je suis Baptiste",
-    "subtitle": "Développeur full-stack — CDA 3e année à MyDigitalSchool Vannes. Je conçois, je code, je recommence — jusqu'à ce que l'interface ait l'air évidente."
+    "subtitle": "Développeur full-stack - CDA 3e année à MyDigitalSchool Vannes. Je conçois, je code, je recommence - jusqu'à ce que l'interface ait l'air évidente."
   },
   "about": {
     "eyebrow": "// À PROPOS",
     "title": "Coup d'œil",
-    "body": "Dev full-stack JS/TS avec une sensibilité produit héritée d'un parcours pluridisciplinaire. Je construis des apps web, mobile et desktop — de l'architecture à la prod — et j'aime garder la main sur toute la chaîne."
+    "body": "Dev full-stack JS/TS avec une sensibilité produit héritée d'un parcours pluridisciplinaire. Je construis des apps web, mobile et desktop - de l'architecture à la prod - et j'aime garder la main sur toute la chaîne."
   },
   "parcours": {
     "eyebrow": "// PARCOURS",
@@ -692,8 +692,8 @@ File: `src/i18n/locales/en/home.json`
 
 ```json
 {
-  "hero": { "greeting_text": "Hello world,", "name": "I'm Baptiste", "subtitle": "Full-stack developer — 3rd year CDA at MyDigitalSchool Vannes. I design, I code, I iterate — until the interface looks obvious." },
-  "about": { "eyebrow": "// ABOUT", "title": "At a glance", "body": "Full-stack JS/TS developer with a product sensibility rooted in a multidisciplinary path. I build web, mobile and desktop apps — architecture to production — and I like owning the whole chain." },
+  "hero": { "greeting_text": "Hello world,", "name": "I'm Baptiste", "subtitle": "Full-stack developer - 3rd year CDA at MyDigitalSchool Vannes. I design, I code, I iterate - until the interface looks obvious." },
+  "about": { "eyebrow": "// ABOUT", "title": "At a glance", "body": "Full-stack JS/TS developer with a product sensibility rooted in a multidisciplinary path. I build web, mobile and desktop apps - architecture to production - and I like owning the whole chain." },
   "parcours": { "eyebrow": "// JOURNEY", "title": "My education" },
   "skills": { "eyebrow": "// SKILLS", "title": "Hard & Soft Skills", "hard": "Hard Skills", "soft": "Soft Skills" },
   "stack": { "eyebrow": "// STACK", "title": "What I build with" }
@@ -740,7 +740,7 @@ File: `src/i18n/locales/en/project.json`
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1e1a15" />
-    <title>Baptiste Dechamp — Portfolio</title>
+    <title>Baptiste Dechamp - Portfolio</title>
   </head>
   <body>
     <div id="root"></div>
@@ -762,7 +762,7 @@ git add -A && git commit -m "feat(i18n): i18next bootstrap with FR and EN namesp
 
 ---
 
-## Task 6 : Primitive — `Container`
+## Task 6 : Primitive - `Container`
 
 **Files:**
 - Create: `frontend/src/components/ui/container.tsx`
@@ -793,7 +793,7 @@ describe("Container", () => {
 });
 ```
 
-- [ ] **Step 2 : Run — expect FAIL**
+- [ ] **Step 2 : Run - expect FAIL**
 
 Run: `pnpm test container`
 Expected: FAIL (module not found).
@@ -826,7 +826,7 @@ export function Container({ className, size, ...props }: ContainerProps) {
 }
 ```
 
-- [ ] **Step 4 : Run — expect PASS**
+- [ ] **Step 4 : Run - expect PASS**
 
 Run: `pnpm test container`
 
@@ -838,7 +838,7 @@ git add -A && git commit -m "feat(ui): Container primitive with size variants"
 
 ---
 
-## Task 7 : Primitive — `NoiseOverlay` + `AnimatedGradient`
+## Task 7 : Primitive - `NoiseOverlay` + `AnimatedGradient`
 
 **Files:**
 - Create: `frontend/src/components/effects/noise-overlay.tsx`
@@ -922,7 +922,7 @@ git add -A && git commit -m "feat(effects): NoiseOverlay and AnimatedGradient CS
 
 ---
 
-## Task 8 : Primitive — `Section`
+## Task 8 : Primitive - `Section`
 
 **Files:**
 - Create: `frontend/src/components/ui/section.tsx`
@@ -951,7 +951,7 @@ describe("Section", () => {
 });
 ```
 
-- [ ] **Step 2 : Run — expect FAIL**
+- [ ] **Step 2 : Run - expect FAIL**
 
 - [ ] **Step 3 : Implement**
 
@@ -1005,7 +1005,7 @@ export function Section({
 }
 ```
 
-- [ ] **Step 4 : Run — expect PASS**
+- [ ] **Step 4 : Run - expect PASS**
 
 - [ ] **Step 5 : Commit**
 
@@ -1015,7 +1015,7 @@ git add -A && git commit -m "feat(ui): Section primitive with tone/rounded/overl
 
 ---
 
-## Task 9 : Primitives — `Bracket`, `Label`, `Tag`, `Divider`
+## Task 9 : Primitives - `Bracket`, `Label`, `Tag`, `Divider`
 
 **Files:**
 - Create: `src/components/ui/{bracket,label,tag,divider}.tsx`
@@ -1161,7 +1161,7 @@ git add -A && git commit -m "feat(ui): Bracket, Label, Tag, Divider primitives"
 
 ---
 
-## Task 10 : Primitive — `Button` (refait maison)
+## Task 10 : Primitive - `Button` (refait maison)
 
 **Files:**
 - Rewrite: `frontend/src/components/ui/button.tsx`
@@ -1190,7 +1190,7 @@ describe("Button", () => {
 });
 ```
 
-- [ ] **Step 2 : Run — expect FAIL**
+- [ ] **Step 2 : Run - expect FAIL**
 
 - [ ] **Step 3 : Implement**
 
@@ -1244,7 +1244,7 @@ Button.displayName = "Button";
 export { buttonVariants };
 ```
 
-- [ ] **Step 4 : Run test — expect PASS**
+- [ ] **Step 4 : Run test - expect PASS**
 
 - [ ] **Step 5 : Commit**
 
@@ -1254,7 +1254,7 @@ git add -A && git commit -m "feat(ui): Button primitive rewritten with 7 variant
 
 ---
 
-## Task 11 : Primitive — `Card`
+## Task 11 : Primitive - `Card`
 
 **Files:**
 - Create: `frontend/src/components/ui/card.tsx`
@@ -1313,7 +1313,7 @@ git add -A && git commit -m "feat(ui): Card primitive with tone/radius/interacti
 
 ---
 
-## Task 12 : Effect — `ScrollReveal` (CSS scroll-driven)
+## Task 12 : Effect - `ScrollReveal` (CSS scroll-driven)
 
 **Files:**
 - Create: `frontend/src/components/effects/scroll-reveal.tsx`
@@ -1365,7 +1365,7 @@ git add -A && git commit -m "feat(effects): ScrollReveal using CSS view-timeline
 
 ---
 
-## Task 13 : Hook — `useReducedMotion`
+## Task 13 : Hook - `useReducedMotion`
 
 **Files:**
 - Create: `frontend/src/hooks/use-reduced-motion.ts`
@@ -1415,7 +1415,7 @@ export function useReducedMotion(): boolean {
 }
 ```
 
-- [ ] **Step 3 : Run test — PASS**
+- [ ] **Step 3 : Run test - PASS**
 
 - [ ] **Step 4 : Commit**
 
@@ -1425,7 +1425,7 @@ git add -A && git commit -m "feat(hooks): useReducedMotion with media query list
 
 ---
 
-## Task 14 : Hook — `useEyeTracking`
+## Task 14 : Hook - `useEyeTracking`
 
 **Files:**
 - Create: `frontend/src/hooks/use-eye-tracking.ts`
@@ -1488,7 +1488,7 @@ git add -A && git commit -m "feat(hooks): useEyeTracking with rAF throttle and p
 
 ---
 
-## Task 15 : Composant `Cody` v2 — expressif, beefier, 2 variantes
+## Task 15 : Composant `Cody` v2 - expressif, beefier, 2 variantes
 
 **Design reference :** prototype Claude Design v2 (filled cream face + brackets épais + sourcils/bouche expressifs par mood + blush happy + brackets statiques).
 
@@ -1634,7 +1634,7 @@ export function Cody({
         {filled && (
           <rect x="20" y="18" width="160" height="136" rx="36" fill="var(--color-cream)" stroke="var(--color-bg)" strokeWidth="7" />
         )}
-        {/* Brackets (STATIC — no drift) */}
+        {/* Brackets (STATIC - no drift) */}
         <path d="M 32 16 L 10 16 L 10 154 L 32 154" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M 168 16 L 190 16 L 190 154 L 168 154" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
 
@@ -1654,7 +1654,7 @@ export function Cody({
           </g>
         </g>
 
-        {/* Blush — only when happy */}
+        {/* Blush - only when happy */}
         {mood === "happy" && (
           <g opacity="0.55">
             <ellipse cx="52" cy="118" rx="9" ry="5" fill="var(--color-pink)" />
@@ -1691,7 +1691,7 @@ function App() {
 }
 ```
 
-- [ ] **Step 4 : Remove `useEyeTracking` hook** (obsolete — replaced by MouseCtx consumption inside Cody)
+- [ ] **Step 4 : Remove `useEyeTracking` hook** (obsolete - replaced by MouseCtx consumption inside Cody)
 
 ```bash
 rm src/hooks/use-eye-tracking.ts src/__tests__/hooks/use-eye-tracking.test.ts 2>/dev/null || true
@@ -1745,9 +1745,9 @@ git add -A && git commit -m "feat(ui): UpArrow with CSS scroll-timeline visibili
 
 ---
 
-## Task 17 : Data — `projects.ts`, `skills.ts`, `formations.ts`, `stack.ts`
+## Task 17 : Data - `projects.ts`, `skills.ts`, `formations.ts`, `stack.ts`
 
-> **IMPORTANT — profil réel** : Baptiste est **dev full-stack** en **3e année du titre CDA (Concepteur Développeur d'Applications, RNCP 6)** à MyDigitalSchool Vannes. Positionnement **dev-first**, avec compétences conception d'app et design secondaires. Ne PAS afficher "Mastère Design" ou présenter comme designer.
+> **IMPORTANT - profil réel** : Baptiste est **dev full-stack** en **3e année du titre CDA (Concepteur Développeur d'Applications, RNCP 6)** à MyDigitalSchool Vannes. Positionnement **dev-first**, avec compétences conception d'app et design secondaires. Ne PAS afficher "Mastère Design" ou présenter comme designer.
 
 **Files:**
 - Create: `frontend/src/data/projects.ts`
@@ -1797,18 +1797,18 @@ export const projects: Project[] = [
     description:
       "Site d'agence pour VTubers francophones, pensé comme un terrain d'évolution technique. v1 PHP/MySQL/Tailwind pour valider le concept, v2 React + Vite pour un front réactif, v3 Next.js avec dashboard pro et design system documenté sur Storybook.",
     role: "Lead développeur",
-    period: "2023 — 2025",
+    period: "2023 - 2025",
     stack: ["Next.js", "React", "TypeScript", "Storybook", "Tailwind", "PHP"],
     type: "fullstack",
     status: "live",
     thumbnail: { kind: "gradient", palette: "hero" },
     versions: [
-      { label: "v1 — MVP", stack: ["PHP", "MySQL", "Tailwind", "jQuery"], note: "Preuve de concept, solo dev, focus sur les flux métier." },
-      { label: "v2 — SPA", stack: ["React", "Vite", "Tailwind"], note: "Passage au front réactif, API séparée, premiers composants partagés." },
-      { label: "v3 — Prod", stack: ["Next.js", "TypeScript", "Storybook"], note: "App-router, design system documenté, dashboard interne." },
+      { label: "v1 - MVP", stack: ["PHP", "MySQL", "Tailwind", "jQuery"], note: "Preuve de concept, solo dev, focus sur les flux métier." },
+      { label: "v2 - SPA", stack: ["React", "Vite", "Tailwind"], note: "Passage au front réactif, API séparée, premiers composants partagés." },
+      { label: "v3 - Prod", stack: ["Next.js", "TypeScript", "Storybook"], note: "App-router, design system documenté, dashboard interne." },
     ],
     problem: "Une idée qui n'a cessé de grandir ; chaque montée en ambition a poussé la stack à évoluer.",
-    solution: "Trois versions successives sans tout jeter — chaque itération résout un problème précis.",
+    solution: "Trois versions successives sans tout jeter - chaque itération résout un problème précis.",
     outcome: "v3 en production, codebase qui incarne un vrai parcours d'apprentissage, sert de vitrine technique.",
   },
   {
@@ -1823,9 +1823,9 @@ export const projects: Project[] = [
     type: "desktop",
     status: "wip",
     thumbnail: { kind: "gradient", palette: "chaud" },
-    problem: "Les outils streameurs sont dispersés entre OBS, plateformes web et scripts — pas de cockpit unifié.",
+    problem: "Les outils streameurs sont dispersés entre OBS, plateformes web et scripts - pas de cockpit unifié.",
     solution: "App Electron centralisant overlays, alertes et stats dans une UI moderne et rapide.",
-    outcome: "En développement — MVP fonctionnel avec alertes Twitch et overlay config.",
+    outcome: "En développement - MVP fonctionnel avec alertes Twitch et overlay config.",
   },
   {
     id: "seira-like",
@@ -1841,14 +1841,14 @@ export const projects: Project[] = [
     thumbnail: { kind: "gradient", palette: "froid" },
     problem: "Proposer une expérience éducative cohérente web + mobile avec un back solide.",
     solution: "Stack multi-plateforme : Angular (web), Expo/RN (mobile), Laravel (API et auth).",
-    outcome: "En construction — architecture validée, API opérationnelle.",
+    outcome: "En construction - architecture validée, API opérationnelle.",
   },
   {
     id: "devflix",
     title: "DevFlix",
-    tagline: "Clone Netflix pédagogique — streaming de cours.",
+    tagline: "Clone Netflix pédagogique - streaming de cours.",
     description:
-      "Exercice d'école : réinventer une interface streaming pour du contenu technique. UI inspirée de la VOD mais pensée pour du cours court — rangées thématiques, player sticky, progression par piste.",
+      "Exercice d'école : réinventer une interface streaming pour du contenu technique. UI inspirée de la VOD mais pensée pour du cours court - rangées thématiques, player sticky, progression par piste.",
     role: "Développeur front",
     period: "Juin 2024",
     stack: ["React", "Vite", "Node", "Firebase", "TMDB API", "Tailwind"],
@@ -1921,7 +1921,7 @@ export const projects: Project[] = [
 File: `src/data/skills.ts`
 
 ```ts
-// Pas de level/barre — juste une liste groupée. Ordre = priorité affichage (dev-first).
+// Pas de level/barre - juste une liste groupée. Ordre = priorité affichage (dev-first).
 export type SkillGroup = "Dev" | "Conception" | "Design" | "Outils";
 
 export const hardSkills: Record<SkillGroup, string[]> = {
@@ -1964,21 +1964,21 @@ export interface Formation {
 export const formations: Formation[] = [
   {
     year: "2023 →",
-    title: "Titre CDA — Concepteur Développeur d'Applications",
+    title: "Titre CDA - Concepteur Développeur d'Applications",
     school: "MyDigitalSchool Vannes",
     note: "3e année en cours. RNCP niveau 6. Full-stack JS/TS, conception applicative, DevOps.",
   },
   {
-    year: "2022 — 2023",
-    title: "BTS SIO — Option SLAM",
+    year: "2022 - 2023",
+    title: "BTS SIO - Option SLAM",
     school: "Services Informatiques aux Organisations",
     note: "Solutions logicielles et applications métier.",
   },
   {
-    year: "2021 — 2022",
+    year: "2021 - 2022",
     title: "L1 Arts Plastiques",
     school: "Université Rennes 2",
-    note: "Sémiotique visuelle, pratique plastique — fondation de la sensibilité produit.",
+    note: "Sémiotique visuelle, pratique plastique - fondation de la sensibilité produit.",
   },
 ];
 ```
@@ -2250,7 +2250,7 @@ git add -A && git commit -m "feat(footer): rewritten with Cody + i18n"
 
 ---
 
-## Task 19.5 : Effects — `Typewriter` + `FluidBlobs`
+## Task 19.5 : Effects - `Typewriter` + `FluidBlobs`
 
 **Files:**
 - Create: `frontend/src/components/effects/typewriter.tsx`
@@ -2480,7 +2480,7 @@ export function Hero() {
 }
 ```
 
-**i18n update required** : in `src/i18n/locales/fr/home.json`, replace `greeting` key with `greeting_text` set to `"Hello world,"` (without the underscore prefix — it's rendered separately in the JSX). Same in EN.
+**i18n update required** : in `src/i18n/locales/fr/home.json`, replace `greeting` key with `greeting_text` set to `"Hello world,"` (without the underscore prefix - it's rendered separately in the JSX). Same in EN.
 
 Add to `common.json` `cta`: `"curriculum": "Curriculum"`.
 
@@ -2580,7 +2580,7 @@ git add -A && git commit -m "feat(portfolio): ProjectCard and ProjectFilters com
 
 ---
 
-## Task 22 : Phase 1 Gate — build + test + lint verts
+## Task 22 : Phase 1 Gate - build + test + lint verts
 
 - [ ] **Step 1 : Run all checks**
 
@@ -2591,7 +2591,7 @@ pnpm test
 pnpm build
 ```
 
-All must be green. If lint fails on old page code, that's expected — pages are still old and will be replaced in Phase 2. You can add `pages/` to `oxlint.json` `ignorePatterns` temporarily:
+All must be green. If lint fails on old page code, that's expected - pages are still old and will be replaced in Phase 2. You can add `pages/` to `oxlint.json` `ignorePatterns` temporarily:
 
 ```json
 "ignorePatterns": ["dist", "node_modules", "*.config.*", "src/pages/**"]
@@ -2613,7 +2613,7 @@ git commit --allow-empty -m "chore: phase 1 foundation gate passed"
 
 ---
 
-# PHASE 2 — PAGES SWEEP (parallèle via sub-agents)
+# PHASE 2 - PAGES SWEEP (parallèle via sub-agents)
 
 > **Instructions for executor:** Use `superpowers:dispatching-parallel-agents` skill. Dispatch these 4 sub-agents **in parallel** (single message, multiple Agent tool calls). Each agent works in the same branch on **disjoint files** (different page). Coordinate before merging.
 
@@ -2628,15 +2628,15 @@ git commit --allow-empty -m "chore: phase 1 foundation gate passed"
 - Must commit with conventional commits (`feat(page-name):`, etc.)
 
 > **Insights visuels du prototype Claude Design à appliquer** (cf. spec §15.5) :
-> - Gradient hero = **3 couches** (2 radial ellipses + 1 conic animé) + vignette radial overlay — pas un simple conic
+> - Gradient hero = **3 couches** (2 radial ellipses + 1 conic animé) + vignette radial overlay - pas un simple conic
 > - `MouseProvider` context global à monter dans `App.tsx` pour Cody tracking partout
 > - Marquee stack (bande défilante avec mask linear-gradient)
 > - Pulse dot sur projets `status: "live"`
 > - Scrollbar custom + `::selection` colorée
-> - `useEyeTracking` doit consommer le `MouseContext` (pas son propre `pointermove`) — refactor à prévoir
+> - `useEyeTracking` doit consommer le `MouseContext` (pas son propre `pointermove`) - refactor à prévoir
 > - Prévoir un gradient component plus riche : `<AnimatedGradient palette="hero" layers="full" />` avec variantes
 
-## Agent A — Page Accueil
+## Agent A - Page Accueil
 
 **Files:**
 - Rewrite: `frontend/src/pages/Accueil.tsx`
@@ -2645,25 +2645,25 @@ git commit --allow-empty -m "chore: phase 1 foundation gate passed"
 
 Structure attendue (utilise **exclusivement** les primitives Phase 1) :
 
-1. `<Hero />` — Hero avec sous-titre exact : **"Développeur full-stack — CDA 3e année à MyDigitalSchool Vannes"**
-2. `<Section tone="cream" rounded="2xl" overlap>` — À propos (pitch **dev-first** : "Dev full-stack JS/TS avec une sensibilité produit. Je construis des apps web, mobile et desktop, de l'architecture à la prod.")
+1. `<Hero />` - Hero avec sous-titre exact : **"Développeur full-stack - CDA 3e année à MyDigitalSchool Vannes"**
+2. `<Section tone="cream" rounded="2xl" overlap>` - À propos (pitch **dev-first** : "Dev full-stack JS/TS avec une sensibilité produit. Je construis des apps web, mobile et desktop, de l'architecture à la prod.")
    - `<Container size="md">` centré
    - `<Label prefix="//">` : `t('home.about.eyebrow')`
    - `<Bracket side="left" size="giant" float />` + `<Bracket side="right" size="giant" float />` positionnés absolute aux coins
-   - `<h2>` : `t('home.about.title')` — `text-[var(--text-h1)]` `font-black`
-   - `<p>` : `t('home.about.body')` — `text-xl`
+   - `<h2>` : `t('home.about.title')` - `text-[var(--text-h1)]` `font-black`
+   - `<p>` : `t('home.about.body')` - `text-xl`
    - Wrapped in `<ScrollReveal effect="rise">`
-3. `<Section tone="gradient" rounded="2xl" overlap>` — Parcours
+3. `<Section tone="gradient" rounded="2xl" overlap>` - Parcours
    - `<AnimatedGradient palette="chaud" />` en background
    - Label + H2 (`t('home.parcours.*')`)
    - Grid 3 cols md (`grid-cols-1 md:grid-cols-3 gap-6`) avec `formations` mappées dans des `<Card tone="glass" radius="lg">`
    - Chaque Card : year en `<Label>`, title en `<CardTitle>`, school en `<p>`
-4. `<Section tone="cream" rounded="none" overlap>` — Compétences (PLAT, pas de grand radius — alternance)
+4. `<Section tone="cream" rounded="none" overlap>` - Compétences (PLAT, pas de grand radius - alternance)
    - Label + H2 (`t('home.skills.*')`) "Hard & Soft Skills."
    - Grid 2 cols (1.2fr / 1fr) : Hard (gauche) / Soft (droite)
-   - **Hard — liste groupée, PAS de barres, PAS de levels** : pour chaque groupe dans `hardSkills` (Dev, Conception, Design, Outils), un mini-titre mono uppercase + liste de `<Tag>` flex-wrap
-   - **Soft — 4 cards numérotées 01/02/03/04** : `<div>` avec header flex (label `<span font-bold text-lg>` + numéro mono opacity-50) + note `<p opacity-85>`
-5. `<StackMarquee />` — section bg-bg, display font 900 géant
+   - **Hard - liste groupée, PAS de barres, PAS de levels** : pour chaque groupe dans `hardSkills` (Dev, Conception, Design, Outils), un mini-titre mono uppercase + liste de `<Tag>` flex-wrap
+   - **Soft - 4 cards numérotées 01/02/03/04** : `<div>` avec header flex (label `<span font-bold text-lg>` + numéro mono opacity-50) + note `<p opacity-85>`
+5. `<StackMarquee />` - section bg-bg, display font 900 géant
    - Label + H2 "Ce que j'utilise, aujourd'hui."
    - Duplique `stackItems` 2× pour loop seamless
    - Track avec `animation: marquee 40s linear infinite`, `mask-fade-x` sur container, alternance couleurs pink/cream/muted, séparateurs `·`
@@ -2680,7 +2680,7 @@ Structure attendue (utilise **exclusivement** les primitives Phase 1) :
 
 ---
 
-## Agent B — Page Portfolio
+## Agent B - Page Portfolio
 
 **Files:**
 - Rewrite: `frontend/src/pages/Portfolio.tsx`
@@ -2731,7 +2731,7 @@ const Portfolio = () => {
 
 ---
 
-## Agent C — Page ProjectPage (détail)
+## Agent C - Page ProjectPage (détail)
 
 **Files:**
 - Rewrite: `frontend/src/pages/ProjectPage.tsx`
@@ -2741,7 +2741,7 @@ const Portfolio = () => {
 Utilise `useParams` pour récupérer `id`, trouve le projet dans `projects`, 404 si pas trouvé.
 
 Structure :
-1. **Hero projet** — `<Section tone="gradient" rounded="none">` avec `AnimatedGradient` palette du thumbnail (si gradient) sinon chaud
+1. **Hero projet** - `<Section tone="gradient" rounded="none">` avec `AnimatedGradient` palette du thumbnail (si gradient) sinon chaud
    - `<Container size="lg">`
    - `<Label>// {project.type}</Label>`
    - `<h1 text-display-xl font-black>{project.title}</h1>`
@@ -2749,13 +2749,13 @@ Structure :
    - Meta row : `{project.role} · {project.period}`
    - Stack tags
    - Links (live, repo) si présents
-2. **Description** — `<Section tone="cream" rounded="2xl" overlap>`
+2. **Description** - `<Section tone="cream" rounded="2xl" overlap>`
    - `<Container size="md">{project.description}</Container>`
-3. **Problem / Solution / Outcome** (si présents) — `<Section tone="dark">` avec grid 3 cols de `<Card tone="glass">` pour chaque bloc
-4. **Versions** (si `project.versions` présent — cas Amigaru) — `<Section tone="gradient" rounded="2xl" overlap>`
+3. **Problem / Solution / Outcome** (si présents) - `<Section tone="dark">` avec grid 3 cols de `<Card tone="glass">` pour chaque bloc
+4. **Versions** (si `project.versions` présent - cas Amigaru) - `<Section tone="gradient" rounded="2xl" overlap>`
    - Timeline verticale avec chaque version dans un `<Card>`, stack tags + note
-5. **Galerie** (si `project.screenshots`) — grid images
-6. **Nav prev/next** — liens `/portfolio/<prev-id>` et `/portfolio/<next-id>` basés sur l'ordre dans `projects`
+5. **Galerie** (si `project.screenshots`) - grid images
+6. **Nav prev/next** - liens `/portfolio/<prev-id>` et `/portfolio/<next-id>` basés sur l'ordre dans `projects`
 7. `<Footer />`
 
 **Constraints :**
@@ -2765,7 +2765,7 @@ Structure :
 
 ---
 
-## Agent D — Pages Bonus + 404
+## Agent D - Pages Bonus + 404
 
 **Files:**
 - Rewrite: `frontend/src/pages/Bonus.tsx`
@@ -2778,7 +2778,7 @@ Structure simple, ton expérimental :
 2. `<Container size="lg">`
    - Titre display XXL : "Bonus"
    - Sous-titre : "Expérimentations & easter eggs"
-3. Grid 2 cols de Cards "expériences" — placeholder data (3-4 items fictifs inline : "Curseur custom", "Test WebGL", "Générateur de brackets", "Easter egg terminal")
+3. Grid 2 cols de Cards "expériences" - placeholder data (3-4 items fictifs inline : "Curseur custom", "Test WebGL", "Générateur de brackets", "Easter egg terminal")
 4. Easter egg : Cody avec mood="happy" qui réagit au clic (`useState` + toggle mood)
 5. `<Footer />`
 
@@ -2834,7 +2834,7 @@ Sinon, refactor ou migrer vers `@/components/portfolio/project-card.tsx`.
 
 Remove `src/pages/**` from `oxlint.json` `ignorePatterns`.
 
-Run: `pnpm lint` — must pass.
+Run: `pnpm lint` - must pass.
 
 - [ ] **Step 5 : Commit**
 
@@ -2844,7 +2844,7 @@ git add -A && git commit -m "chore: remove obsolete assets and legacy components
 
 ---
 
-# PHASE 3 — POLISH
+# PHASE 3 - POLISH
 
 ## Task 24 : Route transitions avec framer-motion
 
@@ -2925,7 +2925,7 @@ Target scores : Performance ≥ 90 (goal 95), A11y ≥ 95, BP ≥ 95, SEO ≥ 90
 - [ ] **Step 3 : Fix issues typiques**
 
 - Images trop lourdes : passer en WebP / lazy loading
-- Polices : vérifier `font-display: swap` (Fontsource le fait par défaut — confirmer)
+- Polices : vérifier `font-display: swap` (Fontsource le fait par défaut - confirmer)
 - CLS : réserver espace Cody SVG, aspect-ratio sur cards
 - LCP : hero text immédiat, gradient en background non-blocking
 
@@ -2934,7 +2934,7 @@ Documenter les fixes dans commits atomiques.
 - [ ] **Step 4 : Commit final**
 
 ```bash
-git commit -am "perf: Lighthouse fixes — target 95+ mobile"
+git commit -am "perf: Lighthouse fixes - target 95+ mobile"
 ```
 
 ---
@@ -2946,7 +2946,7 @@ git commit -am "perf: Lighthouse fixes — target 95+ mobile"
 Pour chaque route : audit axe, corriger violations critiques / serious.
 
 Points à vérifier :
-- Contrast ratio sur texte `opacity-60/70` (peut descendre sous AA — tester)
+- Contrast ratio sur texte `opacity-60/70` (peut descendre sous AA - tester)
 - Focus visible (dashed ring) sur tous interactifs
 - Skip link "Aller au contenu" en haut de page
 - `aria-label` sur boutons icon-only (UpArrow, burger menu)
@@ -2990,7 +2990,7 @@ Toutes pages testées.
 
 ```bash
 git checkout main
-git merge --no-ff refonte/foundation -m "feat: frontend refonte — design system, VoidZero, Cody v2, nouveaux projets"
+git merge --no-ff refonte/foundation -m "feat: frontend refonte - design system, VoidZero, Cody v2, nouveaux projets"
 ```
 
 - [ ] **Step 4 : Deploy Vercel**

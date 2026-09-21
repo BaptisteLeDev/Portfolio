@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
-import { Label } from "@/components/ui/label";
 import { ProjectCard, ProjectFilters, type Filter } from "@/components/portfolio";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
@@ -12,15 +11,14 @@ export default function Portfolio() {
   const { t } = useTranslation("portfolio");
   const [filter, setFilter] = useState<Filter>("all");
 
-  const filtered = filter === "all" ? projects : projects.filter((p) => p.type === filter);
+  const filtered = filter === "all" ? projects : projects.filter((p) => p.types.includes(filter));
 
   return (
     <>
       <Section tone="dark" rounded="none" className="pt-32 pb-20">
         <Container size="xl">
-          <Label>PORTFOLIO</Label>
           <h1
-            className="mt-4 font-display font-black"
+            className="mt-0 font-display font-black"
             style={{
               fontSize: "var(--text-display-xl)",
               lineHeight: 0.95,

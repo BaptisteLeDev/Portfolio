@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
 import { Tag } from "@/components/ui/tag";
 import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import type { Project } from "@/data/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const { t } = useTranslation("portfolio");
+  const typesLabel = project.types.map((ty) => t(`filters.${ty}`)).join(" · ");
   const isLive = project.status === "live";
   return (
     <Link to={`/portfolio/${project.id}`} className="block">
@@ -30,9 +33,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
         <CardBody>
-          <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-55 mb-2">
-            // {project.type}
-          </p>
+          <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-55 mb-2">{typesLabel}</p>
           <CardTitle>{project.title}</CardTitle>
           <p className="mt-2 opacity-75 text-sm">{project.tagline}</p>
         </CardBody>

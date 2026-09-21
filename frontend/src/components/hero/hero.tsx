@@ -19,10 +19,6 @@ export function Hero() {
       <Container size="xl" className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] items-center gap-12">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-70 mb-5">
-              ~/baptiste-dev $ run hello.tsx
-            </p>
-
             <h1
               className="font-display font-black leading-[0.95] tracking-[-0.04em] text-balance"
               style={{ fontSize: "clamp(2.5rem, 7.5vw, 5.5rem)" }}
@@ -47,8 +43,16 @@ export function Hero() {
             </p>
 
             <div className="mt-10 flex gap-4 flex-wrap">
-              <Button variant="gradient" size="lg" asChild {...projectsBind}>
-                <Link to="/portfolio">{tc("cta.see_projects")} →</Link>
+              <Button variant="gradient" size="lg" asChild className="group" {...projectsBind}>
+                <Link to="/portfolio">
+                  {tc("cta.see_projects")}
+                  <span
+                    className="ml-1 flex size-6 items-center justify-center rounded-full bg-bg/15 transition-transform duration-300 ease-[var(--ease-signature)] group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </Link>
               </Button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-// Pas de level/barre — juste une liste groupée. Ordre = priorité affichage (dev-first).
+// Pas de level/barre - juste une liste groupée. Ordre = priorité affichage (dev-first).
 export type SkillGroup = "Dev" | "Conception" | "Design" | "Outils";
 
 export const hardSkills: Record<SkillGroup, string[]> = {
@@ -8,12 +8,13 @@ export const hardSkills: Record<SkillGroup, string[]> = {
     "Next.js",
     "Tailwind",
     "Node.js",
+    "Electron",
     "Laravel / PHP",
     "Angular",
     "SQL / Supabase",
   ],
   Conception: ["Architecture", "Modélisation", "Accessibilité / Perf"],
-  Design: ["Figma", "UX/UI", "Illustrator"],
+  Design: ["Figma", "UX/UI", "Illustrator", "Photoshop"],
   Outils: ["Git / CI", "Storybook", "pnpm", "Vercel"],
 };
 

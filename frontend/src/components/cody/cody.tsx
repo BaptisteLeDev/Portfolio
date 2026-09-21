@@ -36,7 +36,7 @@ export interface CodyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "s
   listen?: boolean;
 }
 
-// ASCII face per mood — pure text, no SVG shapes.
+// ASCII face per mood - pure text, no SVG shapes.
 const faceByMood: Record<CodyMood, { left: string; right: string; mouth: string }> = {
   idle:     { left: "o",  right: "o",  mouth: "_" },
   curious:  { left: "o",  right: "O",  mouth: "_" },
@@ -128,7 +128,7 @@ export function Cody({
     applyEye(leftEyeRef.current);
     applyEye(rightEyeRef.current);
 
-    // 3D head tilt — rotateX (pitch, up/down) + rotateY (yaw, left/right)
+    // 3D head tilt - rotateX (pitch, up/down) + rotateY (yaw, left/right)
     const face = faceRef.current;
     if (face) {
       const r = face.getBoundingClientRect();

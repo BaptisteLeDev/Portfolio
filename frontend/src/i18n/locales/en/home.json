@@ -2,14 +2,13 @@
   "hero": {
     "greeting_text": "Hello world,",
     "name": "I'm Baptiste",
-    "subtitle": "Full-stack developer — 3rd year CDA at MyDigitalSchool Vannes. I design, I code, I iterate — until the interface looks obvious."
+    "subtitle": "Junior full-stack developer, application designer & developer. I design, I code, I iterate - until the interface looks obvious."
   },
   "about": {
-    "eyebrow": "ABOUT",
     "title": "At a glance",
-    "body": "Full-stack JS/TS developer with a product sensibility rooted in a multidisciplinary path. I build web, mobile and desktop apps — architecture to production — and I like owning the whole chain."
+    "body": "Junior full-stack JS/TS developer, with a product sensibility rooted in a multidisciplinary path. I build web, mobile and desktop apps - architecture to production - and I like owning the whole chain."
   },
-  "parcours": { "eyebrow": "JOURNEY", "title": "My education" },
-  "skills": { "eyebrow": "SKILLS", "title": "Hard & Soft Skills", "hard": "Hard Skills", "soft": "Soft Skills" },
-  "stack": { "eyebrow": "STACK", "title": "What I build with, today." }
+  "parcours": { "title": "My education" },
+  "skills": { "title": "Hard & Soft Skills", "hard": "Hard Skills", "soft": "Soft Skills" },
+  "stack": { "title": "What I build with, today." }
 }

@@ -7,21 +7,20 @@ export interface Formation {
 
 export const formations: Formation[] = [
   {
-    year: "2023 →",
-    title: "Titre CDA — Concepteur Développeur d'Applications",
+    year: "2023 - 2026",
+    title: "Titre professionnel CDA - Concepteur Développeur Web et Mobile",
     school: "MyDigitalSchool Vannes",
-    note: "3e année en cours. RNCP niveau 6. Full-stack JS/TS, conception applicative, DevOps.",
+    note: "RNCP niveau 6, obtenu sur 3 ans. Full-stack JS/TS, conception applicative, alternance chez Tom Explore en 3e année.",
   },
   {
-    year: "2022 — 2023",
-    title: "BTS SIO — Option SLAM",
-    school: "Services Informatiques aux Organisations",
-    note: "Solutions logicielles et applications métier.",
+    year: "2021 - 2023",
+    title: "Baccalauréat STI2D",
+    school: "Lycée Polyvalent Chaptal",
+    note: "Sciences et technologies de l'industrie et du développement durable.",
   },
   {
-    year: "2021 — 2022",
-    title: "L1 Arts Plastiques",
-    school: "Université Rennes 2",
-    note: "Sémiotique visuelle, pratique plastique — fondation de la sensibilité produit.",
+    year: "2019 - 2021",
+    title: "Études générales",
+    school: "Lycée Henri Avril, Lamballe",
   },
 ];

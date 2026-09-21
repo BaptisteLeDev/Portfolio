@@ -6,12 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Tag } from "@/components/ui/tag";
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Bracket } from "@/components/ui/bracket";
 import { Divider } from "@/components/ui/divider";
 import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import { NoiseOverlay } from "@/components/effects/noise-overlay";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
-import { projects } from "@/data/projects";
+import { projects, type SitemapNode } from "@/data/projects";
 
 const statusLabel: Record<string, string> = {
   live: "En production",
@@ -19,28 +20,46 @@ const statusLabel: Record<string, string> = {
   archived: "Archivé",
 };
 
+function SitemapTree({ nodes, depth = 0 }: { nodes: SitemapNode[]; depth?: number }) {
+  return (
+    <ul className={depth === 0 ? "space-y-4" : "space-y-2 border-l border-fg/15 pl-4 ml-1"}>
+      {nodes.map((node) => (
+        <li key={node.path}>
+          <div className="flex flex-wrap gap-x-3">
+            <span className="font-mono text-xs uppercase tracking-[0.1em]">{node.label}</span>
+            <span className="font-mono text-xs opacity-40">{node.path}</span>
+          </div>
+          {node.children && <SitemapTree nodes={node.children} depth={depth + 1} />}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function ProjectPage() {
   const { id } = useParams();
   const { t } = useTranslation("project");
+  const { t: tp } = useTranslation("portfolio");
   const idx = projects.findIndex((p) => p.id === id);
 
   if (idx === -1) return <Navigate to="/404" replace />;
 
   const project = projects[idx];
+  const typesLabel = project.types.map((ty) => tp(`filters.${ty}`)).join(" · ");
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];
   const palette = project.thumbnail.kind === "gradient" ? project.thumbnail.palette : "chaud";
 
   return (
     <>
-      {/* Hero projet — centré vertical, hauteur adaptée */}
+      {/* Hero projet - centré vertical, hauteur adaptée */}
       <section className="relative overflow-hidden flex items-center pt-24 pb-24 md:pt-28 md:pb-32 px-6 md:px-8">
         <AnimatedGradient palette={palette} />
         <div className="absolute inset-0 bg-bg/45" aria-hidden="true" />
         <NoiseOverlay />
         <Container size="lg" className="relative z-10">
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <Label prefix="">// {project.type}</Label>
+            <Label>{typesLabel}</Label>
             <span
               className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] px-3 py-1 rounded-full border ${
                 project.status === "live"
@@ -91,14 +110,20 @@ export default function ProjectPage() {
           {project.links && (project.links.live || project.links.repo) && (
             <div className="mt-8 flex gap-3 flex-wrap">
               {project.links.live && (
-                <Button variant="gradient" size="md" asChild>
+                <Button variant="gradient" size="md" asChild className="group">
                   <a href={project.links.live} target="_blank" rel="noreferrer">
-                    {t("view_live")} →
+                    {t("view_live")}
+                    <span
+                      className="ml-1 flex size-6 items-center justify-center rounded-full bg-bg/15 transition-transform duration-300 ease-[var(--ease-signature)] group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
                   </a>
                 </Button>
               )}
               {project.links.repo && (
-                <Button variant="glass-cream" size="md" asChild>
+                <Button variant="glass-cream" size="md" asChild className="group">
                   <a href={project.links.repo} target="_blank" rel="noreferrer">
                     {t("view_repo")}
                   </a>
@@ -109,13 +134,25 @@ export default function ProjectPage() {
         </Container>
       </section>
 
-      {/* Description — section cream, compact */}
-      <Section tone="cream" rounded="2xl" overlap className="py-16 md:py-20">
-        <Container size="md" className="text-bg">
+      {/* Description - floating cream panel, inset from edges */}
+      <Section tone="cream" rounded="xl" overlap className="mx-4 md:mx-10 py-16 md:py-20">
+        <Container size="md" className="relative text-bg">
+          <Bracket side="left" size="giant" float className="left-[-3rem] top-[-2rem] opacity-15 text-bg" />
           <ScrollReveal effect="rise">
             <Label className="text-bg">À PROPOS DU PROJET</Label>
-            <p className="mt-5 text-xl md:text-2xl leading-relaxed">{project.description}</p>
+            <p className="mt-5 max-w-[62ch] text-lg md:text-xl leading-[1.7]">{project.description}</p>
           </ScrollReveal>
+          {project.brief && (
+            <ScrollReveal effect="rise" delay={120}>
+              <Label className="text-bg mt-12">{t("brief_note")}</Label>
+              <iframe
+                src={project.brief.src}
+                title={project.brief.title}
+                className="mt-6 w-full h-[640px] rounded-[16px] border-0 bg-bg/5"
+                loading="lazy"
+              />
+            </ScrollReveal>
+          )}
         </Container>
       </Section>
 
@@ -123,7 +160,6 @@ export default function ProjectPage() {
       {(project.problem || project.solution || project.outcome) && (
         <Section tone="dark" rounded="none" className="py-20">
           <Container size="lg">
-            <Label className="mb-10 block">DÉFI & LIVRAISON</Label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {project.problem && (
                 <ScrollReveal effect="rise">
@@ -191,20 +227,69 @@ export default function ProjectPage() {
                 </ScrollReveal>
               ))}
             </div>
+            {project.team && (
+              <ScrollReveal effect="rise">
+                <Label className="mt-12">{t("team")}</Label>
+                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                  {project.team.map((m) => (
+                    <a
+                      key={m.url}
+                      href={m.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="opacity-85 hover:opacity-100 transition-opacity"
+                    >
+                      {m.name} →
+                    </a>
+                  ))}
+                </div>
+              </ScrollReveal>
+            )}
+          </Container>
+        </Section>
+      )}
+
+      {/* SEO sitemap */}
+      {project.sitemap && project.sitemap.length > 0 && (
+        <Section tone="dark" rounded="none" className="py-20">
+          <Container size="lg">
+            <Label>{t("sitemap")}</Label>
+            <div className="mt-8">
+              <SitemapTree nodes={project.sitemap} />
+            </div>
           </Container>
         </Section>
       )}
 
       {/* Gallery */}
-      {project.screenshots && project.screenshots.length > 0 && (
+      {((project.screenshots?.length ?? 0) + (project.videos?.length ?? 0) > 0) && (
         <Section tone="cream" rounded="none" className="py-20">
           <Container size="xl" className="text-bg">
             <Label className="text-bg">{t("gallery")}</Label>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.screenshots.map((src) => (
-                <img key={src} src={src} alt="" loading="lazy" className="w-full rounded-[24px]" />
-              ))}
-            </div>
+            {project.videos && project.videos.length > 0 && (
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {project.videos.map((src) => (
+                  <video key={src} src={src} controls preload="metadata" className="w-full rounded-[24px]" />
+                ))}
+              </div>
+            )}
+            {project.screenshots && project.screenshots.length > 0 && (
+              <div
+                tabIndex={0}
+                aria-label={t("gallery")}
+                className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
+              >
+                {project.screenshots.map((src) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className="min-w-[85%] md:min-w-[70%] w-auto snap-center rounded-[24px] object-cover"
+                  />
+                ))}
+              </div>
+            )}
           </Container>
         </Section>
       )}

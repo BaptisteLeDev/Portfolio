@@ -6,9 +6,12 @@
   "solution": "Solution",
   "outcome": "Outcome",
   "versions": "Versions",
+  "sitemap": "Site sitemap",
   "gallery": "Gallery",
   "prev": "Previous",
   "next": "Next",
   "view_live": "View site",
-  "view_repo": "Source code"
+  "view_repo": "Source code",
+  "brief_note": "The brief that kicked the project off at MyDigitalSchool.",
+  "team": "The team"
 }

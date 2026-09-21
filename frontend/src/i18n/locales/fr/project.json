@@ -6,9 +6,12 @@
   "solution": "Solution",
   "outcome": "Résultat",
   "versions": "Versions",
+  "sitemap": "Sitemap du site",
   "gallery": "Galerie",
   "prev": "Précédent",
   "next": "Suivant",
   "view_live": "Voir le site",
-  "view_repo": "Code source"
+  "view_repo": "Code source",
+  "brief_note": "Le brief qui a lancé le projet à l'école MyDigitalSchool.",
+  "team": "L'équipe"
 }

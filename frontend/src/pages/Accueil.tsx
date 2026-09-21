@@ -22,7 +22,7 @@ export default function Accueil() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* 2. About — cream, rounded-top matching hero bottom, overlap */}
+      {/* 2. About - cream, rounded-top matching hero bottom, overlap */}
       <Section
         tone="cream"
         rounded="none"
@@ -33,9 +33,8 @@ export default function Accueil() {
           <Bracket side="left" size="giant" float className="left-[-4rem] top-[-3rem] opacity-30 text-bg" />
           <Bracket side="right" size="giant" float className="right-[-4rem] bottom-[-3rem] opacity-30 text-bg" />
           <ScrollReveal effect="rise">
-            <Label className="text-bg">{t("home:about.eyebrow")}</Label>
             <h2
-              className="mt-3 font-display font-black text-bg"
+              className="font-display font-black text-bg"
               style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
             >
               {t("home:about.title")}
@@ -47,21 +46,20 @@ export default function Accueil() {
         </Container>
       </Section>
 
-      {/* 3. Parcours — rounded 2xl, overlap, dark + gradient chaud */}
+      {/* 3. Parcours - rounded 2xl, overlap, dark + gradient chaud */}
       <Section tone="dark" rounded="2xl" overlap>
         <AnimatedGradient palette="chaud" className="opacity-30" />
         <Container size="lg" className="relative z-10">
-          <Label>{t("home:parcours.eyebrow")}</Label>
           <h2
-            className="mt-3 font-display font-black"
+            className="font-display font-black"
             style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
           >
             {t("home:parcours.title")}
           </h2>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {formations.map((f, i) => (
-              <ScrollReveal key={f.title} effect="rise" delay={i * 80}>
-                <Card tone="glass" radius="lg">
+              <ScrollReveal key={f.title} effect="rise" delay={i * 80} className="h-full">
+                <Card tone="glass" radius="lg" className="h-full">
                   <CardBody>
                     <Label className="opacity-50">{f.year}</Label>
                     <CardTitle className="mt-3">{f.title}</CardTitle>
@@ -75,25 +73,24 @@ export default function Accueil() {
         </Container>
       </Section>
 
-      {/* 4. Skills — flat, overlap, cream */}
+      {/* 4. Skills - flat, overlap, cream */}
       <Section tone="cream" rounded="none" overlap>
         <Container size="lg" className="text-bg">
-          <Label className="text-bg">{t("home:skills.eyebrow")}</Label>
           <h2
-            className="mt-3 font-display font-black"
+            className="font-display font-black"
             style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
           >
             {t("home:skills.title")}
           </h2>
 
           <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12">
-            {/* Hard — grouped lists, no bars */}
+            {/* Hard - grouped lists, no bars */}
             <div>
               <h3 className="font-display font-bold text-2xl mb-6">{t("home:skills.hard")}</h3>
               <div className="space-y-6">
                 {(Object.entries(hardSkills) as [keyof typeof hardSkills, string[]][]).map(([group, items]) => (
                   <div key={group}>
-                    <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50 mb-3">// {group}</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.12em] opacity-50 mb-3">{group}</p>
                     <div className="flex flex-wrap gap-2">
                       {items.map((s) => (
                         <span
@@ -109,7 +106,7 @@ export default function Accueil() {
               </div>
             </div>
 
-            {/* Soft — numbered cards 01..04 */}
+            {/* Soft - numbered cards 01..04 */}
             <div>
               <h3 className="font-display font-bold text-2xl mb-6">{t("home:skills.soft")}</h3>
               <div className="space-y-4">
@@ -128,12 +125,11 @@ export default function Accueil() {
         </Container>
       </Section>
 
-      {/* 5. StackMarquee — flat dark, display giant, marquee animation */}
+      {/* 5. StackMarquee - flat dark, display giant, marquee animation */}
       <section className="relative bg-bg text-fg py-24 overflow-hidden">
         <Container size="lg">
-          <Label>{t("home:stack.eyebrow")}</Label>
           <h2
-            className="mt-3 font-display font-black"
+            className="font-display font-black"
             style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
           >
             {t("home:stack.title")}
@@ -165,7 +161,7 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* 6. CTA final — gradient, sans Cody */}
+      {/* 6. CTA final - gradient, sans Cody */}
       <Section tone="gradient" rounded="2xl" overlap className="bg-bg">
         <AnimatedGradient palette="hero" className="opacity-40" />
         <Container size="md" className="relative z-10 text-center">
@@ -179,10 +175,18 @@ export default function Accueil() {
             Je réponds vite, que ce soit une alternance, un freelance ou juste un café.
           </p>
           <div className="mt-10 flex gap-4 justify-center flex-wrap">
-            <Button variant="gradient" size="lg" asChild>
-              <a href="mailto:baptiste.dechamp@tomexplore.com">Envoyer un email →</a>
+            <Button variant="gradient" size="lg" asChild className="group">
+              <a href="mailto:baptiste.dechamp@outlook.fr">
+                Envoyer un email
+                <span
+                  className="ml-1 flex size-6 items-center justify-center rounded-full bg-bg/15 transition-transform duration-300 ease-[var(--ease-signature)] group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
             </Button>
-            <Button variant="glass-cream" size="lg" asChild>
+            <Button variant="glass-cream" size="lg" asChild className="group">
               <Link to="/portfolio">{t("common:cta.see_projects")}</Link>
             </Button>
           </div>

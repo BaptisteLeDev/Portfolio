@@ -1,0 +1,107 @@
+/* === DA BDDev - thème document (PDF / HTML via pandoc) === */
+/* Pensé pour weasyprint (--pdf-engine=weasyprint). A4, fond sombre. */
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --bg:       #2a2522; /* approx oklch(21.61% 0.0061 56.04) */
+  --fg:       #fdfbf3; /* approx oklch(98.69% 0.0214 95.28) */
+  --muted:    #fdfbf3b3;
+  --indigo:   #4a35b8;
+  --pink:     #f9487f;
+  --line:     #fdfbf32e;
+}
+
+@page {
+  size: A4;
+  margin: 22mm 20mm;
+  background: var(--bg);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Geist", "Inter", system-ui, sans-serif;
+  font-size: 11.5pt;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--fg);
+}
+h1 { font-size: 26pt; margin: 0 0 0.2em; }
+h2 {
+  font-size: 17pt;
+  margin: 1.6em 0 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 13pt; margin: 1.2em 0 0.4em; color: var(--muted); }
+
+/* Kicker : un titre de niveau 6 sert de label mono */
+h6 {
+  font-family: "Geist Mono", monospace;
+  font-size: 9pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin: 0 0 0.4em;
+}
+
+a { color: var(--pink); text-decoration: none; }
+
+strong { color: var(--fg); font-weight: 700; }
+em { color: var(--pink); font-style: normal; font-weight: 600; }
+
+code {
+  font-family: "Geist Mono", monospace;
+  font-size: 0.9em;
+  background: #fdfbf314;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+pre {
+  font-family: "Geist Mono", monospace;
+  background: #fdfbf30d;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1em 1.2em;
+  font-size: 9.5pt;
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; }
+
+blockquote {
+  margin: 1em 0;
+  padding: 0.6em 1.2em;
+  border-left: 3px solid var(--pink);
+  background: #fdfbf30d;
+  border-radius: 0 12px 12px 0;
+  color: var(--muted);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+  margin: 2em 0;
+}
+
+table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 10pt; }
+th, td { text-align: left; padding: 0.5em 0.8em; border-bottom: 1px solid var(--line); }
+th {
+  font-family: "Geist Mono", monospace;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+ul, ol { padding-left: 1.3em; }
+li { margin: 0.25em 0; }
+li::marker { color: var(--pink); }

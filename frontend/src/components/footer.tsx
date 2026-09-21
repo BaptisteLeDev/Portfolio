@@ -55,7 +55,7 @@ export function Footer() {
         <Divider variant="brackets" className="mb-12" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60">// Liens</p>
+            <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60">Liens</p>
             <ul className="mt-4 space-y-2">
               <li><FooterRouterLink to="/" reaction={R("curious", "square")}>{t("nav.home")}</FooterRouterLink></li>
               <li><FooterRouterLink to="/portfolio" reaction={R("star", "square")}>{t("nav.portfolio")}</FooterRouterLink></li>
@@ -63,10 +63,10 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60">// Contact</p>
+            <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60">Contact</p>
             <ul className="mt-4 space-y-2">
               <li>
-                <FooterLink href="mailto:baptiste.dechamp@tomexplore.com" reaction={R("mail", "round")}>
+                <FooterLink href="mailto:baptiste.dechamp@outlook.fr" reaction={R("mail", "round")}>
                   Email
                 </FooterLink>
               </li>

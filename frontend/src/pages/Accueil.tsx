@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Hero } from "@/components/hero";
@@ -12,7 +13,8 @@ import { AnimatedGradient } from "@/components/effects/animated-gradient";
 import { Footer } from "@/components/footer";
 import { formations } from "@/data/formations";
 import { hardSkills, softSkills } from "@/data/skills";
-import { stackItems } from "@/data/stack";
+import { logiciels, stackStats } from "@/data/stack";
+import type { StackItem, StackStat } from "@/data/stack";
 
 export default function Accueil() {
   const { t } = useTranslation();
@@ -125,40 +127,22 @@ export default function Accueil() {
         </Container>
       </Section>
 
-      {/* 5. StackMarquee - flat dark, display giant, marquee animation */}
+      {/* 5. Logiciels + Stacks - flat dark, giant marquee, click -> detail */}
       <section className="relative bg-bg text-fg py-24 overflow-hidden">
-        <Container size="lg">
-          <h2
-            className="font-display font-black"
-            style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
-          >
-            {t("home:stack.title")}
-          </h2>
-        </Container>
-        <div className="mt-12 mask-fade-x overflow-hidden">
-          <div className="flex gap-8 w-max" style={{ animation: "marquee 40s linear infinite" }}>
-            {[...stackItems, ...stackItems].map((item, i) => {
-              const colors = [
-                "var(--color-pink)",
-                "var(--color-cream)",
-                "color-mix(in oklch, var(--color-fg) 30%, transparent)",
-              ];
-              return (
-                <span
-                  key={i}
-                  className="font-display font-black whitespace-nowrap"
-                  style={{
-                    fontSize: "clamp(2rem, 5vw, 4rem)",
-                    letterSpacing: "-0.03em",
-                    color: colors[i % 3],
-                  }}
-                >
-                  {item.label} <span className="opacity-40">·</span>
-                </span>
-              );
-            })}
-          </div>
-        </div>
+        <MarqueeBlock
+          title={t("home:stack.logiciels_title")}
+          items={logiciels}
+          id="logiciels-detail"
+          detailLabel={t("home:stack.detail")}
+        />
+        <MarqueeBlock
+          title={t("home:stack.title")}
+          items={stackStats}
+          id="stack-detail"
+          detailLabel={t("home:stack.detail")}
+          withCount
+          usesLabel={t("home:stack.uses")}
+        />
       </section>
 
       {/* 6. CTA final - gradient, sans Cody */}
@@ -195,5 +179,103 @@ export default function Accueil() {
 
       <Footer />
     </>
+  );
+}
+
+function MarqueeBlock({
+  title,
+  items,
+  id,
+  detailLabel,
+  withCount,
+  usesLabel,
+}: {
+  title: string;
+  items: (StackItem | StackStat)[];
+  id: string;
+  detailLabel: string;
+  withCount?: boolean;
+  usesLabel?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const colors = [
+    "var(--color-pink)",
+    "var(--color-cream)",
+    "color-mix(in oklch, var(--color-fg) 30%, transparent)",
+  ];
+  return (
+    <div className="py-12">
+      <Container size="lg">
+        <div className="flex flex-wrap items-center justify-between gap-6">
+          <h2
+            className="font-display font-black"
+            style={{ fontSize: "var(--text-h1)", lineHeight: 1, letterSpacing: "-0.03em" }}
+          >
+            {title}
+          </h2>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls={id}
+            className="inline-flex items-center gap-2 rounded-full border border-fg/15 bg-fg/5 px-4 py-2 font-mono text-xs uppercase tracking-[0.1em] text-fg/80 transition-colors hover:bg-fg/10"
+          >
+            {detailLabel}
+            <span
+              aria-hidden="true"
+              className={`transition-transform duration-300 ease-[var(--ease-signature)] ${open ? "rotate-45" : ""}`}
+            >
+              +
+            </span>
+          </button>
+        </div>
+      </Container>
+      <div className="mt-12 mask-fade-x overflow-hidden">
+        <div className="flex gap-8 w-max" style={{ animation: "marquee 40s linear infinite" }}>
+          {[...items, ...items].map((item, i) => (
+            <span
+              key={i}
+              className="font-display font-black whitespace-nowrap"
+              style={{
+                fontSize: "clamp(2rem, 5vw, 4rem)",
+                letterSpacing: "-0.03em",
+                color: colors[i % 3],
+              }}
+            >
+              {item.icon && (
+                <img
+                  src={item.icon}
+                  alt=""
+                  loading="lazy"
+                  className="mr-3 inline-block size-[0.85em] align-[-0.12em]"
+                  aria-hidden="true"
+                />
+              )}
+              {item.label} <span className="opacity-40">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
+      <Container size="lg" className="mt-12">
+        <ul id={id} hidden={!open} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {items.map((s) => (
+            <li
+              key={"key" in s ? s.key : s.label}
+              className="flex items-center gap-3 rounded-full border border-fg/15 bg-fg/5 px-4 py-2.5"
+            >
+              {s.icon && (
+                <img src={s.icon} alt="" loading="lazy" aria-hidden="true" className="size-5 shrink-0" />
+              )}
+              <span className="font-mono text-sm uppercase tracking-[0.1em]">{s.label}</span>
+              {withCount && (
+                <span className="ml-auto font-mono text-xs text-fg/60 shrink-0">
+                  ×{(s as StackStat).count} {usesLabel}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </div>
   );
 }

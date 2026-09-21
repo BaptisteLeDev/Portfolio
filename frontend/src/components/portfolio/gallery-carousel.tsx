@@ -19,9 +19,10 @@ export function GalleryCarousel({
   const zoomRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState<string | null>(null);
   const reduced = useReducedMotion();
+  const single = images.length === 1;
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || single) return;
     let raf: number;
     let last = performance.now();
     const step = (now: number) => {
@@ -43,7 +44,7 @@ export function GalleryCarousel({
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [reduced]);
+  }, [reduced, single]);
 
   useEffect(() => {
     if (!zoom) return;
@@ -62,30 +63,51 @@ export function GalleryCarousel({
 
   return (
     <>
-      <div
-        ref={ref}
-        tabIndex={0}
-        role="region"
-        aria-label={label}
-        onPointerEnter={pause}
-        onPointerLeave={resume}
-        onFocus={pause}
-        onBlur={resume}
-        onTouchStart={pause}
-        className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {images.map((src) => (
-          <button
-            key={src}
-            type="button"
-            onClick={() => setZoom(src)}
-            aria-label={expandLabel}
-            className="min-w-[85%] md:min-w-[70%] snap-center shrink-0 cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
-          >
-            <img src={src} alt="" loading="lazy" className="w-full h-auto rounded-[24px]" />
-          </button>
-        ))}
-      </div>
+      {single ? (
+        <button
+          type="button"
+          onClick={() => setZoom(images[0])}
+          aria-label={expandLabel}
+          className="mt-8 block mx-auto cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
+        >
+          <img
+            src={images[0]}
+            alt=""
+            loading="lazy"
+            className="max-h-[560px] md:max-h-[640px] w-auto max-w-full rounded-[24px]"
+          />
+        </button>
+      ) : (
+        <div
+          ref={ref}
+          tabIndex={0}
+          role="region"
+          aria-label={label}
+          onPointerEnter={pause}
+          onPointerLeave={resume}
+          onFocus={pause}
+          onBlur={resume}
+          onTouchStart={pause}
+          className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {images.map((src) => (
+            <button
+              key={src}
+              type="button"
+              onClick={() => setZoom(src)}
+              aria-label={expandLabel}
+              className="shrink-0 snap-center cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
+            >
+              <img
+                src={src}
+                alt=""
+                loading="lazy"
+                className="h-[460px] md:h-[540px] w-auto rounded-[24px]"
+              />
+            </button>
+          ))}
+        </div>
+      )}
       {zoom && (
         <div
           ref={zoomRef}

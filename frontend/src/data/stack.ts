@@ -1,10 +1,10 @@
 import { projects } from "./projects";
 import type { Project } from "./projects";
 
-// Icons: https://icon-sets.iconify.design/devicon/ served via jsdelivr. Missing icon = text only.
+// Icons: devicon via jsdelivr, others via api.iconify.design. Missing icon = text only.
 const ICON_BASE = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
-
 const ic = (path: string) => `${ICON_BASE}/${path}.svg`;
+const ix = (set: string, name: string) => `https://api.iconify.design/${set}/${name}.svg`;
 
 export interface StackItem {
   label: string;
@@ -51,14 +51,30 @@ const CATALOG: Record<string, { label: string; icon: string | null }> = {
   figma: { label: "Figma", icon: ic("figma/figma-original") },
   photoshop: { label: "Photoshop", icon: ic("photoshop/photoshop-original") },
   illustrator: { label: "Illustrator", icon: ic("illustrator/illustrator-original") },
-  wordpress: { label: "WordPress", icon: ic("wordpress/wordpress-original") },
+  wordpress: { label: "WordPress", icon: ix("thesvg-color", "wordpress") },
   jquery: { label: "jQuery", icon: ic("jquery/jquery-original") },
   astro: { label: "Astro", icon: ic("astro/astro-original") },
   bun: { label: "Bun", icon: ic("bun/bun-original") },
   "discord.js": { label: "discord.js", icon: ic("discordjs/discordjs-original") },
   fastify: { label: "Fastify", icon: ic("fastify/fastify-original") },
   "react native": { label: "React Native", icon: ic("reactnative/reactnative-original") },
+  firebase: { label: "Firebase", icon: ix("logos", "firebase-icon") },
+  "twitch api": { label: "Twitch", icon: ix("thesvg-color", "twitch") },
+  "tmdb api": { label: "TMDB", icon: ix("selfhst", "tmdb") },
+  "radix ui": { label: "Radix UI", icon: ix("thesvg-color", "radix-ui-dark") },
+  elysia: { label: "Elysia", icon: ix("skill-icons", "elysia-dark") },
+  storybook: { label: "Storybook", icon: ic("storybook/storybook-original") },
 };
+
+// Owner-curated removals (tools/keywords, not stacks worth showing).
+const EXCLUDED = new Set([
+  "marketing digital",
+  "rss-parser",
+  "winscp",
+  "recherche ux",
+  "kadence",
+  "adobe xd",
+]);
 
 // "React 19", "Node.js 22", "discord.js v14", "Tailwind v4" -> "react", "node.js", ...
 function normalize(raw: string): string {
@@ -74,7 +90,7 @@ function stacksOf(p: Project): string[] {
 
 // ponytail: counts scanned in the repos' package.json on 2026-09-21; re-scan to refresh.
 const EXTRA: StackStat[] = [
-  { key: "zod", label: "Zod", icon: null, count: 5 },
+  { key: "zod", label: "Zod", icon: ix("logos", "zod"), count: 5 },
   { key: "vitest", label: "Vitest", icon: ic("vitest/vitest-original"), count: 4 },
   { key: "playwright", label: "Playwright", icon: ic("playwright/playwright-original"), count: 3 },
   { key: "zustand", label: "Zustand", icon: ic("zustand/zustand-original"), count: 1 },
@@ -85,6 +101,7 @@ const derived: StackStat[] = (() => {
   const seen = new Map<string, { label: string; count: number }>();
   for (const p of projects) {
     for (const key of stacksOf(p)) {
+      if (EXCLUDED.has(key)) continue;
       const cur = seen.get(key);
       const label = cur?.label ?? p.stack.find((s) => normalize(s) === key) ?? key;
       seen.set(key, { label, count: (cur?.count ?? 0) + 1 });

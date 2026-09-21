@@ -114,12 +114,12 @@ export const projects: Project[] = [
     title: "RSS-News",
     tagline: "Veille RSS multi-sources : reader perso + API pour agent.",
     description:
-      "Reader de veille perso organisé en Verticals (Dev, Gaming, Social - une base Neon par univers), Lens IA (vue filtrée) et Directory (annuaire d'outils curés). Reader filtrable par stack, source, lus et sauvegardés, digest, graph des topics, alertes sécurité. Une API on-demand bearer-token alimente AOS, l'agent perso : articles filtrés, live-fetch, taxonomie. Ingestion cron 2x/jour sur Vercel, IA on-demand via OpenRouter.",
+      "Reader de veille perso organisé en Verticals (Dev, Gaming, Social - une base Neon par univers), Lens IA (vue filtrée) et Directory (annuaire d'outils curés). Reader filtrable par stack, source, lus et sauvegardés, digest, graph des topics, alertes sécurité. Une API on-demand bearer-token alimente AOS, l'agent perso : articles filtrés, live-fetch, taxonomie. Ingestion cron 2x/jour (cible Vercel), IA on-demand via OpenRouter.",
     role: "Développeur fullstack",
     period: "Mai 2026 - Juillet 2026",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Drizzle ORM", "Neon Postgres", "rss-parser"],
     types: ["fullstack"],
-    status: "live",
+    status: "wip",
     thumbnail: { kind: "image", src: "/images/rss-news/home.png" },
     screenshots: ["/images/rss-news/home.png", "/images/rss-news/security.png"],
     problem:
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     solution:
       "Verticals isolés (une base Neon par univers), reader filtrable (stack, source, lus, sauvegardés) et API bearer-token on-demand pour AOS.",
     outcome:
-      "Reader en usage quotidien, cron d'ingestion 2x/jour sur Vercel, l'API alimente l'agent AOS (advisories sécu, nouvelles features).",
+      "Reader en usage quotidien, ingestion cron 2x/jour (déploiement Vercel à venir), l'API alimente l'agent AOS (advisories sécu, nouvelles features).",
   },
   {
     id: "amigaru",

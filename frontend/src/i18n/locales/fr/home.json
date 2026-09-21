@@ -2,11 +2,11 @@
   "hero": {
     "greeting_text": "Hello world,",
     "name": "je suis Baptiste",
-    "subtitle": "Junior développeur full-stack, concepteur développeur d'applications. Je conçois, je code, je recommence - jusqu'à ce que l'interface ait l'air évidente."
+    "subtitle": "Développeur full-stack junior, concepteur développeur d'applications. Je conçois, je code, je recommence - jusqu'à ce que l'interface ait l'air évidente."
   },
   "about": {
     "title": "Coup d'œil",
-    "body": "Junior développeur full-stack JS/TS, avec une sensibilité produit héritée d'un parcours pluridisciplinaire. Je construis des apps web, mobile et desktop - de l'architecture à la prod - et j'aime garder la main sur toute la chaîne."
+    "body": "Développeur full-stack JS/TS junior, avec une sensibilité produit héritée d'un parcours pluridisciplinaire. Je construis des apps web, mobile et desktop - de l'architecture à la prod - et j'aime garder la main sur toute la chaîne."
   },
   "parcours": {
     "title": "Mes formations"

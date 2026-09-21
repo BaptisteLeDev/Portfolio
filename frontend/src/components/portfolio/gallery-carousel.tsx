@@ -2,18 +2,32 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 // ponytail: drift 30px/s + retour smooth; lightbox sans dep. Upgrade: embla si besoin de boucles vraies.
-export function GalleryCarousel({ images, label }: { images: string[]; label: string }) {
+export function GalleryCarousel({
+  images,
+  label,
+  expandLabel,
+  zoomLabel,
+}: {
+  images: string[];
+  label: string;
+  expandLabel: string;
+  zoomLabel: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const returning = useRef(false);
+  const zoomRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState<string | null>(null);
   const reduced = useReducedMotion();
 
   useEffect(() => {
     if (reduced) return;
     let raf: number;
-    const step = () => {
+    let last = performance.now();
+    const step = (now: number) => {
       const el = ref.current;
+      const dt = Math.min(now - last, 100);
+      last = now;
       if (el && !paused.current) {
         const max = el.scrollWidth - el.clientWidth;
         if (returning.current) {
@@ -22,7 +36,7 @@ export function GalleryCarousel({ images, label }: { images: string[]; label: st
           returning.current = true;
           el.scrollTo({ left: 0, behavior: "smooth" });
         } else {
-          el.scrollLeft += 0.5;
+          el.scrollLeft += (dt / 1000) * 30;
         }
       }
       raf = requestAnimationFrame(step);
@@ -33,9 +47,14 @@ export function GalleryCarousel({ images, label }: { images: string[]; label: st
 
   useEffect(() => {
     if (!zoom) return;
+    const prev = document.activeElement as HTMLElement | null;
+    zoomRef.current?.focus();
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setZoom(null);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      prev?.focus();
+    };
   }, [zoom]);
 
   const pause = () => (paused.current = true);
@@ -60,7 +79,7 @@ export function GalleryCarousel({ images, label }: { images: string[]; label: st
             key={src}
             type="button"
             onClick={() => setZoom(src)}
-            aria-label="Agrandir l'image"
+            aria-label={expandLabel}
             className="min-w-[85%] md:min-w-[70%] snap-center shrink-0 cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
           >
             <img src={src} alt="" loading="lazy" className="w-full h-auto rounded-[24px]" />
@@ -69,9 +88,11 @@ export function GalleryCarousel({ images, label }: { images: string[]; label: st
       </div>
       {zoom && (
         <div
+          ref={zoomRef}
+          tabIndex={-1}
           role="dialog"
           aria-modal="true"
-          aria-label="Vue agrandie"
+          aria-label={zoomLabel}
           onClick={() => setZoom(null)}
           className="fixed inset-0 z-50 flex items-center justify-center bg-bg/90 p-4 md:p-12 cursor-zoom-out animate-[fade-in_200ms_ease-out_both]"
         >

@@ -275,7 +275,12 @@ export default function ProjectPage() {
               </div>
             )}
             {project.screenshots && project.screenshots.length > 0 && (
-              <GalleryCarousel images={project.screenshots} label={t("gallery")} />
+              <GalleryCarousel
+                images={project.screenshots}
+                label={t("gallery")}
+                expandLabel={t("expand_image")}
+                zoomLabel={t("zoom_view")}
+              />
             )}
           </Container>
         </Section>

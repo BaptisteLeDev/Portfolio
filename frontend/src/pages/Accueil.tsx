@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Hero } from "@/components/hero";
@@ -140,8 +140,9 @@ export default function Accueil() {
           items={stackStats}
           id="stack-detail"
           detailLabel={t("home:stack.detail")}
-          withCount
-          usesLabel={t("home:stack.uses")}
+            withCount
+            usesLabel={t("home:stack.uses")}
+            usesOneLabel={t("home:stack.uses_one")}
         />
       </section>
 
@@ -189,6 +190,7 @@ function MarqueeBlock({
   detailLabel,
   withCount,
   usesLabel,
+  usesOneLabel,
 }: {
   title: string;
   items: (StackItem | StackStat)[];
@@ -196,13 +198,30 @@ function MarqueeBlock({
   detailLabel: string;
   withCount?: boolean;
   usesLabel?: string;
+  usesOneLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const track = useRef<HTMLDivElement>(null);
   const colors = [
     "var(--color-pink)",
     "var(--color-cream)",
     "color-mix(in oklch, var(--color-fg) 30%, transparent)",
   ];
+
+  // Same visual speed (px/s) for every marquee regardless of content width.
+  useLayoutEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    const SPEED = 60;
+    const apply = () => {
+      el.style.animationDuration = `${Math.round(el.scrollWidth / 2 / SPEED)}s`;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div className="py-12">
       <Container size="lg">
@@ -231,7 +250,7 @@ function MarqueeBlock({
         </div>
       </Container>
       <div className="mt-12 mask-fade-x overflow-hidden">
-        <div className="flex gap-8 w-max" style={{ animation: "marquee 40s linear infinite" }}>
+        <div ref={track} className="flex gap-8 w-max" style={{ animation: "marquee 40s linear infinite" }}>
           {[...items, ...items].map((item, i) => (
             <span
               key={i}
@@ -269,7 +288,7 @@ function MarqueeBlock({
               <span className="font-mono text-sm uppercase tracking-[0.1em]">{s.label}</span>
               {withCount && (
                 <span className="ml-auto font-mono text-xs text-fg/60 shrink-0">
-                  ×{(s as StackStat).count} {usesLabel}
+                  ×{(s as StackStat).count} {(s as StackStat).count > 1 ? usesLabel : usesOneLabel}
                 </span>
               )}
             </li>

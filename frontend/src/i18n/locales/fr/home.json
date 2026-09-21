@@ -20,6 +20,7 @@
       "title": "Ce que j'utilise, aujourd'hui.",
       "logiciels_title": "Mes logiciels, au quotidien.",
       "detail": "Voir le détail",
-      "uses": "projets"
+      "uses": "projets",
+      "uses_one": "projet"
     }
 }

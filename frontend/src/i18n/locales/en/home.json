@@ -10,5 +10,5 @@
   },
   "parcours": { "title": "My education" },
   "skills": { "title": "Hard & Soft Skills", "hard": "Hard Skills", "soft": "Soft Skills" },
-  "stack": { "title": "What I build with, today.", "logiciels_title": "My daily software.", "detail": "Browse all", "uses": "projects" }
+  "stack": { "title": "What I build with, today.", "logiciels_title": "My daily software.", "detail": "Browse all", "uses": "projects", "uses_one": "project" }
 }

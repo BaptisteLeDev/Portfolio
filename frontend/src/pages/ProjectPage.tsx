@@ -105,7 +105,7 @@ export default function ProjectPage() {
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <Tag key={s} className="bg-bg/55 text-fg border-fg/20">{s}</Tag>
+              <Tag key={s} noise className="bg-bg/85 backdrop-blur-sm text-fg border-fg/15">{s}</Tag>
             ))}
           </div>
           {project.links && (project.links.live || project.links.repo) && (

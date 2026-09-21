@@ -50,6 +50,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="absolute inset-0 bg-bg/30" />
           {isLive && (
             <span
+              role="img"
               aria-label="Live"
               className="absolute top-4 right-4 size-2.5 rounded-full bg-success"
               style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
@@ -58,19 +59,19 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="absolute bottom-4 left-4 right-4">
           <div ref={stackRow} aria-hidden="true" className="absolute inset-0 flex gap-2 flex-nowrap overflow-hidden invisible">
             {project.stack.map((s) => (
-              <Tag key={s} className="bg-bg/40 text-fg border-fg/10 whitespace-nowrap shrink-0">
+              <Tag key={s} noise className="bg-bg/85 backdrop-blur-sm text-fg border-fg/15 whitespace-nowrap shrink-0">
                 {s}
               </Tag>
             ))}
           </div>
           <div className="flex gap-2 flex-nowrap overflow-hidden">
             {project.stack.slice(0, visible).map((s) => (
-              <Tag key={s} className="bg-bg/40 text-fg border-fg/10 whitespace-nowrap shrink-0">
+              <Tag key={s} noise className="bg-bg/85 backdrop-blur-sm text-fg border-fg/15 whitespace-nowrap shrink-0">
                 {s}
               </Tag>
             ))}
             {visible < project.stack.length && (
-              <Tag className="bg-bg/40 text-fg border-fg/10 whitespace-nowrap shrink-0">
+              <Tag noise className="bg-bg/85 backdrop-blur-sm text-fg border-fg/15 whitespace-nowrap shrink-0">
                 +{project.stack.length - visible}
               </Tag>
             )}

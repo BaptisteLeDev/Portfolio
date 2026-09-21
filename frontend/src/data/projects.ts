@@ -156,8 +156,10 @@ status: "wip",
     ],
     screenshots: [
       "/images/amigaru/web-home.png",
+      "/images/amigaru/web-directory.png",
+      "/images/amigaru/web-studi00s.png",
       "/images/amigaru/web-blog.png",
-      "/images/amigaru/web-join.png",
+      "/images/amigaru/web-about.png",
       "/images/amigaru/admin-login.png",
     ],
     sitemap: [

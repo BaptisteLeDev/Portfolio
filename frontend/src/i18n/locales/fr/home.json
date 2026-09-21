@@ -17,6 +17,9 @@
     "soft": "Soft Skills"
   },
   "stack": {
-    "title": "Ce que j'utilise, aujourd'hui."
-  }
+      "title": "Ce que j'utilise, aujourd'hui.",
+      "logiciels_title": "Mes logiciels, au quotidien.",
+      "detail": "Voir le détail",
+      "uses": "projets"
+    }
 }

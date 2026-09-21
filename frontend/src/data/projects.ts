@@ -24,7 +24,7 @@ export interface Project {
   types: ProjectType[];
   status: ProjectStatus;
   thumbnail:
-    | { kind: "gradient"; palette: "hero" | "chaud" | "froid" }
+    | { kind: "gradient"; palette: "hero" | "chaud" | "froid" | "violet" }
     | { kind: "image"; src: string };
   links?: { live?: string; repo?: string; figma?: string };
   versions?: ProjectVersion[];
@@ -50,8 +50,8 @@ export const projects: Project[] = [
     period: "2025",
     stack: ["Electron", "React", "Vite", "Tailwind", "TypeScript", "Node"],
     types: ["desktop"],
-    status: "wip",
-    thumbnail: { kind: "gradient", palette: "chaud" },
+status: "wip",
+    thumbnail: { kind: "image", src: "/images/streamoos/dashboard-home.png" },
     screenshots: [
       "/images/streamoos/shot-01.png",
       "/images/streamoos/shot-02.png",
@@ -156,8 +156,10 @@ export const projects: Project[] = [
     ],
     screenshots: [
       "/images/amigaru/web-home.png",
+      "/images/amigaru/web-directory.png",
+      "/images/amigaru/web-studi00s.png",
       "/images/amigaru/web-blog.png",
-      "/images/amigaru/web-join.png",
+      "/images/amigaru/web-about.png",
       "/images/amigaru/admin-login.png",
     ],
     sitemap: [
@@ -196,7 +198,7 @@ export const projects: Project[] = [
     stack: ["React 19", "Vite", "Node", "Express", "Twitch API", "Supabase"],
     types: ["web", "fullstack"],
     status: "wip",
-    thumbnail: { kind: "gradient", palette: "chaud" },
+    thumbnail: { kind: "gradient", palette: "violet" },
     screenshots: ["/images/0viewers/signin.png"],
     problem:
       "Un streamer à 0 viewers reste invisible : sans audience, pas de découverte - et sans découverte, pas d'audience.",
@@ -216,7 +218,7 @@ export const projects: Project[] = [
     stack: ["Angular", "Expo", "React Native", "Laravel", "PHP", "MySQL", "TypeScript"],
     types: ["fullstack"],
     status: "archived",
-    thumbnail: { kind: "gradient", palette: "froid" },
+    thumbnail: { kind: "image", src: "/images/montomaster/catalogue.png" },
     videos: ["/videos/montomaster/demo.mp4", "/videos/montomaster/capture.webm"],
     problem: "Proposer une expérience éducative cohérente web + mobile avec un back solide.",
     solution: "Stack multi-plateforme : Angular (web), Expo/RN (mobile), Laravel (API et auth).",

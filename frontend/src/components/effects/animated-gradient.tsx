@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-type Palette = "hero" | "chaud" | "froid";
+type Palette = "hero" | "chaud" | "froid" | "violet";
 
 type Blob = {
   color: string;
@@ -41,6 +41,15 @@ const palettes: Record<Palette, { base: string; blobs: Blob[] }> = {
       { color: "oklch(60% 0.2 220)",    x: 80, y: 78, size: 80, duration: 36, delay: -12, blend: "screen", opacity: 0.7 },
       { color: "oklch(65% 0.18 260)",   x: 60, y: 18, size: 70, duration: 42, delay: -18, blend: "screen", opacity: 0.7 },
       { color: "var(--color-cream)",    x: 35, y: 88, size: 55, duration: 46, delay: -6, blend: "overlay", opacity: 0.3 },
+    ],
+  },
+  violet: {
+    base: "oklch(24% 0.07 290)",
+    blobs: [
+      { color: "oklch(58% 0.22 295)", x: 25, y: 30, size: 85, duration: 30, blend: "screen", opacity: 0.85 },
+      { color: "oklch(65% 0.18 275)", x: 78, y: 70, size: 80, duration: 36, delay: -12, blend: "screen", opacity: 0.75 },
+      { color: "oklch(52% 0.2 260)",  x: 70, y: 90, size: 70, duration: 38, delay: -16, blend: "screen", opacity: 0.7 },
+      { color: "var(--color-pink-2)", x: 15, y: 75, size: 60, duration: 32, delay: -8, blend: "screen", opacity: 0.6 },
     ],
   },
 };

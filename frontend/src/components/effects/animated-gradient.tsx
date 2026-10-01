@@ -68,13 +68,9 @@ export function AnimatedGradient({
       className={cn("absolute inset-0 -z-10 overflow-hidden", className)}
       style={{ backgroundColor: p.base }}
     >
-      <div
-        className="absolute"
-        style={{
-          inset: "-20%",
-          filter: "blur(80px) saturate(1.1)",
-        }}
-      >
+      {/* no filter here: blur over animated children re-rasters every
+          frame, one per card -> jank on weak GPUs. gradient is soft enough */}
+      <div className="absolute" style={{ inset: "-20%" }}>
         {p.blobs.map((b, i) => (
           <span
             key={i}

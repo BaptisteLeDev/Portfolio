@@ -15,9 +15,11 @@ import { formations } from "@/data/formations";
 import { hardSkills, softSkills } from "@/data/skills";
 import { logiciels, stackStats } from "@/data/stack";
 import type { StackItem, StackStat } from "@/data/stack";
+import { HOME_DESCRIPTION, useSeo } from "@/lib/seo";
 
 export default function Accueil() {
   const { t } = useTranslation();
+  useSeo({ description: HOME_DESCRIPTION, path: "/" });
 
   return (
     <>

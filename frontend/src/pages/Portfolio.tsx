@@ -6,10 +6,16 @@ import { ProjectCard, ProjectFilters, type Filter } from "@/components/portfolio
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { projects } from "@/data/projects";
+import { useSeo } from "@/lib/seo";
 
 export default function Portfolio() {
   const { t } = useTranslation("portfolio");
   const [filter, setFilter] = useState<Filter>("all");
+  useSeo({
+    title: "Portfolio, projets",
+    description: "Projets de Baptiste Dechamp, développeur web : applications web, mobile, desktop et design, avec stack et rôle pour chacun.",
+    path: "/portfolio",
+  });
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.types.includes(filter));
 

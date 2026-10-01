@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Hero } from "@/components/hero";
@@ -205,19 +205,18 @@ function MarqueeBlock({
   const colors = [
     "var(--color-pink)",
     "var(--color-cream)",
-    "color-mix(in oklch, var(--color-fg) 30%, transparent)",
+    "color-mix(in oklch, var(--color-fg) 60%, transparent)",
   ];
 
   // Same visual speed (px/s) for every marquee regardless of content width.
-  useLayoutEffect(() => {
+  // RO fires on observe, post-layout: no sync read, no forced reflow.
+  useEffect(() => {
     const el = track.current;
     if (!el) return;
     const SPEED = 60;
-    const apply = () => {
+    const ro = new ResizeObserver(() => {
       el.style.animationDuration = `${Math.round(el.scrollWidth / 2 / SPEED)}s`;
-    };
-    apply();
-    const ro = new ResizeObserver(apply);
+    });
     ro.observe(el);
     return () => ro.disconnect();
   }, []);

@@ -12,7 +12,6 @@ const MORE_WIDTH = 48;
 export function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation("portfolio");
   const typesLabel = project.types.map((ty) => t(`filters.${ty}`)).join(" · ");
-  const isLive = project.status === "live";
   const stackRow = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(project.stack.length);
 
@@ -48,14 +47,6 @@ export function ProjectCard({ project }: { project: Project }) {
             <img src={project.thumbnail.src} alt="" loading="lazy" className="size-full object-cover" />
           )}
           <div className="absolute inset-0 bg-bg/30" />
-          {isLive && (
-            <span
-              role="img"
-              aria-label="Live"
-              className="absolute top-4 right-4 size-2.5 rounded-full bg-success"
-              style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
-            />
-          )}
           <div className="absolute bottom-4 left-4 right-4">
           <div ref={stackRow} aria-hidden="true" className="absolute inset-0 flex gap-2 flex-nowrap overflow-hidden invisible">
             {project.stack.map((s) => (

@@ -16,7 +16,6 @@ import { projects, type SitemapNode } from "@/data/projects";
 import { GalleryCarousel } from "@/components/portfolio/gallery-carousel";
 
 const statusLabel: Record<string, string> = {
-  live: "En production",
   wip: "En développement",
   archived: "Archivé",
 };
@@ -61,24 +60,17 @@ export default function ProjectPage() {
         <Container size="lg" className="relative z-10">
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <Label>{typesLabel}</Label>
-            <span
-              className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] px-3 py-1 rounded-full border ${
-                project.status === "live"
-                  ? "bg-success/15 border-success/40 text-success"
-                  : project.status === "wip"
+            {project.status !== "live" && (
+              <span
+                className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] px-3 py-1 rounded-full border ${
+                  project.status === "wip"
                     ? "bg-warn/15 border-warn/40 text-warn"
                     : "bg-fg/10 border-fg/20 text-fg/70"
-              }`}
-            >
-              {project.status === "live" && (
-                <span
-                  aria-hidden="true"
-                  className="size-1.5 rounded-full bg-success"
-                  style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
-                />
-              )}
-              {statusLabel[project.status]}
-            </span>
+                }`}
+              >
+                {statusLabel[project.status]}
+              </span>
+            )}
           </div>
           <h1
             className="font-display font-black"

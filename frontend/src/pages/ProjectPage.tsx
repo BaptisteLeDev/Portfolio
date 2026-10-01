@@ -1,4 +1,5 @@
 import { useParams, Navigate, Link } from "react-router-dom";
+import { useSeo } from "@/lib/seo";
 import { useTranslation } from "react-i18next";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
@@ -41,10 +42,15 @@ export default function ProjectPage() {
   const { t } = useTranslation("project");
   const { t: tp } = useTranslation("portfolio");
   const idx = projects.findIndex((p) => p.id === id);
-
-  if (idx === -1) return <Navigate to="/404" replace />;
-
   const project = projects[idx];
+  useSeo({
+    title: project?.title,
+    description: project ? `${project.title} : ${project.tagline}. Projet de Baptiste Dechamp, développeur.` : "",
+    path: `/portfolio/${id}`,
+  });
+
+  if (!project) return <Navigate to="/404" replace />;
+
   const typesLabel = project.types.map((ty) => tp(`filters.${ty}`)).join(" · ");
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];

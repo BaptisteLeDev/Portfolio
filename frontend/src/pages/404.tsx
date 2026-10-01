@@ -5,9 +5,11 @@ import { Container } from "@/components/ui/container";
 import { Bracket } from "@/components/ui/bracket";
 import { Button } from "@/components/ui/button";
 import { Cody } from "@/components/cody";
+import { useSeo } from "@/lib/seo";
 
 export default function NotFound() {
   const { t } = useTranslation("common");
+  useSeo({ title: "Page introuvable", description: "Page introuvable.", noindex: true });
   return (
     <Section tone="dark" rounded="none" className="min-h-screen flex items-center">
       <Container size="md" className="text-center">

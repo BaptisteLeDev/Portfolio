@@ -61,6 +61,17 @@
   font-feature-settings: "kern", "liga", "ss01";
 }
 
+@utility scrollbar-site {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, currentColor 35%, transparent) transparent;
+  &::-webkit-scrollbar { width: 8px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, currentColor 35%, transparent);
+    border-radius: 9999px;
+  }
+}
+
 @utility mask-fade-x {
   -webkit-mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);
           mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);

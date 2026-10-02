@@ -16,6 +16,7 @@ import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { projects, type SitemapNode } from "@/data/projects";
 import { GalleryCarousel } from "@/components/portfolio/gallery-carousel";
+import { DocViewer } from "@/components/portfolio/doc-viewer";
 
 const statusLabel: Record<string, string> = {
   wip: "En développement",
@@ -141,24 +142,7 @@ export default function ProjectPage() {
           {project.doc && (
             <ScrollReveal effect="rise" delay={120}>
               <Label className="text-bg mt-12">{project.doc.title}</Label>
-              <div
-                tabIndex={0}
-                role="region"
-                aria-label={project.doc.title}
-                onContextMenu={(e) => e.preventDefault()}
-                className="mt-6 h-[640px] max-h-[80vh] overflow-y-auto overscroll-contain rounded-[16px] bg-bg/5 p-3 space-y-3"
-              >
-                {project.doc.pages.map((src, i) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`Page ${i + 1}`}
-                    loading="lazy"
-                    draggable={false}
-                    className="w-full rounded-[8px] select-none"
-                  />
-                ))}
-              </div>
+              <DocViewer title={project.doc.title} pages={project.doc.pages} />
             </ScrollReveal>
           )}
           {project.team && (

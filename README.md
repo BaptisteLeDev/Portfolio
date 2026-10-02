@@ -47,3 +47,7 @@ Ajouter un projet = une entrée dans `frontend/src/data/projects.ts` : sa page e
 
 - **Vercel** : `main` part en production sur baptisteledev.fr, les autres branches en preview (non indexées).
 - **GitHub Pages** : copier `frontend/dist/` dans le repo [BaptisteLeDev.github.io](https://github.com/BaptisteLeDev/BaptisteLeDev.github.io), puis copier `index.html` en `404.html` (sinon les liens directs vers `/portfolio/...` tombent en 404).
+
+## Licence
+
+Tous droits réservés. Code et contenus publiés pour consultation uniquement, aucune réutilisation sans accord écrit. Voir [LICENSE](LICENSE).

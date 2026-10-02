@@ -54,14 +54,25 @@ const palettes: Record<Palette, { base: string; blobs: Blob[] }> = {
   },
 };
 
+// Brand colors on the hero geometry. Base stays dark so cream text keeps
+// its contrast even with light brand colors.
+function fromColors(colors: string[]) {
+  return {
+    base: `color-mix(in oklch, ${colors[0]} 30%, var(--color-bg))`,
+    blobs: palettes.hero.blobs.map((b, i) => ({ ...b, color: colors[i % colors.length] })),
+  };
+}
+
 export function AnimatedGradient({
   palette = "hero",
+  colors,
   className,
 }: {
   palette?: Palette;
+  colors?: string[];
   className?: string;
 }) {
-  const p = palettes[palette];
+  const p = colors?.length ? fromColors(colors) : palettes[palette];
   return (
     <div
       aria-hidden="true"

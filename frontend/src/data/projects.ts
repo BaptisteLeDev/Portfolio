@@ -25,6 +25,8 @@ export interface Project {
   stack: string[];
   types: ProjectType[];
   status: ProjectStatus;
+  /** Main colors of the project visuals, drive the hero gradient. */
+  colors?: string[];
   thumbnail:
     | { kind: "gradient"; palette: "hero" | "chaud" | "froid" | "violet" }
     | { kind: "image"; src: string };
@@ -74,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     id: "botdiscordfactory",
+    colors: ["#faf7f2", "#f8e8a0", "#9fd7cd", "#f3e4fb"],
     title: "BotDiscordFactory",
     tagline: "Flotte de bots Discord pour communautés de streameurs.",
     description:
@@ -218,6 +221,7 @@ export const projects: Project[] = [
   },
   {
     id: "seira-like",
+    colors: ["#090908", "#7bd0ff", "#fbfdff"],
     title: "MontoMaster",
     tagline: "Plateforme pédagogique cross-plateforme.",
     description:
@@ -239,6 +243,7 @@ export const projects: Project[] = [
   },
   {
     id: "g-en",
+    colors: ["#151120", "#62f35e", "#5d64f1", "#fbb701"],
     title: "G-En",
     tagline: "Inclusion intergénérationnelle en B2B.",
     description:
@@ -258,6 +263,7 @@ export const projects: Project[] = [
   },
   {
     id: "erwan-ewen",
+    colors: ["#3c0e13", "#b8454e", "#8f2b35"],
     title: "Erwan & Ewen",
     tagline: "E-commerce WordPress pour cavistes bretons.",
     description:
@@ -271,6 +277,7 @@ export const projects: Project[] = [
   },
   {
     id: "festival-vibrations",
+    colors: ["#35193f", "#b5206f", "#21ae72", "#baba2c"],
     title: "Festival Vibrations",
     tagline: "Identité visuelle et site pour un festival.",
     description:
@@ -300,6 +307,7 @@ export const projects: Project[] = [
   },
   {
     id: "vannes-agglo",
+    colors: ["#ffffff", "#ffda43", "#1497ab"],
     title: "Vannes Agglo",
     tagline: "Marketing de territoire pour étudiants.",
     description:

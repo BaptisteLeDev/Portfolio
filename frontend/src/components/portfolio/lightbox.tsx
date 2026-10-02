@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
@@ -17,6 +17,7 @@ export function Lightbox({
   const ref = useRef<HTMLDivElement>(null);
   const open = index !== null;
   const many = images.length > 1;
+  const [long, setLong] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -55,23 +56,24 @@ export function Lightbox({
       aria-label={label}
       onClick={() => onIndex(null)}
       onContextMenu={(e) => e.preventDefault()}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-bg/90 p-4 md:p-12 cursor-zoom-out animate-[fade-in_200ms_ease-out_both]"
+      className={`fixed inset-0 z-50 flex justify-center bg-bg/90 p-4 md:p-12 cursor-zoom-out animate-[fade-in_200ms_ease-out_both] scrollbar-site text-fg ${long ? "items-start overflow-y-auto" : "items-center"}`}
     >
       <img
         src={images[index]}
         alt=""
         draggable={false}
-        className="max-h-full max-w-full rounded-[24px] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.7)] select-none"
+        onLoad={(e) => setLong(e.currentTarget.naturalHeight > e.currentTarget.naturalWidth * 2)}
+        className={`${long ? "w-full max-w-5xl" : "max-h-full max-w-full"} rounded-[24px] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.7)] select-none`}
       />
       {many && (
         <>
-          <button type="button" aria-label={t("prev")} onClick={step(-1)} className={`${arrow} left-3 md:left-6`}>
+          <button type="button" aria-label={t("prev")} onClick={step(-1)} className={`${arrow} fixed left-3 md:left-6`}>
             ←
           </button>
-          <button type="button" aria-label={t("next")} onClick={step(1)} className={`${arrow} right-3 md:right-6`}>
+          <button type="button" aria-label={t("next")} onClick={step(1)} className={`${arrow} fixed right-3 md:right-6`}>
             →
           </button>
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-sm text-fg/70">
+          <span className="fixed bottom-4 left-1/2 -translate-x-1/2 font-mono text-sm text-fg/70">
             {index + 1} / {images.length}
           </span>
         </>

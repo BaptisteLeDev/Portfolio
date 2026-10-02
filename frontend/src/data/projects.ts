@@ -274,6 +274,7 @@ export const projects: Project[] = [
     types: ["web"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/erwan-ewen/cover.png" },
+    doc: { title: "Les maquettes du site.", pages: docPages("erwan-ewen", 6) },
   },
   {
     id: "festival-vibrations",

@@ -222,7 +222,7 @@ export const projects: Project[] = [
     tagline: "Plateforme pédagogique cross-plateforme.",
     description:
       "Inspirée de Seira, plateforme éducative interactive. Web en Angular, mobile en Expo/React Native, backend Laravel pour API et auth. Démonstration de la capacité à orchestrer plusieurs écosystèmes sur un même produit.",
-    role: "Développeur fullstack",
+    role: "Développeur frontend (Angular, Expo React)",
     period: "2025",
     stack: ["Angular", "Expo", "React Native", "Laravel", "PHP", "MySQL", "TypeScript"],
     types: ["fullstack"],

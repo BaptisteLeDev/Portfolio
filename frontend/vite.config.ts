@@ -3,14 +3,48 @@ import path from "path"
 import tailwindcss from '@tailwindcss/vite'
 import react from "@vitejs/plugin-react"
 import { defineConfig, type Plugin } from "vite"
-import { fullTitle, ogImage, pages, type PageMeta } from "./src/data/pages"
-import { SITE_URL } from "./src/data/site"
+import { fullTitle, ogImage, pageMeta, pages, SITE_NAME, type PageMeta } from "./src/data/pages"
+import { projects } from "./src/data/projects"
+import { contactLinks, SITE_URL } from "./src/data/site"
+
+// https://llmstxt.org
+function llmsTxt() {
+  const link = (path: string) => {
+    const p = pageMeta(path)!
+    return `- [${p.title ?? "Accueil"}](${SITE_URL}${path}): ${p.description}`
+  }
+  return [
+    `# ${SITE_NAME}`,
+    "",
+    `> ${pageMeta("/")!.description}`,
+    "",
+    "Portfolio statique (React, Vite). Chaque projet a sa page avec rôle, période, stack et contexte.",
+    "",
+    "## Pages",
+    link("/"),
+    link("/portfolio"),
+    "",
+    "## Projets",
+    ...projects.map(
+      (p) => `- [${p.title}](${SITE_URL}/portfolio/${p.id}): ${p.tagline} Rôle : ${p.role}. Stack : ${p.stack.join(", ")}.`,
+    ),
+    "",
+    "## Contact",
+    ...contactLinks.map((c) => `- [${c.label}](${c.href})`),
+    "",
+    "## Optional",
+    link("/mentions-legales"),
+    `- [CV (PDF)](${SITE_URL}/TheCV_Baptiste-DECHAMP.pdf): CV de Baptiste Dechamp`,
+    "",
+  ].join("\n")
+}
 
 // Built from pages.ts so a new project is indexed without a manual edit.
 function sitemap(): Plugin {
   return {
     name: "sitemap",
     generateBundle() {
+      this.emitFile({ type: "asset", fileName: "llms.txt", source: llmsTxt() })
       const urls = pages.map((p) => `  <url><loc>${SITE_URL}${p.path}</loc></url>`).join("\n")
       this.emitFile({
         type: "asset",

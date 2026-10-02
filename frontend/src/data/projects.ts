@@ -297,5 +297,14 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/vannes-agglo/cover.png" },
+    // Pages of the Figma dossier, rendered from the PDF.
+    screenshots: Array.from(
+      { length: 25 },
+      (_, i) => `/images/vannes-agglo/dossier-${String(i + 1).padStart(2, "0")}.webp`,
+    ),
+    team: [
+      { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
+    ],
   },
 ];

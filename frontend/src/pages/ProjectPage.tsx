@@ -152,6 +152,24 @@ export default function ProjectPage() {
               />
             </ScrollReveal>
           )}
+          {project.team && (
+            <ScrollReveal effect="rise">
+              <Label className="text-bg mt-12">{t("team")}</Label>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                {project.team.map((m) => (
+                  <a
+                    key={m.url}
+                    href={m.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="opacity-85 hover:opacity-100 transition-opacity"
+                  >
+                    {m.name} →
+                  </a>
+                ))}
+              </div>
+            </ScrollReveal>
+          )}
         </Container>
       </Section>
 
@@ -226,24 +244,6 @@ export default function ProjectPage() {
                 </ScrollReveal>
               ))}
             </div>
-            {project.team && (
-              <ScrollReveal effect="rise">
-                <Label className="mt-12">{t("team")}</Label>
-                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-                  {project.team.map((m) => (
-                    <a
-                      key={m.url}
-                      href={m.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="opacity-85 hover:opacity-100 transition-opacity"
-                    >
-                      {m.name} →
-                    </a>
-                  ))}
-                </div>
-              </ScrollReveal>
-            )}
           </Container>
         </Section>
       )}

@@ -15,12 +15,13 @@ import { formations } from "@/data/formations";
 import { hardSkills, softSkills } from "@/data/skills";
 import { logiciels, stackStats } from "@/data/stack";
 import type { StackItem, StackStat } from "@/data/stack";
-import { HOME_DESCRIPTION, useSeo } from "@/lib/seo";
+import { useSeo } from "@/lib/seo";
+import { pageMeta } from "@/data/pages";
 import { EMAIL } from "@/data/site";
 
 export default function Accueil() {
   const { t } = useTranslation();
-  useSeo({ description: HOME_DESCRIPTION, path: "/" });
+  useSeo(pageMeta("/"));
 
   return (
     <>

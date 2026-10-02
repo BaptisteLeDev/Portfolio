@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Footer } from "@/components/footer";
 import { EMAIL, SITE_URL } from "@/data/site";
 import { useSeo } from "@/lib/seo";
+import { pageMeta } from "@/data/pages";
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -15,11 +16,7 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
 }
 
 export default function MentionsLegales() {
-  useSeo({
-    title: "Mentions légales",
-    description: "Mentions légales et données personnelles du portfolio de Baptiste Dechamp.",
-    path: "/mentions-legales",
-  });
+  useSeo(pageMeta("/mentions-legales"));
 
   return (
     <>

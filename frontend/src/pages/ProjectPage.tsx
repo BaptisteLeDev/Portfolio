@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useSeo } from "@/lib/seo";
+import { pageMeta } from "@/data/pages";
 import { useTranslation } from "react-i18next";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
@@ -43,11 +44,7 @@ export default function ProjectPage() {
   const { t: tp } = useTranslation("portfolio");
   const idx = projects.findIndex((p) => p.id === id);
   const project = projects[idx];
-  useSeo({
-    title: project?.title,
-    description: project ? `${project.title} : ${project.tagline}. Projet de Baptiste Dechamp, développeur.` : "",
-    path: `/portfolio/${id}`,
-  });
+  useSeo(pageMeta(`/portfolio/${id}`));
 
   if (!project) return <Navigate to="/404" replace />;
 

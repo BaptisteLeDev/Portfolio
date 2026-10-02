@@ -104,12 +104,12 @@ export const projects: Project[] = [
     stack: ["TypeScript", "Node.js 22", "discord.js v14", "Fastify", "Drizzle ORM"],
     types: ["fullstack"],
     status: "live",
-    thumbnail: { kind: "image", src: "/images/moodioos/mood-01.png" },
+    thumbnail: { kind: "image", src: "/images/moodioos/mood-01.webp" },
     links: { live: "https://bdf-portail.vercel.app/moodioos" },
     screenshots: [
-      "/images/moodioos/mood-01.png",
-      "/images/moodioos/mood-02.png",
-      "/images/moodioos/mood-03.png",
+      "/images/moodioos/mood-01.webp",
+      "/images/moodioos/mood-02.webp",
+      "/images/moodioos/mood-03.webp",
     ],
     problem:
       "Maintenir une ambiance positive dans une communauté Discord demande des interactions régulières : votes d'humeur, câlins, petits gestes.",

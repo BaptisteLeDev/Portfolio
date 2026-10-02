@@ -138,15 +138,27 @@ export default function ProjectPage() {
             <Label className="text-bg">À PROPOS DU PROJET</Label>
             <p className="mt-5 max-w-[62ch] text-lg md:text-xl leading-[1.7]">{project.description}</p>
           </ScrollReveal>
-          {project.brief && (
+          {project.doc && (
             <ScrollReveal effect="rise" delay={120}>
-              <Label className="text-bg mt-12">{t("brief_note")}</Label>
-              <iframe
-                src={project.brief.src}
-                title={project.brief.title}
-                className="mt-6 w-full h-[640px] rounded-[16px] border-0 bg-bg/5"
-                loading="lazy"
-              />
+              <Label className="text-bg mt-12">{project.doc.title}</Label>
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label={project.doc.title}
+                onContextMenu={(e) => e.preventDefault()}
+                className="mt-6 h-[640px] max-h-[80vh] overflow-y-auto overscroll-contain rounded-[16px] bg-bg/5 p-3 space-y-3"
+              >
+                {project.doc.pages.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`Page ${i + 1}`}
+                    loading="lazy"
+                    draggable={false}
+                    className="w-full rounded-[8px] select-none"
+                  />
+                ))}
+              </div>
             </ScrollReveal>
           )}
           {project.team && (

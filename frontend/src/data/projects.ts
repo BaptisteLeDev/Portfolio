@@ -36,11 +36,15 @@ export interface Project {
   problem?: string;
   solution?: string;
   outcome?: string;
-  brief?: { src: string; title: string };
+  doc?: { title: string; pages: string[] };
   team?: { name: string; url: string; role?: string }[];
 }
 
 // Ordre = dernier commit du repo source (desc), projets sans repo ranges par periode.
+// PDFs ship as WebP pages: viewable on the page, no one-click download.
+const docPages = (slug: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/docs/${slug}/${String(i + 1).padStart(2, "0")}.webp`);
+
 export const projects: Project[] = [
   {
     id: "stream-dashboard",
@@ -147,7 +151,7 @@ export const projects: Project[] = [
     status: "live",
     thumbnail: { kind: "image", src: "/images/amigaru/cover.png" },
     links: { live: "https://amigaru.fr/fr" },
-    brief: { src: "/docs/amigaru-brief-mds.pdf", title: "Brief du projet - MyDigitalSchool" },
+    doc: { title: "Le brief qui a lancé le projet à l'école MyDigitalSchool.", pages: docPages("amigaru", 11) },
     team: [
       { name: "Baptiste Dechamp", url: LINKEDIN_URL },
       { name: "Raphaël Launay", url: "https://www.linkedin.com/in/raphaellaunay/" },
@@ -245,6 +249,7 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/g-en/cover.png" },
+    doc: { title: "Le dossier du projet.", pages: docPages("g-en", 8) },
     team: [
       { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
       { name: "Baptiste Dechamp", url: LINKEDIN_URL },
@@ -305,11 +310,7 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/vannes-agglo/cover.png" },
-    // Pages of the Figma dossier, rendered from the PDF.
-    screenshots: Array.from(
-      { length: 25 },
-      (_, i) => `/images/vannes-agglo/dossier-${String(i + 1).padStart(2, "0")}.webp`,
-    ),
+    doc: { title: "Le dossier Figma du projet.", pages: docPages("vannes-agglo", 25) },
     team: [
       { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
       { name: "Baptiste Dechamp", url: LINKEDIN_URL },

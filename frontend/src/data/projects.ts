@@ -1,3 +1,5 @@
+import { LINKEDIN_URL } from "./site";
+
 export type ProjectType = "web" | "mobile" | "desktop" | "fullstack" | "design";
 export type ProjectStatus = "live" | "archived" | "wip";
 
@@ -34,11 +36,15 @@ export interface Project {
   problem?: string;
   solution?: string;
   outcome?: string;
-  brief?: { src: string; title: string };
-  team?: { name: string; url: string }[];
+  doc?: { title: string; pages: string[] };
+  team?: { name: string; url: string; role?: string }[];
 }
 
 // Ordre = dernier commit du repo source (desc), projets sans repo ranges par periode.
+// PDFs ship as WebP pages: viewable on the page, no one-click download.
+const docPages = (slug: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/docs/${slug}/${String(i + 1).padStart(2, "0")}.webp`);
+
 export const projects: Project[] = [
   {
     id: "stream-dashboard",
@@ -145,9 +151,9 @@ export const projects: Project[] = [
     status: "live",
     thumbnail: { kind: "image", src: "/images/amigaru/cover.png" },
     links: { live: "https://amigaru.fr/fr" },
-    brief: { src: "/docs/amigaru-brief-mds.pdf", title: "Brief du projet - MyDigitalSchool" },
+    doc: { title: "Le brief qui a lancé le projet à l'école MyDigitalSchool.", pages: docPages("amigaru", 11) },
     team: [
-      { name: "Baptiste Dechamp", url: "https://www.linkedin.com/in/baptistedechamp/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
       { name: "Raphaël Launay", url: "https://www.linkedin.com/in/raphaellaunay/" },
       { name: "Léa Chastanier", url: "https://www.linkedin.com/in/lea-chastanier-019537255/" },
       { name: "Alice Goaoc", url: "https://www.linkedin.com/in/alice-goaoc-6135521b8/" },
@@ -216,13 +222,17 @@ export const projects: Project[] = [
     tagline: "Plateforme pédagogique cross-plateforme.",
     description:
       "Inspirée de Seira, plateforme éducative interactive. Web en Angular, mobile en Expo/React Native, backend Laravel pour API et auth. Démonstration de la capacité à orchestrer plusieurs écosystèmes sur un même produit.",
-    role: "Développeur fullstack",
+    role: "Développeur frontend (Angular, Expo React)",
     period: "2025",
     stack: ["Angular", "Expo", "React Native", "Laravel", "PHP", "MySQL", "TypeScript"],
     types: ["fullstack"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/montomaster/catalogue.png" },
     videos: ["/videos/montomaster/demo.mp4", "/videos/montomaster/capture.webm"],
+    team: [
+      { name: "Nicolas Rouillé", url: "https://www.linkedin.com/in/nicolas-rouill%C3%A9-ba3b42283", role: "Dev backend" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL, role: "Dev frontend, app Angular et Expo React" },
+    ],
     problem: "Proposer une expérience éducative cohérente web + mobile avec un back solide.",
     solution: "Stack multi-plateforme : Angular (web), Expo/RN (mobile), Laravel (API et auth).",
     outcome: "Architecture validée, API opérationnelle - développement stoppé.",
@@ -239,6 +249,11 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/g-en/cover.png" },
+    doc: { title: "Le dossier du projet.", pages: docPages("g-en", 8) },
+    team: [
+      { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
+    ],
     outcome: "Prototype cliquable, dossier marketing complet, concept validé en jury.",
   },
   {
@@ -295,5 +310,10 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/vannes-agglo/cover.png" },
+    doc: { title: "Le dossier Figma du projet.", pages: docPages("vannes-agglo", 25) },
+    team: [
+      { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
+    ],
   },
 ];

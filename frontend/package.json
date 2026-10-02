@@ -10,6 +10,7 @@
     "lint": "oxlint .",
     "format": "echo 'formatter not installed'",
     "format:check": "echo 'formatter not installed'",
+    "og": "node scripts/og.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui"

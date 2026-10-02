@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { Lightbox } from "./lightbox";
 
 // ponytail: drift 30px/s + retour smooth; lightbox sans dep. Upgrade: embla si besoin de boucles vraies.
 export function GalleryCarousel({
@@ -16,8 +17,7 @@ export function GalleryCarousel({
   const ref = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const returning = useRef(false);
-  const zoomRef = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState<string | null>(null);
+  const [zoom, setZoom] = useState<number | null>(null);
   const reduced = useReducedMotion();
   const single = images.length === 1;
 
@@ -46,18 +46,6 @@ export function GalleryCarousel({
     return () => cancelAnimationFrame(raf);
   }, [reduced, single]);
 
-  useEffect(() => {
-    if (!zoom) return;
-    const prev = document.activeElement as HTMLElement | null;
-    zoomRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setZoom(null);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      prev?.focus();
-    };
-  }, [zoom]);
-
   const pause = () => (paused.current = true);
   const resume = () => (paused.current = false);
 
@@ -66,7 +54,7 @@ export function GalleryCarousel({
       {single ? (
         <button
           type="button"
-          onClick={() => setZoom(images[0])}
+          onClick={() => setZoom(0)}
           aria-label={expandLabel}
           className="mt-8 block mx-auto cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
         >
@@ -74,7 +62,7 @@ export function GalleryCarousel({
             src={images[0]}
             alt=""
             loading="lazy"
-            className="max-h-[560px] md:max-h-[640px] w-auto max-w-full rounded-[24px]"
+            className="max-h-[360px] md:max-h-[440px] w-auto max-w-full rounded-[24px]"
           />
         </button>
       ) : (
@@ -90,11 +78,11 @@ export function GalleryCarousel({
           onTouchStart={pause}
           className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
-          {images.map((src) => (
+          {images.map((src, i) => (
             <button
               key={src}
               type="button"
-              onClick={() => setZoom(src)}
+              onClick={() => setZoom(i)}
               aria-label={expandLabel}
               className="shrink-0 snap-center cursor-zoom-in transition-transform duration-300 ease-[var(--ease-signature)] hover:scale-[1.01]"
             >
@@ -102,25 +90,13 @@ export function GalleryCarousel({
                 src={src}
                 alt=""
                 loading="lazy"
-                className="h-[460px] md:h-[540px] w-auto rounded-[24px]"
+                className="h-[360px] md:h-[440px] w-auto rounded-[24px]"
               />
             </button>
           ))}
         </div>
       )}
-      {zoom && (
-        <div
-          ref={zoomRef}
-          tabIndex={-1}
-          role="dialog"
-          aria-modal="true"
-          aria-label={zoomLabel}
-          onClick={() => setZoom(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bg/90 p-4 md:p-12 cursor-zoom-out animate-[fade-in_200ms_ease-out_both]"
-        >
-          <img src={zoom} alt="" className="max-h-full max-w-full rounded-[24px] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.7)]" />
-        </div>
-      )}
+      <Lightbox images={images} index={zoom} onIndex={setZoom} label={zoomLabel} />
     </>
   );
 }

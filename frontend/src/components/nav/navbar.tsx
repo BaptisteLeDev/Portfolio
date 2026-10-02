@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import {
 } from "@/components/cody";
 import { MobileMenu } from "./mobile-menu";
 import { cn } from "@/lib/cn";
+import { contactLinks } from "@/data/site";
 
 type NavKey = "home" | "portfolio" | "contact";
 
@@ -48,12 +49,43 @@ function NavItem({
   );
 }
 
-function ContactButton({ label }: { label: string }) {
+// Native popover: Esc + outside click + top layer for free.
+function ContactMenu({ label }: { label: string }) {
   const bind = useCodyBroadcast(reactions.contact);
+  const menu = useRef<HTMLDivElement>(null);
+
+  const place = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    menu.current?.style.setProperty("top", `${r.bottom + 12}px`);
+    menu.current?.style.setProperty("right", `${window.innerWidth - r.right}px`);
+  };
+
   return (
-    <Button size="sm" variant="solid-cream" asChild {...bind}>
-      <a href="mailto:baptiste.dechamp@outlook.fr">{label}</a>
-    </Button>
+    <>
+      <Button size="sm" variant="solid-cream" popoverTarget="contact-menu" onClick={place} {...bind}>
+        {label}
+      </Button>
+      <div
+        id="contact-menu"
+        ref={menu}
+        popover="auto"
+        className="fixed m-0 [inset:auto] rounded-2xl border border-fg/10 bg-bg/95 backdrop-blur-md p-2 text-fg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)]"
+      >
+        <ul className="flex flex-col">
+          {contactLinks.map((l) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                {...(l.external && { target: "_blank", rel: "noreferrer" })}
+                className="block rounded-xl px-4 py-2 font-mono text-sm opacity-85 hover:opacity-100 hover:bg-fg/10 focus-visible:bg-fg/10"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
@@ -93,7 +125,7 @@ export function NavBar() {
           </div>
 
           <div className="hidden md:block">
-            <ContactButton label={t("nav.contact")} />
+            <ContactMenu label={t("nav.contact")} />
           </div>
 
           <button

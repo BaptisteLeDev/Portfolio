@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useSeo } from "@/lib/seo";
+import { pageMeta } from "@/data/pages";
 import { useTranslation } from "react-i18next";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
@@ -15,6 +16,7 @@ import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { projects, type SitemapNode } from "@/data/projects";
 import { GalleryCarousel } from "@/components/portfolio/gallery-carousel";
+import { DocViewer } from "@/components/portfolio/doc-viewer";
 
 const statusLabel: Record<string, string> = {
   wip: "En développement",
@@ -43,11 +45,7 @@ export default function ProjectPage() {
   const { t: tp } = useTranslation("portfolio");
   const idx = projects.findIndex((p) => p.id === id);
   const project = projects[idx];
-  useSeo({
-    title: project?.title,
-    description: project ? `${project.title} : ${project.tagline}. Projet de Baptiste Dechamp, développeur.` : "",
-    path: `/portfolio/${id}`,
-  });
+  useSeo(pageMeta(`/portfolio/${id}`));
 
   if (!project) return <Navigate to="/404" replace />;
 
@@ -141,15 +139,29 @@ export default function ProjectPage() {
             <Label className="text-bg">À PROPOS DU PROJET</Label>
             <p className="mt-5 max-w-[62ch] text-lg md:text-xl leading-[1.7]">{project.description}</p>
           </ScrollReveal>
-          {project.brief && (
+          {project.doc && (
             <ScrollReveal effect="rise" delay={120}>
-              <Label className="text-bg mt-12">{t("brief_note")}</Label>
-              <iframe
-                src={project.brief.src}
-                title={project.brief.title}
-                className="mt-6 w-full h-[640px] rounded-[16px] border-0 bg-bg/5"
-                loading="lazy"
-              />
+              <Label className="text-bg mt-12">{project.doc.title}</Label>
+              <DocViewer title={project.doc.title} pages={project.doc.pages} />
+            </ScrollReveal>
+          )}
+          {project.team && (
+            <ScrollReveal effect="rise">
+              <Label className="text-bg mt-12">{t("team")}</Label>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                {project.team.map((m) => (
+                  <a
+                    key={m.url}
+                    href={m.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="opacity-85 hover:opacity-100 transition-opacity"
+                  >
+                    {m.name}
+                    {m.role && <span className="opacity-60"> · {m.role}</span>} →
+                  </a>
+                ))}
+              </div>
             </ScrollReveal>
           )}
         </Container>
@@ -226,24 +238,6 @@ export default function ProjectPage() {
                 </ScrollReveal>
               ))}
             </div>
-            {project.team && (
-              <ScrollReveal effect="rise">
-                <Label className="mt-12">{t("team")}</Label>
-                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-                  {project.team.map((m) => (
-                    <a
-                      key={m.url}
-                      href={m.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="opacity-85 hover:opacity-100 transition-opacity"
-                    >
-                      {m.name} →
-                    </a>
-                  ))}
-                </div>
-              </ScrollReveal>
-            )}
           </Container>
         </Section>
       )}
@@ -266,9 +260,15 @@ export default function ProjectPage() {
           <Container size="xl" className="text-bg">
             <Label className="text-bg">{t("gallery")}</Label>
             {project.videos && project.videos.length > 0 && (
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="mt-8 flex flex-wrap justify-center gap-6">
                 {project.videos.map((src) => (
-                  <video key={src} src={src} controls preload="metadata" className="w-full rounded-[24px]" />
+                  <video
+                    key={src}
+                    src={src}
+                    controls
+                    preload="metadata"
+                    className="h-[360px] md:h-[440px] w-auto max-w-full rounded-[24px] bg-bg/10"
+                  />
                 ))}
               </div>
             )}

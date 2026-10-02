@@ -264,9 +264,15 @@ export default function ProjectPage() {
           <Container size="xl" className="text-bg">
             <Label className="text-bg">{t("gallery")}</Label>
             {project.videos && project.videos.length > 0 && (
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="mt-8 flex flex-wrap justify-center gap-6">
                 {project.videos.map((src) => (
-                  <video key={src} src={src} controls preload="metadata" className="w-full rounded-[24px]" />
+                  <video
+                    key={src}
+                    src={src}
+                    controls
+                    preload="metadata"
+                    className="h-[360px] md:h-[440px] w-auto max-w-full rounded-[24px] bg-bg/10"
+                  />
                 ))}
               </div>
             )}

@@ -74,7 +74,7 @@ export function GalleryCarousel({
             src={images[0]}
             alt=""
             loading="lazy"
-            className="max-h-[560px] md:max-h-[640px] w-auto max-w-full rounded-[24px]"
+            className="max-h-[360px] md:max-h-[440px] w-auto max-w-full rounded-[24px]"
           />
         </button>
       ) : (
@@ -102,7 +102,7 @@ export function GalleryCarousel({
                 src={src}
                 alt=""
                 loading="lazy"
-                className="h-[460px] md:h-[540px] w-auto rounded-[24px]"
+                className="h-[360px] md:h-[440px] w-auto rounded-[24px]"
               />
             </button>
           ))}

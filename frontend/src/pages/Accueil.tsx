@@ -16,6 +16,7 @@ import { hardSkills, softSkills } from "@/data/skills";
 import { logiciels, stackStats } from "@/data/stack";
 import type { StackItem, StackStat } from "@/data/stack";
 import { HOME_DESCRIPTION, useSeo } from "@/lib/seo";
+import { EMAIL } from "@/data/site";
 
 export default function Accueil() {
   const { t } = useTranslation();
@@ -163,7 +164,7 @@ export default function Accueil() {
           </p>
           <div className="mt-10 flex gap-4 justify-center flex-wrap">
             <Button variant="gradient" size="lg" asChild className="group">
-              <a href="mailto:baptiste.dechamp@outlook.fr">
+              <a href={`mailto:${EMAIL}`}>
                 Envoyer un email
                 <span
                   className="ml-1 flex size-6 items-center justify-center rounded-full bg-bg/15 transition-transform duration-300 ease-[var(--ease-signature)] group-hover:translate-x-0.5"

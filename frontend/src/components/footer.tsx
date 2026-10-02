@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence, m } from "motion/react";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import {
@@ -8,6 +10,7 @@ import {
   type CodyBrackets,
 } from "@/components/cody";
 import { Divider } from "@/components/ui/divider";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/data/site";
 
 const R = (mood: CodyMood, brackets: CodyBrackets) => ({ mood, brackets });
 
@@ -47,6 +50,54 @@ function FooterRouterLink({
   );
 }
 
+// 1st click copies, 2nd click lets the mailto through.
+function CopyEmailLink() {
+  const { t } = useTranslation("common");
+  const [copied, setCopied] = useState(false);
+  const [toast, setToast] = useState(false);
+  const bind = useCodyBroadcast(R("mail", "round"));
+
+  const onClick = (e: React.MouseEvent) => {
+    if (copied) return;
+    e.preventDefault();
+    navigator.clipboard.writeText(EMAIL).then(
+      () => {
+        setCopied(true);
+        setToast(true);
+        setTimeout(() => setToast(false), 2000);
+      },
+      () => (window.location.href = `mailto:${EMAIL}`),
+    );
+  };
+
+  return (
+    <span className="relative inline-block">
+      <a
+        href={`mailto:${EMAIL}`}
+        onClick={onClick}
+        {...bind}
+        className="opacity-85 hover:opacity-100 transition-opacity"
+      >
+        {copied ? EMAIL : "Email"}
+      </a>
+      <span aria-live="polite" className="absolute left-0 bottom-full mb-2 pointer-events-none">
+        <AnimatePresence>
+          {toast && (
+            <m.span
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              className="block whitespace-nowrap rounded-full bg-cream text-bg px-3 py-1 font-mono text-xs"
+            >
+              {t("contact.copied")}
+            </m.span>
+          )}
+        </AnimatePresence>
+      </span>
+    </span>
+  );
+}
+
 export function Footer() {
   const { t } = useTranslation("common");
   return (
@@ -66,18 +117,26 @@ export function Footer() {
             <p className="font-mono text-xs uppercase tracking-[0.1em] opacity-60">Contact</p>
             <ul className="mt-4 space-y-2">
               <li>
-                <FooterLink href="mailto:baptiste.dechamp@outlook.fr" reaction={R("mail", "round")}>
-                  Email
-                </FooterLink>
+                <CopyEmailLink />
               </li>
               <li>
                 <FooterLink
-                  href="https://github.com/BaptisteLeDev"
+                  href={GITHUB_URL}
                   target="_blank"
                   rel="noreferrer"
                   reaction={R("code", "angle")}
                 >
                   GitHub
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  reaction={R("happy", "round")}
+                >
+                  LinkedIn
                 </FooterLink>
               </li>
             </ul>

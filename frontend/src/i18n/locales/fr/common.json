@@ -13,5 +13,8 @@
     "see_projects": "Voir mes projets",
     "back_home": "Retour à l'accueil",
     "read_more": "En savoir plus"
+  },
+  "contact": {
+    "copied": "Email copié dans le presse-papier"
   }
 }

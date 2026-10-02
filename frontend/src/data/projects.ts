@@ -1,3 +1,5 @@
+import { LINKEDIN_URL } from "./site";
+
 export type ProjectType = "web" | "mobile" | "desktop" | "fullstack" | "design";
 export type ProjectStatus = "live" | "archived" | "wip";
 
@@ -147,7 +149,7 @@ export const projects: Project[] = [
     links: { live: "https://amigaru.fr/fr" },
     brief: { src: "/docs/amigaru-brief-mds.pdf", title: "Brief du projet - MyDigitalSchool" },
     team: [
-      { name: "Baptiste Dechamp", url: "https://www.linkedin.com/in/baptistedechamp/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
       { name: "Raphaël Launay", url: "https://www.linkedin.com/in/raphaellaunay/" },
       { name: "Léa Chastanier", url: "https://www.linkedin.com/in/lea-chastanier-019537255/" },
       { name: "Alice Goaoc", url: "https://www.linkedin.com/in/alice-goaoc-6135521b8/" },

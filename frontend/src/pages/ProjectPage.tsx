@@ -161,7 +161,8 @@ export default function ProjectPage() {
                     rel="noreferrer"
                     className="opacity-85 hover:opacity-100 transition-opacity"
                   >
-                    {m.name} →
+                    {m.name}
+                    {m.role && <span className="opacity-60"> · {m.role}</span>} →
                   </a>
                 ))}
               </div>

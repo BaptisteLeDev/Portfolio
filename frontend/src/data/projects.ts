@@ -37,7 +37,7 @@ export interface Project {
   solution?: string;
   outcome?: string;
   brief?: { src: string; title: string };
-  team?: { name: string; url: string }[];
+  team?: { name: string; url: string; role?: string }[];
 }
 
 // Ordre = dernier commit du repo source (desc), projets sans repo ranges par periode.
@@ -225,6 +225,10 @@ export const projects: Project[] = [
     status: "archived",
     thumbnail: { kind: "image", src: "/images/montomaster/catalogue.png" },
     videos: ["/videos/montomaster/demo.mp4", "/videos/montomaster/capture.webm"],
+    team: [
+      { name: "Nicolas Rouillé", url: "https://www.linkedin.com/in/nicolas-rouill%C3%A9-ba3b42283", role: "Dev backend" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL, role: "Dev frontend, app Angular et Expo React" },
+    ],
     problem: "Proposer une expérience éducative cohérente web + mobile avec un back solide.",
     solution: "Stack multi-plateforme : Angular (web), Expo/RN (mobile), Laravel (API et auth).",
     outcome: "Architecture validée, API opérationnelle - développement stoppé.",
@@ -241,6 +245,10 @@ export const projects: Project[] = [
     types: ["design"],
     status: "archived",
     thumbnail: { kind: "image", src: "/images/g-en/cover.png" },
+    team: [
+      { name: "Pierre Gaillard", url: "https://www.linkedin.com/in/pierre-gaillard-dev/" },
+      { name: "Baptiste Dechamp", url: LINKEDIN_URL },
+    ],
     outcome: "Prototype cliquable, dossier marketing complet, concept validé en jury.",
   },
   {

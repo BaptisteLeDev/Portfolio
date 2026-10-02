@@ -69,7 +69,7 @@ function ContactMenu({ label }: { label: string }) {
         id="contact-menu"
         ref={menu}
         popover="auto"
-        className="fixed m-0 [inset:auto] rounded-2xl border border-fg/10 bg-bg/95 backdrop-blur-md p-2 text-fg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)]"
+        className="fixed m-0 [inset:auto] rounded-md border border-fg/10 bg-bg/95 backdrop-blur-md p-2 text-fg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)]"
       >
         <ul className="flex flex-col">
           {contactLinks.map((l) => (
@@ -77,7 +77,7 @@ function ContactMenu({ label }: { label: string }) {
               <a
                 href={l.href}
                 {...(l.external && { target: "_blank", rel: "noreferrer" })}
-                className="block rounded-xl px-4 py-2 font-mono text-sm opacity-85 hover:opacity-100 hover:bg-fg/10 focus-visible:bg-fg/10"
+                className="block rounded-sm px-4 py-2 font-mono text-sm opacity-85 hover:opacity-100 hover:bg-fg/10 focus-visible:bg-fg/10"
               >
                 {l.label}
               </a>

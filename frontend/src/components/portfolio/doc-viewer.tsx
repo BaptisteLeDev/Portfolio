@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Lightbox } from "./lightbox";
 
 // Frame height drives the page fit: portrait pages show whole, landscape
-// pages are capped by width.
+// pages are capped by width. Long pages (site mockups) go full width and
+// scroll, else they shrink to a sliver.
 export function DocViewer({ title, pages }: { title: string; pages: string[] }) {
   const [zoom, setZoom] = useState<number | null>(null);
+  const [long, setLong] = useState<Set<number>>(new Set());
   return (
     <>
       <div
@@ -20,14 +22,18 @@ export function DocViewer({ title, pages }: { title: string; pages: string[] }) 
             type="button"
             onClick={() => setZoom(i)}
             aria-label={`Page ${i + 1}, agrandir`}
-            className="block mx-auto snap-center cursor-zoom-in"
+            className={`block mx-auto cursor-zoom-in ${long.has(i) ? "w-full snap-start" : "snap-center"}`}
           >
             <img
               src={src}
               alt=""
               loading="lazy"
               draggable={false}
-              className="max-h-[calc(min(720px,80vh)-1.5rem)] w-auto max-w-full rounded-[8px] select-none"
+              onLoad={(e) => {
+                const img = e.currentTarget;
+                if (img.naturalHeight > img.naturalWidth * 2) setLong((s) => new Set(s).add(i));
+              }}
+              className={`${long.has(i) ? "w-full" : "max-h-[calc(min(720px,80vh)-1.5rem)] w-auto"} max-w-full rounded-[8px] select-none`}
             />
           </button>
         ))}

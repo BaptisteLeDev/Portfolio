@@ -7,7 +7,8 @@
   "footer": {
     "signature": "/* fin */",
     "made_with": "Fait avec",
-    "year": "© 2026 Baptiste Dechamp"
+    "year": "© 2026 Baptiste Dechamp",
+    "legal": "Mentions légales"
   },
   "cta": {
     "see_projects": "Voir mes projets",

@@ -7,7 +7,7 @@ import { SITE_URL } from "./src/data/site"
 
 // Built from projects.ts so a new project is indexed without a manual edit.
 function sitemap(): Plugin {
-  const paths = ["/", "/portfolio", ...projects.map((p) => `/portfolio/${p.id}`)]
+  const paths = ["/", "/portfolio", ...projects.map((p) => `/portfolio/${p.id}`), "/mentions-legales"]
   return {
     name: "sitemap",
     generateBundle() {

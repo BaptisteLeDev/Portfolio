@@ -9,6 +9,7 @@ import Accueil from "./pages/Accueil";
 
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
+const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const NotFound = lazy(() => import("./pages/404"));
 
 function AnimatedRoutes() {
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
             <Route path="/" element={<Accueil />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/portfolio/:id" element={<ProjectPage />} />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

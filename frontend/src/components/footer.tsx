@@ -147,8 +147,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center justify-between text-xs opacity-60 font-mono">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 text-xs opacity-60 font-mono">
           <span>{t("footer.year")}</span>
+          <Link to="/mentions-legales" className="hover:opacity-100">
+            {t("footer.legal")}
+          </Link>
           <span>{t("footer.signature")}</span>
         </div>
       </Container>

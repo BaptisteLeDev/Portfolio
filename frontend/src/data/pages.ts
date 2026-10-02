@@ -10,6 +10,7 @@ export interface PageMeta {
   /** Second line on the OG card. */
   subtitle: string;
   cover?: string;
+  colors?: string[];
 }
 
 export const pages: PageMeta[] = [
@@ -38,6 +39,7 @@ export const pages: PageMeta[] = [
     description: `${p.title} : ${p.tagline.replace(/\.$/, "")}. Projet de Baptiste Dechamp, développeur.`,
     subtitle: p.tagline,
     cover: p.thumbnail.kind === "image" ? p.thumbnail.src : undefined,
+    colors: p.colors,
   })),
 ];
 

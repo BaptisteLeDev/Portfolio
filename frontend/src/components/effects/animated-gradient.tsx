@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { darkest } from "@/lib/color";
 
 type Palette = "hero" | "chaud" | "froid" | "violet";
 
@@ -58,7 +59,7 @@ const palettes: Record<Palette, { base: string; blobs: Blob[] }> = {
 // its contrast even with light brand colors.
 function fromColors(colors: string[]) {
   return {
-    base: `color-mix(in oklch, ${colors[0]} 30%, var(--color-bg))`,
+    base: `color-mix(in oklch, ${darkest(colors)} 30%, var(--color-bg))`,
     blobs: palettes.hero.blobs.map((b, i) => ({ ...b, color: colors[i % colors.length] })),
   };
 }

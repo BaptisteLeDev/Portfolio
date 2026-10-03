@@ -34,7 +34,7 @@ export function Hero() {
                     "linear-gradient(110deg, var(--color-cream) 0%, color-mix(in oklch, var(--color-pink) 60%, var(--color-cream)) 100%)",
                 }}
               >
-                <Typewriter text="Baptiste." speed={80} startDelay={1100} caret={false} />
+                <Typewriter text="Baptiste Dechamp." speed={70} startDelay={1100} caret={false} />
               </span>
             </h1>
 

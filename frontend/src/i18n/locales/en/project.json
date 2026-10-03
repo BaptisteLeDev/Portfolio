@@ -14,5 +14,7 @@
   "next": "Next",
   "view_live": "View site",
   "view_repo": "Source code",
-  "team": "The team"
+  "team": "The team",
+  "screenshot_alt": "Screenshot of the {{title}} project",
+  "video_label": "{{title}} project demo video"
 }

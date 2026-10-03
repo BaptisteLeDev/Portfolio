@@ -35,7 +35,10 @@ export function Typewriter({ text, speed = 45, startDelay = 200, caret = true }:
 
   return (
     <>
-      {shown}
+      {/* Full text in the DOM from the first render: crawler snapshot and
+          screen readers never see a half-typed string. */}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{shown}</span>
       {caret && (
         <span
           aria-hidden="true"

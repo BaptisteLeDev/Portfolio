@@ -26,7 +26,7 @@ export function DocViewer({ title, pages }: { title: string; pages: string[] }) 
           >
             <img
               src={src}
-              alt=""
+              alt={`${title}, page ${i + 1}`}
               loading="lazy"
               draggable={false}
               onLoad={(e) => {
@@ -38,7 +38,7 @@ export function DocViewer({ title, pages }: { title: string; pages: string[] }) 
           </button>
         ))}
       </div>
-      <Lightbox images={pages} index={zoom} onIndex={setZoom} label={title} />
+      <Lightbox images={pages} index={zoom} onIndex={setZoom} label={title} alt={title} />
     </>
   );
 }

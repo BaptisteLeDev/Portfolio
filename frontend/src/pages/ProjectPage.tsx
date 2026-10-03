@@ -265,6 +265,7 @@ export default function ProjectPage() {
                   <video
                     key={src}
                     src={src}
+                    aria-label={t("video_label", { title: project.title })}
                     controls
                     preload="metadata"
                     className="h-[360px] md:h-[440px] w-auto max-w-full rounded-[24px] bg-bg/10"
@@ -278,6 +279,7 @@ export default function ProjectPage() {
                 label={t("gallery")}
                 expandLabel={t("expand_image")}
                 zoomLabel={t("zoom_view")}
+                alt={t("screenshot_alt", { title: project.title })}
               />
             )}
           </Container>

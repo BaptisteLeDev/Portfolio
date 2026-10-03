@@ -9,5 +9,6 @@
     "fullstack": "Full-stack",
     "design": "Design"
   },
-  "empty": "Aucun projet ne correspond à ce filtre."
+  "empty": "Aucun projet ne correspond à ce filtre.",
+  "thumbnail_alt": "Aperçu du projet {{title}}"
 }

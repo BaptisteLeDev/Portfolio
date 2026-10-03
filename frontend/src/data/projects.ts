@@ -24,6 +24,8 @@ export interface Project {
   period: string;
   stack: string[];
   types: ProjectType[];
+  /** Google applicationCategory; set only for real apps (not design). */
+  app?: { category: string; os?: string; free?: boolean };
   status: ProjectStatus;
   /** Main colors of the project visuals, drive the hero gradient. */
   colors?: string[];
@@ -58,6 +60,7 @@ export const projects: Project[] = [
     period: "2025",
     stack: ["Electron", "React", "Vite", "Tailwind", "TypeScript", "Node"],
     types: ["desktop"],
+    app: { category: "MultimediaApplication", os: "Windows" },
     status: "live",
     thumbnail: { kind: "image", src: "/images/streamoos/dashboard-home.png" },
     links: { live: "https://streamoo-s.vercel.app/fr/" },
@@ -85,6 +88,7 @@ export const projects: Project[] = [
     period: "Octobre 2025 - Septembre 2026",
     stack: ["Bun", "TypeScript", "discord.js v14", "Fastify", "Drizzle ORM", "Neon Postgres", "Astro", "Elysia"],
     types: ["fullstack"],
+    app: { category: "CommunicationApplication" },
     status: "live",
     thumbnail: { kind: "image", src: "/images/botdiscordfactory/cover.png" },
     links: { live: "https://bdf-portail.vercel.app" },
@@ -106,6 +110,7 @@ export const projects: Project[] = [
     period: "Juin 2026 - Septembre 2026",
     stack: ["TypeScript", "Node.js 22", "discord.js v14", "Fastify", "Drizzle ORM"],
     types: ["fullstack"],
+    app: { category: "CommunicationApplication", os: "Discord", free: true },
     status: "live",
     thumbnail: { kind: "image", src: "/images/moodioos/mood-01.webp" },
     links: { live: "https://bdf-portail.vercel.app/moodioos" },
@@ -131,6 +136,7 @@ export const projects: Project[] = [
     period: "Mai 2026 - Juillet 2026",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Drizzle ORM", "Neon Postgres", "rss-parser"],
     types: ["fullstack"],
+    app: { category: "ReferenceApplication" },
     status: "wip",
     thumbnail: { kind: "image", src: "/images/rss-news/home.png" },
     screenshots: ["/images/rss-news/home.png", "/images/rss-news/security.png"],
@@ -151,6 +157,7 @@ export const projects: Project[] = [
     period: "2023 - 2025",
     stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Storybook", "Radix UI"],
     types: ["web", "fullstack", "design"],
+    app: { category: "SocialNetworkingApplication" },
     status: "live",
     thumbnail: { kind: "image", src: "/images/amigaru/cover.png" },
     links: { live: "https://amigaru.fr/fr" },
@@ -209,6 +216,7 @@ export const projects: Project[] = [
     period: "Septembre 2025",
     stack: ["React 19", "Vite", "Node", "Express", "Twitch API", "Supabase"],
     types: ["web", "fullstack"],
+    app: { category: "EntertainmentApplication", free: true },
     status: "wip",
     thumbnail: { kind: "gradient", palette: "violet" },
     screenshots: ["/images/0viewers/signin.png"],
@@ -230,6 +238,7 @@ export const projects: Project[] = [
     period: "2025",
     stack: ["Angular", "Expo", "React Native", "Laravel", "PHP", "MySQL", "TypeScript"],
     types: ["fullstack"],
+    app: { category: "EducationalApplication", os: "Web, Android, iOS" },
     status: "archived",
     thumbnail: { kind: "image", src: "/images/montomaster/catalogue.png" },
     videos: ["/videos/montomaster/demo.mp4", "/videos/montomaster/capture.webm"],
@@ -272,6 +281,7 @@ export const projects: Project[] = [
     period: "Novembre 2024",
     stack: ["WordPress", "Kadence", "Figma", "WinSCP"],
     types: ["web"],
+    app: { category: "ShoppingApplication" },
     status: "archived",
     thumbnail: { kind: "image", src: "/images/erwan-ewen/cover.png" },
     doc: { title: "Les maquettes du site.", pages: docPages("erwan-ewen", 6) },
@@ -300,6 +310,7 @@ export const projects: Project[] = [
     period: "Juin 2024",
     stack: ["React", "Vite", "Node", "Firebase", "TMDB API", "Tailwind"],
     types: ["fullstack"],
+    app: { category: "EducationalApplication" },
     status: "archived",
     thumbnail: { kind: "image", src: "/images/devflix/cover.jpg" },
     problem: "Exercice d'école : réinventer une interface streaming pour du contenu technique.",

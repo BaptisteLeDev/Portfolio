@@ -134,9 +134,9 @@ function jsonLd(p: PageMeta) {
       license: `${SITE_URL}/mentions-legales`,
       acquireLicensePage: `${SITE_URL}/mentions-legales`,
     })
-  // No offers/aggregateRating: no real price or reviews, so no rich result,
-  // but the app is still described for Google and AI answers.
-  if (pr.types.some((t) => t !== "design"))
+  // No reviews to mark up, so no star snippet; category + OS satisfy
+  // Google's "two of offers/rating/category/OS" rule, item stays valid.
+  if (pr.app)
     graph.push({
       "@type": pr.types.includes("mobile") ? "MobileApplication" : pr.types.includes("desktop") ? "SoftwareApplication" : "WebApplication",
       name: pr.title,
@@ -145,7 +145,9 @@ function jsonLd(p: PageMeta) {
       ...(images[0] && { image: SITE_URL + images[0] }),
       author: personRef,
       keywords: pr.stack.join(", "),
-      ...(!pr.types.includes("mobile") && !pr.types.includes("desktop") && { operatingSystem: "Web" }),
+      applicationCategory: pr.app.category,
+      operatingSystem: pr.app.os ?? "Web",
+      ...(pr.app.free && { offers: { "@type": "Offer", price: 0, priceCurrency: "EUR" } }),
     })
   return { "@context": "https://schema.org", "@graph": graph }
 }

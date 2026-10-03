@@ -27,15 +27,7 @@ export function Hero() {
               <Typewriter text={t("hero.greeting_text")} speed={55} startDelay={300} caret={false} />
               <br />
               je suis{" "}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(110deg, var(--color-cream) 0%, color-mix(in oklch, var(--color-pink) 60%, var(--color-cream)) 100%)",
-                }}
-              >
-                <Typewriter text="Baptiste Dechamp." speed={70} startDelay={1100} caret={false} />
-              </span>
+              <Typewriter text="Baptiste Dechamp." speed={70} startDelay={1100} caret={false} />
             </h1>
 
             <p className="mt-7 max-w-[48ch] text-lg md:text-xl opacity-90">

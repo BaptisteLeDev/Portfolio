@@ -92,7 +92,7 @@ export function GalleryCarousel({
                 src={src}
                 alt={`${alt} (${i + 1}/${images.length})`}
                 loading="lazy"
-                className="h-[360px] md:h-[440px] w-auto rounded-[24px]"
+                className="max-h-[360px] md:max-h-[440px] max-w-[85vw] w-auto h-auto rounded-[24px]"
               />
             </button>
           ))}

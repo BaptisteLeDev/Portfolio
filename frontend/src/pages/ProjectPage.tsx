@@ -268,7 +268,7 @@ export default function ProjectPage() {
                     aria-label={t("video_label", { title: project.title })}
                     controls
                     preload="metadata"
-                    className="h-[360px] md:h-[440px] w-auto max-w-full rounded-[24px] bg-bg/10"
+                    className="max-h-[360px] md:max-h-[440px] w-auto h-auto max-w-full rounded-[24px] bg-bg/10"
                   />
                 ))}
               </div>

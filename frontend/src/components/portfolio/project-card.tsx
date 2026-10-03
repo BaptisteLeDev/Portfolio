@@ -44,7 +44,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.thumbnail.kind === "gradient" ? (
             <AnimatedGradient palette={project.thumbnail.palette} />
           ) : (
-            <img src={project.thumbnail.src} alt="" loading="lazy" className="size-full object-cover" />
+            <img src={project.thumbnail.src} alt={t("thumbnail_alt", { title: project.title })} loading="lazy" className="size-full object-cover" />
           )}
           <div className="absolute inset-0 bg-bg/30" />
           <div className="absolute bottom-4 left-4 right-4">

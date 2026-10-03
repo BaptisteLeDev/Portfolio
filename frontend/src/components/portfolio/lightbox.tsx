@@ -7,11 +7,13 @@ export function Lightbox({
   index,
   onIndex,
   label,
+  alt,
 }: {
   images: string[];
   index: number | null;
   onIndex: (i: number | null) => void;
   label: string;
+  alt: string;
 }) {
   const { t } = useTranslation("project");
   const ref = useRef<HTMLDivElement>(null);
@@ -60,7 +62,7 @@ export function Lightbox({
     >
       <img
         src={images[index]}
-        alt=""
+        alt={`${alt} (${index + 1}/${images.length})`}
         draggable={false}
         onLoad={(e) => setLong(e.currentTarget.naturalHeight > e.currentTarget.naturalWidth * 2)}
         className={`${long ? "w-full max-w-5xl" : "max-h-full max-w-full"} rounded-[24px] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.7)] select-none`}

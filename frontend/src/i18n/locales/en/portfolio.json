@@ -2,5 +2,6 @@
   "title": "Portfolio",
   "subtitle": "Projects, experiments, learnings",
   "filters": { "all": "All", "web": "Web", "mobile": "Mobile", "desktop": "Desktop", "fullstack": "Full-stack", "design": "Design" },
-  "empty": "No project matches this filter."
+  "empty": "No project matches this filter.",
+  "thumbnail_alt": "{{title}} project preview"
 }

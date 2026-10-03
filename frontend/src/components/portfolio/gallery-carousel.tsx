@@ -8,11 +8,13 @@ export function GalleryCarousel({
   label,
   expandLabel,
   zoomLabel,
+  alt,
 }: {
   images: string[];
   label: string;
   expandLabel: string;
   zoomLabel: string;
+  alt: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
@@ -60,7 +62,7 @@ export function GalleryCarousel({
         >
           <img
             src={images[0]}
-            alt=""
+            alt={alt}
             loading="lazy"
             className="max-h-[360px] md:max-h-[440px] w-auto max-w-full rounded-[24px]"
           />
@@ -88,7 +90,7 @@ export function GalleryCarousel({
             >
               <img
                 src={src}
-                alt=""
+                alt={`${alt} (${i + 1}/${images.length})`}
                 loading="lazy"
                 className="h-[360px] md:h-[440px] w-auto rounded-[24px]"
               />
@@ -96,7 +98,7 @@ export function GalleryCarousel({
           ))}
         </div>
       )}
-      <Lightbox images={images} index={zoom} onIndex={setZoom} label={zoomLabel} />
+      <Lightbox images={images} index={zoom} onIndex={setZoom} label={zoomLabel} alt={alt} />
     </>
   );
 }
